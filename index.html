@@ -1,1 +1,632 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 극실사 포토그래피 프롬프트 스튜디오 (Portrait & Pet Studio)</title>
+  <meta name="description" content="제미나이 및 최신 AI 이미지 생성기를 위한 인물 & 반려견 극실사 프롬프트 빌더 및 마스터 라이브러리" />
+  <style>
+    :root {
+      --bg-dark: #080c14;
+      --bg-panel: #0f172a;
+      --bg-card: #1e293b;
+      --bg-input: #131d31;
+      --border: #334155;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
 
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; padding: 20px; gap: 16px; }
+    
+    header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+    .logo-box h1 { font-size: 1.45rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .logo-box p { font-size: 0.84rem; color: var(--text-muted); margin-top: 3px; }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .badge-pro { background: linear-gradient(135deg, var(--accent), var(--purple)); color: #080c14; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px; }
+    .btn-guide { background-color: rgba(56, 189, 248, 0.12); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .btn-guide:hover { background-color: var(--accent); color: #080c14; }
+
+    .main-grid { display: grid; grid-template-columns: 460px 1fr; gap: 20px; flex: 1; align-items: start; }
+
+    /* Left Builder */
+    .builder-panel { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
+    .panel-header { display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--accent); padding-left: 10px; }
+    .panel-header h2 { font-size: 1.1rem; color: var(--text); font-weight: 700; }
+    .btn-reset { background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; cursor: pointer; }
+    .btn-reset:hover { color: var(--text); border-color: var(--text); }
+
+    .form-row { display: flex; flex-direction: column; gap: 5px; }
+    .form-row label { font-size: 0.78rem; font-weight: 700; color: #cbd5e1; display: flex; justify-content: space-between; }
+    .form-row select, .form-row textarea, .form-row input { background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 7px 10px; font-size: 0.83rem; outline: none; transition: border-color 0.2s; }
+    .form-row select:focus, .form-row textarea:focus, .form-row input:focus { border-color: var(--accent); }
+    .form-row textarea { resize: vertical; min-height: 54px; line-height: 1.4; }
+
+    .live-box { background-color: #050811; border: 1px dashed var(--accent); border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.8rem; line-height: 1.45; color: #e2e8f0; max-height: 140px; overflow-y: auto; word-break: break-all; }
+    .btn-copy-main { background-color: var(--accent); color: #080c14; font-weight: 800; font-size: 0.9rem; border: none; border-radius: 6px; padding: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; width: 100%; }
+    .btn-copy-main:hover { background-color: var(--accent-hover); }
+
+    /* Right Library */
+    .library-panel { display: flex; flex-direction: column; gap: 14px; }
+    .filter-bar { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; flex-wrap: wrap; gap: 10px; }
+    .tab-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-btn { background-color: var(--bg-input); border: 1px solid var(--border); color: var(--text-muted); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .tab-btn.active, .tab-btn:hover { background-color: var(--accent); color: #080c14; border-color: var(--accent); }
+    .search-input { width: 240px; padding: 6px 12px; font-size: 0.82rem; }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; }
+    .card { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; transition: border-color 0.2s, transform 0.2s; }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .card-title { font-size: 0.92rem; font-weight: 700; color: var(--text); line-height: 1.35; }
+    .tag { font-size: 0.7rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+    .tag-portrait { background-color: rgba(192, 132, 252, 0.18); color: var(--purple); }
+    .tag-pet { background-color: rgba(52, 211, 153, 0.18); color: var(--emerald); }
+    .card-meta { font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; }
+    .card-code { background-color: #050811; border: 1px solid #1e293b; border-radius: 6px; padding: 10px; font-family: ui-monospace, monospace; font-size: 0.77rem; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto; }
+    .card-btns { display: flex; justify-content: flex-end; gap: 6px; }
+    .btn-sm { padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; font-weight: 700; cursor: pointer; border: none; }
+    .btn-load { background-color: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
+    .btn-load:hover { background-color: var(--border); }
+    .btn-copy { background-color: var(--accent); color: #080c14; }
+    .btn-copy:hover { background-color: var(--accent-hover); }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 580px; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+    .modal-title { font-size: 1.2rem; font-weight: 800; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; display: flex; flex-direction: column; gap: 12px; }
+    .modal-body ol { padding-left: 20px; }
+    .modal-body li { margin-bottom: 6px; }
+    .btn-close { background: var(--border); color: var(--text); border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-weight: 700; align-self: flex-end; }
+
+    /* Toast */
+    #toast { position: fixed; bottom: 20px; right: 20px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 10px 18px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; }
+    #toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1024px) {
+      .main-grid { grid-template-columns: 1fr; }
+      .builder-panel { position: static; max-height: none; }
+      .search-input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-box">
+      <h1>📸 AI 극실사 포토그래피 스튜디오 <span class="badge-pro">GitHub & Gemini v2.5</span></h1>
+      <p>인물 포트레이트 & 반려견 극실사 전용 30선 마스터 프롬프트 & 10축 광학 빌더</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn-guide" id="open-guide">🚀 깃허브 배포 가이드</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+    <!-- Left: 10-axis Interactive Builder -->
+    <aside class="builder-panel">
+      <div class="panel-header">
+        <h2>🛠️ 10축 광학 콤보 빌더</h2>
+        <button class="btn-reset" id="btn-reset">초기화</button>
+      </div>
+
+      <div class="form-row">
+        <label>1. 촬영 장르 (Genre)</label>
+        <select id="sel-genre">
+          <option value="A photorealistic high-end editorial portrait">인물: 에디토리얼 뷰티/패션 화보</option>
+          <option value="A masterclass authentic craftsman portrait">인물: 장인 & 아티산 클래식 포트레이트</option>
+          <option value="A cinematic atmospheric candid street portrait">인물: 거리/카페 시네마틱 스냅</option>
+          <option value="A masterclass fine-art monochrome portrait">인물: 흑백 파인아트 캐릭터 스터디</option>
+          <option value="An ultra-photorealistic close-up pet lifestyle portrait">반려견: 코지 실내 라이프스타일</option>
+          <option value="A masterclass high-speed action pet photograph">반려견: 역동적인 야외 질주/점프 액션</option>
+          <option value="An ultra-photorealistic outdoor seasonal pet portrait">반려견: 계절 야외 화보 (단풍/해변/설원/꽃밭)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>2. 카메라 바디 & 센서 (Camera Body)</label>
+        <select id="sel-camera">
+          <option value="Shot on Hasselblad X2D 100C medium format camera, medium format microcontrast">Hasselblad X2D 100C (중형 포맷/극강 마이크로 콘트라스트)</option>
+          <option value="Shot on Fujifilm GFX 100 II medium format camera, rich highlight roll-off">Fujifilm GFX 100 II (중형 뷰티/하이라이트 롤오프)</option>
+          <option value="Shot on Canon EOS R5 with L-series glass, warm authentic skin rendition">Canon EOS R5 (화사하고 따뜻한 인물 피부 발색)</option>
+          <option value="Shot on Sony A7R V with 61MP high-resolution full-frame sensor">Sony A7R V (6100만 화소 초고해상력 디테일)</option>
+          <option value="Shot on Sony A9 III with global shutter, 1/2000s motion freezing">Sony A9 III (1/2000s 왜곡 없는 초고속 액션 정지)</option>
+          <option value="Shot on Leica M11 rangefinder camera, classic optical rendering">Leica M11 (클래식 레인지파인더 광학 질감)</option>
+          <option value="Shot on Nikon Z8 flagship mirrorless, crisp edge-to-edge sharpness">Nikon Z8 (선명한 동물 털/눈동자 선예도)</option>
+          <option value="Shot on Canon EOS R3 flagship sports camera, 1/3200s high-speed shutter">Canon EOS R3 (1/3200s 플래그십 스포츠 액션)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>3. 렌즈 화각 & 조리개 심도 (Lens & Aperture)</label>
+        <select id="sel-lens">
+          <option value="with an 85mm f/1.4 portrait prime lens at f/1.4, shallow depth of field, creamy background bokeh">85mm f/1.4 (대표 인물/반려견 화각, 크리미 보케)</option>
+          <option value="with an 85mm f/1.2L lens at f/1.2, extreme shallow depth of field, pin-sharp eyes">85mm f/1.2 (극단적 얕은 심도, 몽환적 배경 흐림)</option>
+          <option value="with a 50mm f/1.2 lens at f/1.8, natural human-eye perspective, balanced subject separation">50mm f/1.2 (자연스러운 50mm 표준 시야)</option>
+          <option value="with a 135mm f/1.8 telephoto lens at f/2.0, strong background compression, isolated subject">135mm f/1.8 (망원 배경 압축, 강력한 피사체 분리)</option>
+          <option value="with a 35mm f/1.4 prime lens at eye level, f/2.0 aperture, intimate lifestyle framing">35mm f/1.4 (친밀한 아이레벨 일상 스냅)</option>
+          <option value="with a 110mm f/2 medium format lens, f/2.0 aperture, dimensional spatial rendering">110mm f/2 (중형 뷰티/에디토리얼 화각)</option>
+          <option value="with a 70-200mm f/2.8 lens at 200mm, f/2.8, 1/3200s motion freezing">200mm f/2.8 (원거리 초고속 액션 포착)</option>
+          <option value="with a 28mm f/1.7 prime lens at f/2.0, environmental context">28mm f/1.7 (공간 배경을 살리는 감성 화각)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>4. 조명 설계 (Lighting Setup)</label>
+        <select id="sel-lighting">
+          <option value="dramatic Rembrandt studio lighting with key light at 45 degrees, subtle inverted triangle cheek shadow, hair rim light">렘브란트 스튜디오 조명 (45도 키라이트 + 헤어 림라이트)</option>
+          <option value="soft diffused morning window daylight from the side, delicate catchlights in the dark eyes">소프트 창가 자연광 (부드러운 측광 + 맑은 캐치라이트)</option>
+          <option value="warm low-angle golden hour sunset backlighting, glowing golden rim light outlining hair and silhouette">일몰 골든아워 역광 (황금빛 림라이트 + 실루엣 광)</option>
+          <option value="large softbox octabox key light with sharp strip rim light outlining coat contours against dark backdrop">옥타박스 + 스트립 림라이트 (하이엔드 스튜디오 3점 조명)</option>
+          <option value="soft dappled sunlight (Komorebi) filtering through autumn tree canopy, warm glowing light patches">코모레비 나뭇잎 얼룩 햇살 (Dappled Sunlight)</option>
+          <option value="warm 2800K ambient tungsten brass lamp lighting casting cozy amber glow and soft falloff">2800K 텅스텐 백열등 (아늑한 앰비언트 실내광)</option>
+          <option value="volumetric morning sunbeams streaming through industrial windows, illuminating airborne particles">창가 틴들 광선 (미세 분진을 비추는 볼륨메트릭 햇살)</option>
+          <option value="hard directional side key light casting deep chiaroscuro shadows across half the face">키아로스쿠로 하드 사이드라이트 (드라마틱 흑백 명암)</option>
+          <option value="high-key bright winter daylight with soft cool-blue sky fill reflections">하이키 설원 반사광 (눈부신 겨울 자연광)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>5. 필름 룩 & 컬러 사이언스 (Film & Color)</label>
+        <select id="sel-film">
+          <option value="Kodak Portra 400 color science, natural warm skin tones, soft pastel highlights, fine organic grain">Kodak Portra 400 (따뜻한 인물 피부톤, 소프트 파스텔)</option>
+          <option value="Kodak Portra 800 color grading, rich analog shadow warmth, gentle fine film grain">Kodak Portra 800 (풍부한 암부 온기, 고감도 필름 입자)</option>
+          <option value="Kodak Tri-X 400 monochrome film look, deep velvety blacks, rich luminous silver highlights">Kodak Tri-X 400 (깊은 딥블랙, 클래식 흑백 계조)</option>
+          <option value="CineStill 800T color science, signature red halation around bright practical lights, cool neo-noir night mood">CineStill 800T (네온 광원 주변 붉은 할레이션, 시네마 야경)</option>
+          <option value="Fujifilm Pro 400H color profile, airy pastel greens, clean cyan undertones">Fujifilm Pro 400H (맑고 청량한 청록/그린 톤)</option>
+          <option value="Rich earthy muted organic palette, Kinfolk lifestyle aesthetic">어시(Earthy) 뮤트 톤 (킨포크 자연주의 무드)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>6. 극실사 디테일 부스터 (Detail Booster)</label>
+        <select id="sel-detail">
+          <option value="authentic skin texture with visible micro-pores, delicate subsurface scattering under soft light, natural catchlights">인물: 실제 피부 모공(Micro-pores) + 빛 투과 혈색(Subsurface Scattering)</option>
+          <option value="glossy textured fur with individual hairs catching light, moist leathery texture on black nose, distinct white whiskers">반려견: 털 한 올(Individual hairs) + 촉촉한 코 가죽 질감 + 수염</option>
+          <option value="fluffy dense curly teddy-bear coat texture, wet black nose, crisp dual sky catchlights in dark eyes">푸들/비숑: 폭신한 테디베어 털 결 + 맑은 하늘 반사광</option>
+          <option value="soft out-of-focus foreground bokeh layered across the bottom, creating cinematic three-dimensional depth">구도: 전경 보케(Foreground Bokeh) 3차원 입체 심도</option>
+          <option value="crisp raindrops dripping on foreground transparent surface with tiny light refractions">날씨: 전경 표면에 맺힌 선명한 빗방울 굴절 레이어</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>7. 시점 및 앵글 (Point of View)</label>
+        <select id="sel-pov">
+          <option value="Eye-level medium close-up shot">아이레벨 미디엄 클로즈업 (Eye-level)</option>
+          <option value="Low-angle perspective skimming close to ground">초저각 로우 앵글 (Low-angle skimming ground)</option>
+          <option value="High-angle shot looking down naturally">내려다보는 하이 앵글 (High-angle)</option>
+          <option value="Intimate close-up focused on eyes and facial expression">표정 클로즈업 (Tight close-up)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>8. 화면 비율 (Aspect Ratio)</label>
+        <select id="sel-ratio">
+          <option value="--ar 4:5">인스타그램/포트레이트 세로 (4:5)</option>
+          <option value="--ar 1:1">정사각형 스퀘어 (1:1)</option>
+          <option value="--ar 16:9">시네마틱 가로 와이드 (16:9)</option>
+          <option value="--ar 9:16">릴스/스토리/쇼츠 세로 (9:16)</option>
+          <option value="--ar 3:2">클래식 35mm 사진 규격 (3:2)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>9. 피사체 & 상황 자유 묘사 (Subject & Scene)</label>
+        <textarea id="inp-desc" placeholder="예: a 30s Korean ceramic artisan shaping a sourdough loaf with hands dusted in flour..."></textarea>
+      </div>
+
+      <div class="form-row">
+        <label>10. 조립된 최종 프롬프트 (Live Preview)</label>
+        <div class="live-box" id="live-output">프롬프트를 선택하거나 작성하세요.</div>
+      </div>
+
+      <button class="btn-copy-main" id="btn-copy-builder">📋 최종 완성 프롬프트 복사</button>
+    </aside>
+
+    <!-- Right: 30 Master Library Cards -->
+    <main class="library-panel">
+      <div class="filter-bar">
+        <div class="tab-group" id="filter-tabs">
+          <button class="tab-btn active" data-cat="all">전체 마스터 컬렉션 (30)</button>
+          <button class="tab-btn" data-cat="portrait">👤 인물 포트레이트 (15)</button>
+          <button class="tab-btn" data-cat="pet">🐶 반려견 화보 (15)</button>
+        </div>
+        <input type="text" class="search-input" id="search-input" placeholder="키워드 검색 (예: 렘브란트, 코기, 포트라)..." />
+      </div>
+
+      <div class="cards-grid" id="cards-container"></div>
+    </main>
+  </div>
+
+  <!-- Guide Modal -->
+  <div class="modal-overlay" id="guide-modal">
+    <div class="modal-box">
+      <div class="modal-title">
+        <span>🚀 깃허브 & 제미나이 배포 안내</span>
+        <span style="cursor:pointer;" id="close-modal">✕</span>
+      </div>
+      <div class="modal-body">
+        <p>이 웹 앱은 <strong>서버 설치나 추가 비용 없이, GitHub Pages를 통해 100% 무료로 배포</strong>할 수 있습니다.</p>
+        <ol>
+          <li>GitHub(github.com)에서 <strong>New Repository</strong>를 생성합니다. (예: <code>prompt-studio</code>)</li>
+          <li>이 파일의 전체 코드를 <strong><code>index.html</code></strong>이라는 이름으로 업로드(Add file -> Create new file)합니다.</li>
+          <li>저장소 상단 <strong>Settings -> Pages</strong> 메뉴로 이동합니다.</li>
+          <li>Branch를 <strong>main</strong> (또는 master)으로 선택하고 <strong>Save</strong>를 누릅니다.</li>
+          <li>약 1분 뒤 <code>https://&lt;내깃허브아이디&gt;.github.io/prompt-studio</code> 주소로 웹 앱이 전 세계에 공개됩니다!</li>
+        </ol>
+        <p>📱 스마트폰 홈 화면에 '홈 화면에 추가'를 누르면 네이티브 앱처럼 사용할 수 있습니다.</p>
+      </div>
+      <button class="btn-close" id="btn-close-guide">확인</button>
+    </div>
+  </div>
+
+  <div id="toast">클립보드에 복사되었습니다!</div>
+
+  <script>
+    const masterCollection = [
+      // --- PORTRAITS (15) ---
+      {
+        id: "p-01",
+        category: "portrait",
+        title: "보태니컬 온실 에디토리얼 뷰티 화보",
+        meta: "Fujifilm GFX 100 II · 110mm f/2 · 온실 자연광 + 골든 림라이트 · 모공/피부 빛 투과",
+        prompt: "A high-end editorial beauty portrait of a 20s Korean woman with calm, serene expression, wearing a minimalist cream cashmere turtleneck. Natural porcelain skin texture with visible micro-pores and delicate subsurface scattering under soft light. Sitting inside a luxury sunlit botanical greenhouse with lush tropical green foliage creating deep, layered background bokeh. Soft diffused morning daylight entering through high glass panes from the side, accented by a subtle warm golden hour rim light outlining her dark wavy hair. Shot on Fujifilm GFX 100 II medium format camera with a GF 110mm f/2 R LM WR lens, f/2.0 aperture, pin-sharp focus on the eyes with natural glassy catchlights, Kodak Portra 400 color science, authentic and breathable editorial aesthetic."
+      },
+      {
+        id: "p-02",
+        category: "portrait",
+        title: "클래식 렘브란트 스튜디오 포트레이트",
+        meta: "Canon EOS R5 · 85mm f/1.2L · 렘브란트 4:1 조명 + 역삼각형 음영 · 키아로스쿠로",
+        prompt: "A masterclass photorealistic studio portrait of a 40-year-old Korean male craftsman with deep, contemplative eyes and realistic skin texture with visible micro-pores and fine laugh lines. Dramatic Rembrandt lighting setup with a soft key light at 45 degrees creating a distinct inverted triangle shadow on the opposite cheek, subtle hair rim light for background separation. Shot on Canon EOS R5 with an 85mm f/1.2L lens, shallow depth of field, sharp focus on the iris with crisp dual-reflection catchlights. Dark textured graphite canvas backdrop, rich chiaroscuro contrast, authentic medium-format aesthetic."
+      },
+      {
+        id: "p-03",
+        category: "portrait",
+        title: "비 오는 날 카페 창가 시네마틱 스냅",
+        meta: "Leica M11 · 50mm f/1.4 Summilux · 외광 vs 실내 백열등 색온도 대비 · 전경 빗방울",
+        prompt: "A cinematic, atmospheric medium close-up portrait of a 30-year-old Korean woman sitting inside a cozy cafe beside a rain-streaked glass window. Crisp, distinct water droplets on the foreground glass, slightly out of focus. She looks thoughtfully towards the street, wearing a textured chunky beige wool sweater. Soft, diffused overcast daylight illuminating one side of her face through the window, contrasted with warm subtle ambient incandescent light from inside the cafe. Authentic skin texture with natural pores, subtle moisture glow, and soft catchlights in dark brown eyes. Shot on Leica M11 with a 50mm f/1.4 Summilux-M lens, f/1.8 aperture, delicate film grain texture, moody cinematic color grading with cool slate-blue and warm amber tones."
+      },
+      {
+        id: "p-04",
+        category: "portrait",
+        title: "도심 루프탑 일몰 골든아워 패션 룩북",
+        meta: "Canon EOS R6 Mark II · 50mm f/1.2L · 노을빛 역광 + 머릿결 림라이트 · 보그 룩북",
+        prompt: "A cinematic, high-fashion editorial portrait of a stylish 20s Korean woman standing on a high-rise city rooftop during golden hour sunset. Warm, low-angle sunlight hitting her from behind, creating a radiant golden rim light along her silhouette and illuminating soft windblown strands of dark hair. She wears a structured minimalist beige linen blazer with crisp woven texture. Natural glowing skin texture with authentic fine pores and subtle peach blush, confident relaxed gaze toward the camera with warm amber catchlights. Distant modern city skyline softly blurred into creamy circular bokeh in the background. Shot on Canon EOS R6 Mark II with a 50mm f/1.2L lens, f/1.8 aperture, subtle analog lens flare, warm cinematic color grading, Vogue fashion magazine aesthetic."
+      },
+      {
+        id: "p-05",
+        category: "portrait",
+        title: "도예 공방 사선 자연광 아티산 프로필",
+        meta: "Hasselblad X2D 100C · 80mm f/1.9 · 창가 사선광 + 젖은 점토 손 디테일 · 킨포크 무드",
+        prompt: "A masterclass authentic editorial portrait of a 30s Korean ceramic artisan inside a sunlit pottery workshop. She is seated thoughtfully beside a wooden potter's wheel, wearing a textured neutral linen apron with subtle clay dust marks. Soft raking morning sunlight entering from a large industrial studio window on the left, casting gentle dimensional shadows and warm golden highlights across her face. Authentic skin texture with realistic micro-pores and delicate peach fuzz, focused calm expression with crystal-clear catchlights in dark brown eyes. Hands resting naturally with fine traces of damp terracotta clay. Wooden shelves lined with unglazed ceramic vessels softly blurred into creamy background bokeh. Shot on Hasselblad X2D 100C with an XCD 80mm f/1.9 lens at f/2.2, medium format microcontrast, rich organic earthy color science, Kinfolk artisan profile aesthetic."
+      },
+      {
+        id: "p-06",
+        category: "portrait",
+        title: "비 오는 밤 도심 투명 우산 네온 시네마틱",
+        meta: "Sony A7S III · 50mm f/1.2 GM · 네온 반영 + CineStill 800T 붉은 할레이션 · 왕가위 룩",
+        prompt: "A cinematic, high-contrast night street portrait of a 20s Korean woman holding a clear transparent umbrella in a bustling neon-lit Seoul alleyway. Delicate, crisp raindrops dripping along the curved edge of the umbrella with tiny light refractions. Vibrant amber and magenta neon reflections shimmering across wet reflective asphalt and her glossy black leather trench coat. Natural skin texture with authentic fine pores and a subtle dewy moisture sheen, calm introspective expression with sharp double-catchlights reflecting the city lights. Shot on Sony A7S III with a 50mm f/1.2 GM lens at f/1.4, shallow depth of field with creamy circular neon bokeh in the background, CineStill 800T color science with characteristic red halation around street lamps, moody Wong Kar-wai neo-noir aesthetic."
+      },
+      {
+        id: "p-07",
+        category: "portrait",
+        title: "스모키 재즈 바 색소폰 연주자 흑백 포트레이트",
+        meta: "Leica M11 Monochrom · 50mm f/0.95 · 1점 스포트라이트 + 황동 악기 광택 · 블루노트",
+        prompt: "A masterclass black-and-white fine-art portrait of a 40-year-old Korean jazz saxophonist deeply immersed in playing inside a dimly lit, smoky jazz club. Dramatic single overhead spotlight cutting through subtle atmospheric stage haze, illuminating sweat beads on his brow and the reflective brass contours of the saxophone. Authentic weathered skin texture with visible micro-pores and intense emotional focus, eyes closed. Shot on Leica M11 Monochrom with a 50mm f/0.95 Noctilux-M lens, f/1.2 aperture, extreme subject separation, deep velvety blacks and luminous silver highlights, Kodak Tri-X 400 analog grain, timeless Blue Note album cover aesthetic."
+      },
+      {
+        id: "p-08",
+        category: "portrait",
+        title: "앤티크 서재 앰비언트 작가 포트레이트",
+        meta: "Hasselblad X2D 100C · 80mm f/1.9 · 뱅커스 램프 측사광 + 헤링본 모직 · 다크 아카데미아",
+        prompt: "A masterclass authentic editorial portrait of a 40s Korean scholar sitting at a polished mahogany desk inside a grand antique library filled with leather-bound books. A classic green glass banker's desk lamp and soft raking side window light casting warm golden highlights and deep directional chiaroscuro shadows across his face. Wearing a textured brown wool herringbone blazer with crisp woven weave. Authentic weathered skin texture with visible micro-pores and fine laugh lines, intense thoughtful gaze with sharp dual catchlights in dark brown irises. Floor-to-ceiling wooden bookshelves softly blurred into warm amber circular bokeh in the background. Shot on Hasselblad X2D 100C with an XCD 80mm f/1.9 lens at f/2.2, medium format microcontrast, rich organic earthy tones, dark academia intellectual aesthetic."
+      },
+      {
+        id: "p-09",
+        category: "portrait",
+        title: "사막 모래언덕 일몰 바람 속 실크 스카프 화보",
+        meta: "Canon EOS R5 · RF 85mm f/1.2L · 일몰 측광 + 흩날리는 반투명 실크 스카프 · 오트쿠튀르",
+        prompt: "A masterclass high-fashion editorial portrait of a 20s Korean woman standing on the crest of a desert sand dune during a dramatic golden hour sunset. A sheer, vibrant vermilion silk scarf billows dynamically in the desert wind around her head and shoulders, catching the low-angle warm sunlight with glowing translucent highlights. Authentic skin texture with realistic fine micro-pores and a natural warm bronze sheen, calm confident gaze directly into the camera with golden catchlights. Fine windblown sand particles sparkling in the sunbeams. Shot on Canon EOS R5 with an RF 85mm f/1.2L USM lens at f/1.4, shallow depth of field, warm golden rim lighting outlining the silhouette, undulating sand ridges blurred into soft pastel amber bokeh in the background, Vogue desert haute couture aesthetic."
+      },
+      {
+        id: "p-10",
+        category: "portrait",
+        title: "안개 낀 새벽 호숫가 블루아워 에디토리얼",
+        meta: "Fujifilm GFX 100 II · 63mm f/2.8 · 6500K 블루아워 + 호수 물안개 · 노르딕 킨포크",
+        prompt: "A masterclass atmospheric environmental portrait of a 30s Korean man standing beside a tranquil, glass-like mountain lake at early dawn during blue hour. Ethereal, delicate morning mist drifting slowly across the calm dark water in the background. Cool 6500K ambient dawn twilight illuminating his profile with soft, shadowless light. Wearing a textured chunky olive-green cable-knit wool sweater with tactile knit definition. Authentic skin texture with realistic fine pores and a subtle cool-moisture morning dew sheen, stoic and contemplative expression with crisp glassy catchlights in dark brown irises. Distant pine-covered mountain ridges softly layered into cool slate-blue bokeh. Shot on Fujifilm GFX 100 II medium format camera with a GF 63mm f/2.8 R WR lens at f/2.8, rich microcontrast, moody cinematic color science, Kinfolk Nordic nature aesthetic."
+      },
+      {
+        id: "p-11",
+        category: "portrait",
+        title: "브루탈리즘 콘크리트 기하학적 섀도우 미니멀 화보",
+        meta: "Leica M11 · 35mm f/1.4 · 오후 직사광 사선 그림자 + 울 수트 실루엣 · 보그 미니멀",
+        prompt: "A masterclass high-fashion minimalist editorial portrait of a 20s Korean woman standing beside a raw, board-formed concrete architectural wall. Harsh, high-contrast afternoon direct sunlight casting sharp geometric diagonal shadow patterns across her face and the textured concrete surface. She wears a structured, impeccably tailored black oversized wool blazer with crisp architectural lines. Authentic skin texture with visible micro-pores and sharp highlight definition along her cheekbones and jawline, confident stoic gaze into the camera with high dynamic range. Clean negative space, monochrome and neutral slate-grey color palette. Shot on Leica M11 with a 35mm f/1.4 Summilux-M lens at f/4.0 for tack-sharp geometric clarity and edge-to-edge structural fidelity, Vogue minimalist architectural aesthetic."
+      },
+      {
+        id: "p-12",
+        category: "portrait",
+        title: "비 갠 가을 은행나무 가로수길 옐로우 골든아워",
+        meta: "Sony A7R V · 85mm f/1.4 GM · 은행나무 역광 림라이트 + 젖은 아스팔트 반사 · 트렌치코트",
+        prompt: "A masterclass autumn street fashion editorial portrait of a 20s Korean woman standing beneath a glowing avenue of golden-yellow ginkgo trees just after a light autumn rain. Low-angle late afternoon golden sunlight filtering through the vibrant yellow canopy, creating a radiant golden rim light along her hair and silhouette. Wet, reflective dark asphalt ground scattered with fallen bright yellow ginkgo leaves creating soft light reflections. Wearing a classic tailored beige gabardine trench coat with crisp woven texture. Natural glowing skin texture with authentic fine micro-pores and subtle cool-moisture dew, calm introspective expression with warm amber catchlights in dark brown irises. Shot on Sony A7R V with an 85mm f/1.4 GM lens at f/1.8, shallow depth of field, creamy circular golden-yellow foliage bokeh in the background, rich warm autumnal color science, Vogue autumn street editorial aesthetic."
+      },
+      {
+        id: "p-13",
+        category: "portrait",
+        title: "햇살 드는 베이커리 아침 밀가루 분진 아티산",
+        meta: "Canon EOS R5 · 50mm f/1.2L · 창가 틴들 햇살 + 공중에 부유하는 밀가루 입자 · 제빵사",
+        prompt: "A masterclass authentic editorial portrait of a 30s Korean artisan baker shaping a rustic sourdough loaf on a heavy wooden floured workbench inside a sunlit bakery kitchen. Strong volumetric morning sunbeams streaming through high industrial steel-framed windows, illuminating thousands of tiny golden airborne flour dust particles floating in the air. Hands dusted with fine white flour, wearing a dark grey canvas apron with realistic flour smudges and texture. Freshly baked crusty sourdough loaves with intricate scored patterns softly framed in the warm foreground. Authentic skin texture with visible micro-pores, fine laugh lines, and a gentle concentration sweat sheen on the brow, passionate focused expression with sharp catchlights in dark brown eyes. Shot on Canon EOS R5 with an RF 50mm f/1.2L USM lens at f/1.8, shallow depth of field, rich warm amber tones, Kinfolk culinary magazine cover aesthetic."
+      },
+      {
+        id: "p-14",
+        category: "portrait",
+        title: "앤티크 바이올린 공방 대패밥과 마스터 루시어",
+        meta: "Hasselblad 907X 50C · 90mm f/2.8 · 창가 사선광 + 투명한 대패밥 곡선 · 현악기 장인",
+        prompt: "A masterclass authentic editorial portrait of a 40s Korean master luthier meticulously planing a flamed maple violin backplate at a heavy wooden workbench inside an antique workshop. Warm, soft raking morning window daylight entering from the left, illuminating delicate, translucent curls of wood shavings spilling over the workbench and floating in the air. A half-varnished cello and violin molds hanging softly in the background. Wearing a dark canvas apron with realistic wood dust and rosin smudges over a rolled-up denim shirt. Authentic weathered skin texture with visible micro-pores, fine laugh lines around the eyes, and intense focused craftsman gaze with sharp dual catchlights in dark brown irises. Shot on Hasselblad 907X 50C with an XCD 90mm f/2.8 lens at f/3.2, medium format microcontrast, rich warm amber and mahogany color palette, Kinfolk artisan profile aesthetic."
+      },
+      {
+        id: "p-15",
+        category: "portrait",
+        title: "빈티지 모터사이클 워크숍 가죽 재킷 메카닉",
+        meta: "Leica M11 · 35mm f/1.4 · 오버헤드 펜던트 조명 + 크롬 엔진 광택 & 낡은 가죽 · 느와르",
+        prompt: "A masterclass cinematic environmental portrait of a 30s Korean motorcycle mechanic seated on an industrial metal stool beside a stripped-down vintage cafe racer motorcycle inside a dimly lit workshop. A single warm overhead industrial tungsten pendant lamp cutting through subtle atmospheric oil haze, casting dramatic directional chiaroscuro highlights across his face, the metallic chrome engine contours, and steel wrench in his hand. Wearing a distressed, weathered dark brown leather rider jacket with realistic tactile patina, brass zippers, and deep creasing. Authentic skin texture with visible micro-pores, fine grease smudges across his forearm and knuckles, and a focused intense gaze with sharp dual catchlights in dark brown irises. Wall of neatly organized metal tools softly blurred into warm amber bokeh in the background. Shot on Leica M11 with a 35mm f/1.4 Summilux-M lens at f/2.0, rich shadow contrast, tactile metallic and leather textures, timeless neo-noir aesthetic."
+      },
+
+      // --- PET & DOGS (15) ---
+      {
+        id: "d-01",
+        category: "pet",
+        title: "코지 라이프스타일 웰시코기 클로즈업",
+        meta: "Sony A7R V · 35mm f/1.4 GM · 창가 측사광 + 촉촉한 코 가죽 질감 · 스칸디나비안 거실",
+        prompt: "A heartwarming, photorealistic close-up lifestyle portrait of a cute Welsh Corgi resting its chin comfortably on a textured neutral linen sofa pillow. Clear, expressive brown eyes with rich emotional depth and sharp dual catchlights reflecting the window. Highly detailed facial features including realistic leathery moist texture on the black nose, fine distinct white whiskers, and soft dense fur texture on the face and perked ears. Soft morning daylight raking across the scene from a nearby living room window at a 45-degree angle, casting gentle warm shadows. Shot on Sony A7R V with a 35mm f/1.4 GM lens, shot at eye level, f/2.0 shallow depth of field, warm cozy Scandinavian living room background softly blurred."
+      },
+      {
+        id: "d-02",
+        category: "pet",
+        title: "생동감 넘치는 보더콜리 잔디밭 초고속 액션",
+        meta: "Sony A9 III · 70-200mm f/2.8 at 135mm · 1/2000s 셔터 + 일몰 역광 림라이트 · 질주 샷",
+        prompt: "A high-speed photorealistic action photograph of an energetic black-and-white Border Collie running towards the camera across a lush green meadow. The dog has an alert, joyful expression with its tongue slightly out, glossy fur texture with individual hairs catching the sunlight, and clear expressive amber eyes with pin-sharp focus. Tiny moisture droplets and fine blades of grass kicking up from its paws. Shot on Sony A9 III with a 70-200mm f/2.8 GM OSS II lens at 135mm, f/2.8, shutter speed 1/2000s freezing the motion. Warm afternoon backlighting creating a golden rim light around the coat, creamy circular bokeh in the background."
+      },
+      {
+        id: "d-03",
+        category: "pet",
+        title: "일몰 해변 바람을 맞으며 웃는 사모예드",
+        meta: "Nikon Z8 · 85mm f/1.2 S · 바닷바람에 날리는 흰 털 + 파도 윤슬 보케 · 하이키 미소",
+        prompt: "A heartwarming, ultra-photorealistic portrait of a fluffy pure white Samoyed dog smiling joyfully on a sandy beach during sunset golden hour. Sea breeze gently blowing through its voluminous, detailed white double-coat fur, with individual hairs catching the warm golden sunlight. Clear expressive dark eyes and black nose with realistic leathery texture, healthy pink tongue slightly out in a classic 'Samoyed smile'. Ocean waves softly breaking in the background with sparkling sunset water reflections. Shot on Nikon Z8 with an 85mm f/1.2 S lens, eye-level angle, f/2.0 aperture, creamy circular bokeh on the ocean surface, golden rim lighting outlining the white fur silhouette, radiant high-key aesthetic."
+      },
+      {
+        id: "d-04",
+        category: "pet",
+        title: "가을 단풍 숲길 코모레비 햇살 속 시바견",
+        meta: "Sony A7IV · 135mm f/1.8 GM · 나뭇잎 사이 얼룩 햇살(Komorebi) + 허공 낙엽 · 단풍 숲",
+        prompt: "A photorealistic autumn outdoor portrait of an alert red-and-white Shiba Inu sitting proudly on a natural dirt forest path covered with fallen golden and scarlet maple leaves. Soft dappled sunlight (Komorebi) filtering through the autumn canopy, creating warm glowing light patches on the dog's plush, dense fur. Clear expressive amber eyes locked onto the camera, crisp moisture on the black textured nose, pointed triangular ears perked up with fine white inner fur. A single red maple leaf gently drifting in the air in mid-ground. Shot on Sony A7IV with a 135mm f/1.8 GM lens, eye-level angle, f/2.0 aperture, creamy bokeh compressing the warm amber foliage background, rich earthy color grading, serene seasonal atmosphere."
+      },
+      {
+        id: "d-05",
+        category: "pet",
+        title: "하이엔드 스튜디오 블랙 호리존 도베르만",
+        meta: "Canon EOS R5 · 85mm f/1.4L at f/4.0 · 옥타박스 + 스트립 림라이트 · 탄탄한 근육 실루엣",
+        prompt: "A masterclass commercial studio portrait of a sleek, muscular black-and-tan Doberman Pinscher sitting proudly in an alert posture. Controlled high-end studio lighting using a large octabox key light from the upper-left, paired with a sharp strip rim light outlining the glossy muscular contours of the dog's coat and perked ears. Clean, seamless dark graphite grey backdrop. Pin-sharp focus on the expressive dark eyes featuring distinct softbox catchlights, highly detailed leathery moisture on the black nose, and individual whiskers visible. Shot on Canon EOS R5 with an 85mm f/1.4L lens at f/4.0 for tack-sharp full-body detail, rich contrast, elegant and commanding pet-magazine cover aesthetic."
+      },
+      {
+        id: "d-06",
+        category: "pet",
+        title: "눈 덮인 겨울 숲속 스노우 비숑 프리제",
+        meta: "Nikon Z9 · 70-200mm f/2.8 at 135mm · 1/1600s 셔터 + 코끝과 털에 맺힌 눈꽃 결정 · 설원",
+        prompt: "A heartwarming, ultra-photorealistic winter outdoor portrait of a fluffy white Bichon Frise playing joyfully in a snow-covered pine forest. Tiny, distinct crystalline snowflakes gently resting on the dog's black leathery nose, eyelashes, and curly textured fur coat. Crisp falling snow creating soft, blurred circular bokeh particles in the foreground and background. Bright high-key winter morning light with soft, cool-blue sky fill reflections, illuminating the dense fur volume with clean highlights. Shot on Nikon Z9 with a 70-200mm f/2.8 GM lens at 135mm, f/2.8 aperture, 1/1600s high-speed shutter freezing motion, sharp focus locked on expressive dark eyes with glistening catchlights."
+      },
+      {
+        id: "d-07",
+        category: "pet",
+        title: "화사한 봄날 벚꽃 정원 속 갈색 토이푸들",
+        meta: "Sony A7R V · 85mm f/1.4 GM · 전경 핑크빛 벚꽃 잎 보케 레이어 · 테디베어 털 결",
+        prompt: "An enchanting, ultra-photorealistic close-up portrait of an apricot-brown Toy Poodle sitting outdoors in a blooming cherry blossom garden. A few soft, out-of-focus pastel pink cherry blossom petals gently layered across the lower foreground, creating a dreamy depth. Highly detailed, soft curly teddy-bear fur texture with individual strands catching the bright morning daylight. Clear, expressive glossy dark eyes with crisp dual sky catchlights, a wet textured black nose with realistic leathery detail, and alert fluffy ears. Lush spring flower garden and blooming sakura trees softly blurred into creamy circular pastel bokeh in the background. Shot on Sony A7R V with an 85mm f/1.4 GM lens, shot at eye level, f/1.8 aperture, soft pastel high-key color grading, heartwarming fine-art pet photography aesthetic."
+      },
+      {
+        id: "d-08",
+        category: "pet",
+        title: "노을 들판 골든 리트리버 원반 캐치 액션",
+        meta: "Canon EOS R3 · 70-200mm f/2.8 at 200mm · 1/3200s 초고속 셔터 + 공중 도약 역광 림",
+        prompt: "A masterclass photorealistic action photograph of a golden-coated Golden Retriever leaping dynamically in mid-air to catch a flying red frisbee across a sunlit meadow. The dog's coat is full of motion, with individual golden hairs and ear fringes illuminated by intense golden-hour backlighting. Expression of pure joy and intense focus with wide sparkling dark eyes locked onto the disc. Fine blades of grass and tiny droplets of dust catching the sunlight in mid-air below its paws. Shot on Canon EOS R3 with an RF 70-200mm f/2.8L IS USM lens at 200mm, f/2.8 aperture, 1/3200s ultra-high-speed shutter freezing every muscle and fur movement, rich warm sunset bokeh compressing the distant tree line."
+      },
+      {
+        id: "d-09",
+        category: "pet",
+        title: "비 오는 날 창밖을 바라보는 말티즈 클로즈업",
+        meta: "Canon EOS R5 · 85mm f/1.4L · 전경 유리창 빗방울 굴절 + 서늘한 외광/실내등 대비",
+        prompt: "A heartwarming, ultra-photorealistic close-up portrait of a fluffy pure white Maltese dog resting its chin on a dark wooden windowsill, gazing out a rain-streaked glass window. Distinct, crisp raindrops dripping along the foreground glass creating soft optical refractions. Soft cool overcast daylight illuminating the dog's face from the outside, contrasted with warm subtle indoor room glow. Clear expressive dark eyes with glassy catchlights, a wet textured black nose with realistic moisture, and soft silky fur texture on the face and ears. Shot on Canon EOS R5 with an 85mm f/1.4L lens at eye level, f/1.8 aperture, cozy nostalgic atmosphere, creamy indoor bokeh."
+      },
+      {
+        id: "d-10",
+        category: "pet",
+        title: "야간 캠핑장 모닥불 앞 시베리안 허스키",
+        meta: "Sony A7S III · 50mm f/1.2 GM · 모닥불 주황빛 온기 vs 서늘한 밤하늘 대비 · 아이시 블루 눈동자",
+        prompt: "An ultra-photorealistic night outdoor portrait of a majestic silver-and-black Siberian Husky lying comfortably beside a glowing campfire in a pine forest at night. Warm flickering orange campfire light illuminating one side of its dense double-coat fur, creating bright amber rim highlights along its ears and muzzle. Striking, piercing icy-blue eyes with pin-sharp focus and warm firelight catchlights. Realistic moist leathery texture on the black nose, fine white whiskers standing out. Outdoor canvas tent and towering dark pine trees under a starry night sky softly blurred into creamy bokeh in the background. Shot on Sony A7S III with a 50mm f/1.2 GM lens at f/1.4, cozy wilderness camping atmosphere, rich contrast between warm firelight and cool midnight forest tones."
+      },
+      {
+        id: "d-11",
+        category: "pet",
+        title: "계곡에서 물방울을 털어내는 래브라도 리트리버",
+        meta: "Sony A1 · 70-200mm f/2.8 at 135mm · 1/4000s 셔터 + 회오리치는 크리스털 물방울 포착",
+        prompt: "A masterclass high-speed photorealistic action photograph of a sleek chocolate Labrador Retriever shaking off water vigorously while standing in a clear, sunlit mountain stream. An explosion of thousands of sharp, crystalline water droplets spiraling dynamically through the air around the dog, illuminated by bright afternoon backlighting with sparkling prism refractions. Glossy, wet fur texture with individual hairs clinging together, alert joyful expression with wide dark eyes locked in sharp focus, and a wet black nose with realistic moisture. Smooth river pebbles and sun-dappled water surface softly blurred into creamy circular bokeh in the background. Shot on Sony A1 with a 70-200mm f/2.8 GM II lens at 135mm, f/2.8 aperture, 1/4000s ultra-high-speed shutter freezing every single water drop in mid-air."
+      },
+      {
+        id: "d-12",
+        category: "pet",
+        title: "햇살 가득한 해바라기 밭 속 골든두들 화보",
+        meta: "Nikon Z8 · 85mm f/1.2 S · 전경 해바라기 꽃잎 프레이밍 + 아침 역광 림라이트",
+        prompt: "An enchanting, ultra-photorealistic close-up portrait of a cheerful apricot Goldendoodle sitting among blooming yellow sunflowers in a sun-drenched field during golden morning. Large, vibrant yellow sunflower petals softly blurred across the foreground frame, adding rich golden depth. Warm, bright morning sunlight illuminating its soft, fluffy curly fleece coat, highlighting individual golden-blonde strands with radiant rim lighting. Joyful, expressive dark eyes with crisp dual-sky catchlights, a wet textured black nose with realistic leathery detail, and a happy open-mouthed expression with a pink tongue. Lush green sunflower leaves and yellow blossoms melting into creamy circular pastel bokeh in the background. Shot on Nikon Z8 with a NIKKOR Z 85mm f/1.2 S lens at eye level, f/1.8 aperture, vibrant high-key summer color grading, fine-art pet photography aesthetic."
+      },
+      {
+        id: "d-13",
+        category: "pet",
+        title: "빈티지 서재 가죽 암체어 위 저먼 셰퍼드",
+        meta: "Canon EOS R5 · 85mm f/1.2L · 2700K 텅스텐 측사광 + 체스터필드 빈티지 가죽 주름",
+        prompt: "A masterclass, ultra-photorealistic studio portrait of a noble black-and-tan German Shepherd resting majestically on a distressed vintage brown Chesterfield leather armchair. Warm 2700K tungsten ambient sidelight casting dramatic chiaroscuro lighting, creating golden highlights along its dense fur coat, muscular shoulders, and erect pointed ears. Rich, tactile aged leather texture with realistic wrinkles and patina on the armchair. Deep, wise amber eyes with pin-sharp focus and warm softbox catchlights, highly detailed moist leathery texture on the black nose with distinct whiskers. Dark mahogany bookshelf softly blurred into creamy warm bokeh in the background. Shot on Canon EOS R5 with an RF 85mm f/1.2L USM lens at f/2.0, shallow depth of field, elegant and commanding fine-art pet portrait aesthetic."
+      },
+      {
+        id: "d-14",
+        category: "pet",
+        title: "화이트 린넨 침대 위 모닝 스트레칭 이탈리안 그레이하운드",
+        meta: "Hasselblad X2D 100C · 80mm f/1.9 · 45도 창가 자연광 + 구겨진 린넨 주름 & 단모 윤기",
+        prompt: "A heartwarming, ultra-photorealistic lifestyle close-up portrait of a sleek Italian Greyhound stretching playfully on a cozy, rumpled natural white linen bed in the morning. Warm, soft 5000K morning daylight entering from a large nearby bedroom window at a 45-degree angle, casting gentle warm shadows across the rumpled linen folds and highlighting the glossy sheen of the dog's short slate-grey coat. Expressive, sleepy dark eyes with clear window catchlights, a wet textured black nose with realistic leathery detail, and fine distinct white whiskers. Minimalist Scandinavian bedroom background with warm oak wood textures softly blurred into creamy bokeh. Shot on Hasselblad X2D 100C with an XCD 80mm f/1.9 lens at f/2.2, medium format microcontrast, intimate, airy, and serene lifestyle aesthetic."
+      },
+      {
+        id: "d-15",
+        category: "pet",
+        title: "노을빛 젖은 모래사장을 질주하는 달마시안 액션",
+        meta: "Canon EOS R3 · 135mm f/1.8L · 1/3200s 셔터 + 젖은 모래 반영 & 튀는 바닷물 입자",
+        prompt: "A masterclass high-speed photorealistic action photograph of a sleek, muscular Dalmatian sprinting joyfully along the shoreline of a wet sandy beach at golden sunset. Low-angle perspective skimming just inches above the mirror-like wet sand, capturing crisp reflections of the dog and the glowing amber sky. Sleek, short pure-white coat with sharply defined, high-contrast jet-black spots, with individual muscle contours visible in motion. Tens of crystalline seawater droplets splashing up from its paws, sparkling like tiny sun-drenched prisms in the warm low-angle sunset backlighting. Intense joyful expression with alert dark eyes locked in sharp focus, ears flying back in the wind, and a moist textured black nose. Soft rolling ocean waves softly melting into creamy circular pastel bokeh in the background. Shot on Canon EOS R3 with an RF 135mm f/1.8L IS USM lens at f/2.0, 1/3200s ultra-high-speed shutter, radiant summer twilight atmosphere."
+      }
+    ];
+
+    let currentCat = "all";
+    let searchQuery = "";
+
+    const grid = document.getElementById("cards-container");
+    const tabs = document.getElementById("filter-tabs");
+    const search = document.getElementById("search-input");
+    const toast = document.getElementById("toast");
+
+    const selGenre = document.getElementById("sel-genre");
+    const selCamera = document.getElementById("sel-camera");
+    const selLens = document.getElementById("sel-lens");
+    const selLighting = document.getElementById("sel-lighting");
+    const selFilm = document.getElementById("sel-film");
+    const selDetail = document.getElementById("sel-detail");
+    const selPov = document.getElementById("sel-pov");
+    const selRatio = document.getElementById("sel-ratio");
+    const inpDesc = document.getElementById("inp-desc");
+    const liveOutput = document.getElementById("live-output");
+    const btnCopy = document.getElementById("btn-copy-builder");
+    const btnReset = document.getElementById("btn-reset");
+
+    const guideModal = document.getElementById("guide-modal");
+    const openGuide = document.getElementById("open-guide");
+    const closeModal = document.getElementById("close-modal");
+    const btnCloseGuide = document.getElementById("btn-close-guide");
+
+    openGuide.addEventListener("click", () => guideModal.classList.add("open"));
+    closeModal.addEventListener("click", () => guideModal.classList.remove("open"));
+    btnCloseGuide.addEventListener("click", () => guideModal.classList.remove("open"));
+
+    function showToast(msg = "클립보드에 복사되었습니다!") {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => showToast());
+    }
+
+    function updateLivePreview() {
+      const parts = [];
+      const genre = selGenre.value;
+      const desc = inpDesc.value.trim();
+
+      if (desc) {
+        parts.push(`${genre} of ${desc}`);
+      } else {
+        parts.push(genre);
+      }
+
+      if (selDetail.value) parts.push(selDetail.value);
+      if (selLighting.value) parts.push(selLighting.value);
+      if (selCamera.value) parts.push(selCamera.value);
+      if (selLens.value) parts.push(selLens.value);
+      if (selPov.value) parts.push(selPov.value);
+      if (selFilm.value) parts.push(selFilm.value);
+      if (selRatio.value) parts.push(selRatio.value);
+
+      liveOutput.textContent = parts.join(", ");
+    }
+
+    function renderCards() {
+      grid.innerHTML = "";
+      const filtered = masterCollection.filter(item => {
+        const matchesCat = (currentCat === "all" || item.category === currentCat);
+        const q = searchQuery.toLowerCase();
+        const matchesSearch = item.title.toLowerCase().includes(q) ||
+                              item.meta.toLowerCase().includes(q) ||
+                              item.prompt.toLowerCase().includes(q);
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);">일치하는 프롬프트가 없습니다.</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "card";
+        const tagClass = item.category === "portrait" ? "tag tag-portrait" : "tag tag-pet";
+        const tagText = item.category === "portrait" ? "👤 인물" : "🐶 반려견";
+
+        card.innerHTML = `
+          <div>
+            <div class="card-head">
+              <span class="card-title">${item.title}</span>
+              <span class="${tagClass}">${tagText}</span>
+            </div>
+            <p class="card-meta" style="margin-top:6px;">${item.meta}</p>
+          </div>
+          <div class="card-code">${item.prompt}</div>
+          <div class="card-btns">
+            <button class="btn-sm btn-load" onclick="loadToInput('${item.prompt.replace(/'/g, "\\'")}')">➕ 빌더에 추가</button>
+            <button class="btn-sm btn-copy" onclick="copyToClipboard('${item.prompt.replace(/'/g, "\\'")}')">📋 프롬프트 복사</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    window.copyToClipboard = copyToClipboard;
+    window.loadToInput = function(text) {
+      if (inpDesc.value.trim()) {
+        inpDesc.value += `, ${text}`;
+      } else {
+        inpDesc.value = text;
+      }
+      updateLivePreview();
+      showToast("빌더에 프롬프트가 추가되었습니다!");
+    };
+
+    [selGenre, selCamera, selLens, selLighting, selFilm, selDetail, selPov, selRatio, inpDesc].forEach(el => {
+      el.addEventListener("input", updateLivePreview);
+      el.addEventListener("change", updateLivePreview);
+    });
+
+    btnCopy.addEventListener("click", () => copyToClipboard(liveOutput.textContent));
+    btnReset.addEventListener("click", () => {
+      inpDesc.value = "";
+      updateLivePreview();
+      showToast("빌더가 초기화되었습니다.");
+    });
+
+    tabs.addEventListener("click", (e) => {
+      if (e.target.classList.contains("tab-btn")) {
+        document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+        e.target.classList.add("active");
+        currentCat = e.target.dataset.cat;
+        renderCards();
+      }
+    });
+
+    search.addEventListener("input", (e) => {
+      searchQuery = e.target.value.trim();
+      renderCards();
+    });
+
+    updateLivePreview();
+    renderCards();
+  </script>
+</body>
+</html>
