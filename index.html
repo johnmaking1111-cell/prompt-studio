@@ -47,7 +47,7 @@
     .form-row select:focus, .form-row textarea:focus, .form-row input:focus { border-color: var(--accent); }
     .form-row textarea { resize: vertical; min-height: 54px; line-height: 1.4; }
 
-    .live-box { background-color: #050811; border: 1px dashed var(--accent); border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.8rem; line-height: 1.45; color: #e2e8f0; max-height: 140px; overflow-y: auto; word-break: break-all; }
+    .live-box { background-color: #050811; border: 1px dashed var(--accent); border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.8rem; line-height: 1.45; color: #e2e8f0; max-height: 140px; overflow-y: auto; word-break: break-all; min-height: 60px; }
     .btn-copy-main { background-color: var(--accent); color: #080c14; font-weight: 800; font-size: 0.9rem; border: none; border-radius: 6px; padding: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; width: 100%; }
     .btn-copy-main:hover { background-color: var(--accent-hover); }
 
@@ -120,6 +120,7 @@
       <div class="form-row">
         <label>1. 촬영 장르 (Genre)</label>
         <select id="sel-genre">
+          <option value="">-- [선택 안 함] --</option>
           <option value="A photorealistic high-end editorial portrait">인물: 에디토리얼 뷰티/패션 화보</option>
           <option value="A masterclass authentic craftsman portrait">인물: 장인 & 아티산 클래식 포트레이트</option>
           <option value="A cinematic atmospheric candid street portrait">인물: 거리/카페 시네마틱 스냅</option>
@@ -133,6 +134,7 @@
       <div class="form-row">
         <label>2. 카메라 바디 & 센서 (Camera Body)</label>
         <select id="sel-camera">
+          <option value="">-- [선택 안 함] --</option>
           <option value="Shot on Hasselblad X2D 100C medium format camera, medium format microcontrast">Hasselblad X2D 100C (중형 포맷/극강 마이크로 콘트라스트)</option>
           <option value="Shot on Fujifilm GFX 100 II medium format camera, rich highlight roll-off">Fujifilm GFX 100 II (중형 뷰티/하이라이트 롤오프)</option>
           <option value="Shot on Canon EOS R5 with L-series glass, warm authentic skin rendition">Canon EOS R5 (화사하고 따뜻한 인물 피부 발색)</option>
@@ -147,6 +149,7 @@
       <div class="form-row">
         <label>3. 렌즈 화각 & 조리개 심도 (Lens & Aperture)</label>
         <select id="sel-lens">
+          <option value="">-- [선택 안 함] --</option>
           <option value="with an 85mm f/1.4 portrait prime lens at f/1.4, shallow depth of field, creamy background bokeh">85mm f/1.4 (대표 인물/반려견 화각, 크리미 보케)</option>
           <option value="with an 85mm f/1.2L lens at f/1.2, extreme shallow depth of field, pin-sharp eyes">85mm f/1.2 (극단적 얕은 심도, 몽환적 배경 흐림)</option>
           <option value="with a 50mm f/1.2 lens at f/1.8, natural human-eye perspective, balanced subject separation">50mm f/1.2 (자연스러운 50mm 표준 시야)</option>
@@ -161,6 +164,7 @@
       <div class="form-row">
         <label>4. 조명 설계 (Lighting Setup)</label>
         <select id="sel-lighting">
+          <option value="">-- [선택 안 함] --</option>
           <option value="dramatic Rembrandt studio lighting with key light at 45 degrees, subtle inverted triangle cheek shadow, hair rim light">렘브란트 스튜디오 조명 (45도 키라이트 + 헤어 림라이트)</option>
           <option value="soft diffused morning window daylight from the side, delicate catchlights in the dark eyes">소프트 창가 자연광 (부드러운 측광 + 맑은 캐치라이트)</option>
           <option value="warm low-angle golden hour sunset backlighting, glowing golden rim light outlining hair and silhouette">일몰 골든아워 역광 (황금빛 림라이트 + 실루엣 광)</option>
@@ -176,6 +180,7 @@
       <div class="form-row">
         <label>5. 필름 룩 & 컬러 사이언스 (Film & Color)</label>
         <select id="sel-film">
+          <option value="">-- [선택 안 함] --</option>
           <option value="Kodak Portra 400 color science, natural warm skin tones, soft pastel highlights, fine organic grain">Kodak Portra 400 (따뜻한 인물 피부톤, 소프트 파스텔)</option>
           <option value="Kodak Portra 800 color grading, rich analog shadow warmth, gentle fine film grain">Kodak Portra 800 (풍부한 암부 온기, 고감도 필름 입자)</option>
           <option value="Kodak Tri-X 400 monochrome film look, deep velvety blacks, rich luminous silver highlights">Kodak Tri-X 400 (깊은 딥블랙, 클래식 흑백 계조)</option>
@@ -188,6 +193,7 @@
       <div class="form-row">
         <label>6. 극실사 디테일 부스터 (Detail Booster)</label>
         <select id="sel-detail">
+          <option value="">-- [선택 안 함] --</option>
           <option value="authentic skin texture with visible micro-pores, delicate subsurface scattering under soft light, natural catchlights">인물: 실제 피부 모공(Micro-pores) + 빛 투과 혈색(Subsurface Scattering)</option>
           <option value="glossy textured fur with individual hairs catching light, moist leathery texture on black nose, distinct white whiskers">반려견: 털 한 올(Individual hairs) + 촉촉한 코 가죽 질감 + 수염</option>
           <option value="fluffy dense curly teddy-bear coat texture, wet black nose, crisp dual sky catchlights in dark eyes">푸들/비숑: 폭신한 테디베어 털 결 + 맑은 하늘 반사광</option>
@@ -199,6 +205,7 @@
       <div class="form-row">
         <label>7. 시점 및 앵글 (Point of View)</label>
         <select id="sel-pov">
+          <option value="">-- [선택 안 함] --</option>
           <option value="Eye-level medium close-up shot">아이레벨 미디엄 클로즈업 (Eye-level)</option>
           <option value="Low-angle perspective skimming close to ground">초저각 로우 앵글 (Low-angle skimming ground)</option>
           <option value="High-angle shot looking down naturally">내려다보는 하이 앵글 (High-angle)</option>
@@ -209,6 +216,7 @@
       <div class="form-row">
         <label>8. 화면 비율 (Aspect Ratio)</label>
         <select id="sel-ratio">
+          <option value="">-- [선택 안 함] --</option>
           <option value="--ar 4:5">인스타그램/포트레이트 세로 (4:5)</option>
           <option value="--ar 1:1">정사각형 스퀘어 (1:1)</option>
           <option value="--ar 16:9">시네마틱 가로 와이드 (16:9)</option>
@@ -224,7 +232,7 @@
 
       <div class="form-row">
         <label>10. 조립된 최종 프롬프트 (Live Preview)</label>
-        <div class="live-box" id="live-output">프롬프트를 선택하거나 작성하세요.</div>
+        <div class="live-box" id="live-output">선택된 프롬프트가 없습니다. (초기화 상태)</div>
       </div>
 
       <button class="btn-copy-main" id="btn-copy-builder">📋 최종 완성 프롬프트 복사</button>
@@ -531,10 +539,12 @@
       const genre = selGenre.value;
       const desc = inpDesc.value.trim();
 
-      if (desc) {
+      if (genre && desc) {
         parts.push(`${genre} of ${desc}`);
-      } else {
+      } else if (genre) {
         parts.push(genre);
+      } else if (desc) {
+        parts.push(desc);
       }
 
       if (selDetail.value) parts.push(selDetail.value);
@@ -545,7 +555,13 @@
       if (selFilm.value) parts.push(selFilm.value);
       if (selRatio.value) parts.push(selRatio.value);
 
-      liveOutput.textContent = parts.join(", ");
+      if (parts.length === 0) {
+        liveOutput.textContent = "선택된 프롬프트가 없습니다. (초기화 상태)";
+        liveOutput.style.color = "#64748b";
+      } else {
+        liveOutput.textContent = parts.join(", ");
+        liveOutput.style.color = "#e2e8f0";
+      }
     }
 
     function renderCards() {
@@ -604,11 +620,27 @@
       el.addEventListener("change", updateLivePreview);
     });
 
-    btnCopy.addEventListener("click", () => copyToClipboard(liveOutput.textContent));
+    btnCopy.addEventListener("click", () => {
+      const txt = liveOutput.textContent;
+      if (!txt || txt === "선택된 프롬프트가 없습니다. (초기화 상태)") {
+        showToast("복사할 프롬프트 내용이 없습니다.");
+        return;
+      }
+      copyToClipboard(txt);
+    });
+
     btnReset.addEventListener("click", () => {
+      selGenre.selectedIndex = 0;
+      selCamera.selectedIndex = 0;
+      selLens.selectedIndex = 0;
+      selLighting.selectedIndex = 0;
+      selFilm.selectedIndex = 0;
+      selDetail.selectedIndex = 0;
+      selPov.selectedIndex = 0;
+      selRatio.selectedIndex = 0;
       inpDesc.value = "";
       updateLivePreview();
-      showToast("빌더가 초기화되었습니다.");
+      showToast("모든 항목이 제로(0)로 초기화되었습니다.");
     });
 
     tabs.addEventListener("click", (e) => {
