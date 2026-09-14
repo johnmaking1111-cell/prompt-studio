@@ -3,15 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 감성 사진 스튜디오 (Prompt Studio v5.1)</title>
-  <meta name="description" content="스튜디오 24대 조명 + 킨포크 에디션 10선 + 감성 마스터 화보 78선 통합 프롬프트 빌더" />
-  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2248%22%20fill%3D%22%230f172a%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2255%22%20r%3D%2218%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%226%22/%3E%3Crect%20x%3D%2225%22%20y%3D%2235%22%20width%3D%2250%22%20height%3D%2238%22%20rx%3D%226%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%225%22/%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2242%22%20r%3D%223%22%20fill%3D%22%23f59e0b%22/%3E%3Cpath%20d%3D%22M40%2028%20L60%2028%20L65%2035%20L35%2035%20Z%22%20fill%3D%22%2338bdf8%22/%3E%3C/svg%3E" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2248%22%20fill%3D%22%230f172a%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2255%22%20r%3D%2218%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%226%22/%3E%3Crect%20x%3D%2225%22%20y%3D%2235%22%20width%3D%2250%22%20height%3D%2238%22%20rx%3D%226%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%225%22/%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2242%22%20r%3D%223%22%20fill%3D%22%23f59e0b%22/%3E%3Cpath%20d%3D%22M40%2028%20L60%2028%20L65%2035%20L35%2035%20Z%22%20fill%3D%22%2338bdf8%22/%3E%3C/svg%3E" />
-  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%20%22Prompt%20Studio%20-%20AI%20%EA%B0%90%EC%84%B1%20%EC%82%AC%EC%A7%84%20%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4%22%2C%20%22short_name%22%3A%20%22PromptStudio%22%2C%20%22description%22%3A%20%22%ED%82%A8%ED%8F%AC%ED%81%AC%20%26%20%EB%8C%80%EC%9E%90%EC%97%B0%20%EA%B7%B9%EC%8B%A4%EC%82%AC%20%EC%82%AC%EC%A7%84%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EB%B9%8C%EB%8D%94%22%2C%20%22start_url%22%3A%20%22./%22%2C%20%22display%22%3A%20%22standalone%22%2C%20%22background_color%22%3A%20%22%23090d16%22%2C%20%22theme_color%22%3A%20%22%230f172a%22%2C%20%22icons%22%3A%20%5B%7B%22src%22%3A%20%22data%3Aimage/svg%2Bxml%3Butf8%2C%253Csvg%2520xmlns%253D%2522http%253A//www.w3.org/2000/svg%2522%2520viewBox%253D%25220%25200%2520100%2520100%2522%253E%253Ccircle%2520cx%253D%252250%2522%2520cy%253D%252250%2522%2520r%253D%252248%2522%2520fill%253D%2522%25230f172a%2522%2520stroke%253D%2522%252338bdf8%2522%2520stroke-width%253D%25224%2522/%253E%253Ccircle%2520cx%253D%252250%2522%2520cy%253D%252255%2522%2520r%253D%252218%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%252338bdf8%2522%2520stroke-width%253D%25226%2522/%253E%253Crect%2520x%253D%252225%2522%2520y%253D%252235%2522%2520width%253D%252250%2522%2520height%253D%252238%2522%2520rx%253D%25226%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%252338bdf8%2522%2520stroke-width%253D%25225%2522/%253E%253Ccircle%2520cx%253D%252268%2522%2520cy%253D%252242%2522%2520r%253D%25223%2522%2520fill%253D%2522%2523f59e0b%2522/%253E%253Cpath%2520d%253D%2522M40%252028%2520L60%252028%2520L65%252035%2520L35%252035%2520Z%2522%2520fill%253D%2522%252338bdf8%2522/%253E%253C/svg%253E%22%2C%20%22sizes%22%3A%20%22192x192%20512x512%22%2C%20%22type%22%3A%20%22image/svg%2Bxml%22%2C%20%22purpose%22%3A%20%22any%20maskable%22%7D%5D%7D" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="PromptStudio" />
+  <title>AI 감성 사진 스튜디오 (Prompt Studio v4.2)</title>
+  <meta name="description" content="킨포크(Kinfolk) 매거진 에디션 10선 + 촬영 사진 보존 변형 36선 통합 마스터 프롬프트 빌더" />
   <style>
     :root {
       --bg-dark: #090d16;
@@ -22,6 +15,7 @@
       --accent: #38bdf8;
       --accent-hover: #0ea5e9;
       --kinfolk: #f59e0b;
+      --kinfolk-hover: #d97706;
       --emerald: #34d399;
       --amber: #fbbf24;
       --purple: #c084fc;
@@ -34,16 +28,12 @@
     body { background-color: var(--bg-dark); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; padding: 18px; gap: 16px; }
     
     header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
-    .logo-box h1 { font-size: 1.35rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .logo-box h1 { font-size: 1.4rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
     .logo-box p { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
-    .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    
-    .btn-install { background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: #080c14; border: none; border-radius: 8px; padding: 7px 13px; font-size: 0.8rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35); transition: all 0.2s; }
-    .btn-install:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(56, 189, 248, 0.5); }
-    
+    .badge-bar { display: flex; gap: 8px; align-items: center; }
     .badge { font-size: 0.72rem; font-weight: 800; padding: 4px 9px; border-radius: 6px; letter-spacing: 0.3px; }
-    .badge-lighting { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-kinfolk { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-kinfolk { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-universal { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
 
     .main-grid { display: grid; grid-template-columns: 460px 1fr; gap: 20px; flex: 1; align-items: start; }
 
@@ -58,9 +48,7 @@
     .form-row label { font-size: 0.78rem; font-weight: 700; color: #cbd5e1; }
     .form-row select, .form-row textarea, .form-row input { background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 8px 10px; font-size: 0.83rem; outline: none; transition: border-color 0.2s; }
     .form-row select:focus, .form-row textarea:focus, .form-row input:focus { border-color: var(--accent); }
-    .form-row select optgroup { background-color: #0f172a; color: #38bdf8; font-weight: 800; font-size: 0.82rem; }
-    .form-row select option { background-color: #131d31; color: #f8fafc; font-weight: 400; }
-    .form-row textarea { resize: vertical; min-height: 55px; line-height: 1.4; }
+    .form-row textarea { resize: vertical; min-height: 60px; line-height: 1.4; }
 
     .live-box-wrap { display: flex; flex-direction: column; gap: 6px; }
     .live-box-header { display: flex; justify-content: space-between; align-items: center; }
@@ -107,14 +95,13 @@
     .card.kinfolk-card .btn-copy:hover { background-color: #d97706; }
 
     /* Toast */
-    #toast { position: fixed; bottom: 24px; right: 24px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 11px 18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; max-width: 90vw; }
+    #toast { position: fixed; bottom: 24px; right: 24px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 11px 18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; }
     #toast.show { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 1024px) {
       .main-grid { grid-template-columns: 1fr; }
       .builder-panel { position: static; max-height: none; }
       .search-input { width: 100%; }
-      .btn-install { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -122,13 +109,12 @@
 
   <header>
     <div class="logo-box">
-      <h1>📸 AI 감성 사진 스튜디오 <span style="font-size:0.78rem; background:#1e293b; color:#94a3b8; padding:3px 8px; border-radius:5px; border:1px solid #334155;">v5.1</span></h1>
-      <p>스튜디오 24대 조명 가이드 + 킨포크 에디션 10선 + 감성 마스터 화보 78선 라이브러리</p>
+      <h1>📸 AI 감성 사진 스튜디오 <span style="font-size:0.78rem; background:#1e293b; color:#94a3b8; padding:3px 8px; border-radius:5px; border:1px solid #334155;">v4.2</span></h1>
+      <p>킨포크(Kinfolk) 에디션 10선 + 촬영 사진 보존 변형 36선 통합 마스터 라이브러리</p>
     </div>
-    <div class="header-actions">
-      <button class="btn-install" id="btn-install" type="button">📲 홈 화면/바탕화면에 추가</button>
-      <span class="badge badge-lighting">💡 스튜디오 24대 조명</span>
-      <span class="badge badge-kinfolk">🌿 킨포크 10선</span>
+    <div class="badge-bar">
+      <span class="badge badge-kinfolk">🌿 킨포크 에디션 10선</span>
+      <span class="badge badge-universal">📸 사진 변형 36선</span>
     </div>
   </header>
 
@@ -162,48 +148,18 @@
           <option value="in an untouched primeval moss forest surrounded by damp emerald-green mossy rocks and ancient tree roots">대자연 숲: 원시 이끼 숲과 천상의 틴들 빛내림</option>
           <option value="on a rugged basalt sea cliff edge facing violent ocean waves and sea mist with no human structures">대자연 절벽: 대양의 현무암 바위 절벽과 파도 비말</option>
           <option value="at the edge of a crystal-clear mountain glacial brook with smooth river pebbles and alpine air">대자연 계곡: 고산 빙하 개울과 서늘한 산악 대기</option>
-          <option value="on a vast rolling hillside filled with ancient gnarled olive trees under crisp Mediterranean sky">대자연 언덕: 지중해 야생 올리브 언덕</option>
-          <option value="inside a narrow red sandstone slot canyon with flowing sculpted walls and swirling dust motes">대자연 협곡: 붉은 사암 협곡과 슬롯 광선</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label for="sel-lighting">3. 조명 및 스튜디오 라이팅 세팅 (Studio & Natural)</label>
+        <label for="sel-lighting">3. 조명 및 빛의 궤적</label>
         <select id="sel-lighting">
-<option value="">-- [선택 안 함] --</option>
-          <optgroup label="📸 프로 스튜디오 24대 조명 세팅 (Studio Master Guide)">
-            <option value="Rembrandt lighting setup using a 20-inch key softbox positioned high and 45 degrees to the side, creating a defined triangle of light on the shadow cheek with directional soft contrast">렘브란트 (소프트박스) - Rembrandt with a Softbox</option>
-            <option value="Rembrandt lighting setup through a white shoot-through umbrella positioned high at 45 degrees, producing soft wrap-around contrast with subtle triangle highlight on cheek">렘브란트 (투과 우산) - Rembrandt through a Brolly</option>
-            <option value="Dramatic low-key Rembrandt lighting using a key strobe with honeycomb grid attachment, creating a focused beam of light with deep chiaroscuro shadows and narrow triangle cheek highlight">렘브란트 (허니컴 그리드) - Rembrandt with a Honeycomb</option>
-            <option value="Punchy Rembrandt lighting using a silver reflective umbrella, delivering crisp specular highlights, vibrant microcontrast, and classic cheek triangle shadow">렘브란트 (실버 반사 우산) - Rembrandt with a Silver Brolly</option>
-            <option value="Rembrandt short lighting setup illuminating the side of the face turned away from camera, narrowing facial structure with expressive deep dimensional shadows">렘브란트 쇼트 라이팅 - Rembrandt Short Lighting</option>
-            <option value="Rembrandt broad lighting setup illuminating the side of the face turned toward camera, creating an open, luminous portrait with soft cheek triangle on shadow side">렘브란트 브로드 라이팅 - Rembrandt Broad Lighting</option>
-            <option value="Dramatic split lighting setup with a single strobe placed 90 degrees to the side, dividing the face precisely into half brilliant light and half deep shadow">스플릿 라이팅 (사이드 1등) - Split Lighting</option>
-            <option value="Split lighting setup with side key light balanced by a white reflector on the shadow side, softening deep contrast while maintaining half-face dimensional sculpting">스플릿 라이팅 + 필 반사판 - Split with Fill Reflector</option>
-            <option value="Split short lighting illuminating the side turned away from the camera, producing a moody, slimming noir editorial contrast">스플릿 쇼트 라이팅 - Split / Short Lighting</option>
-            <option value="Split broad lighting illuminating the cheek turned toward the camera, creating wide theatrical half-light drama">스플릿 브로드 라이팅 - Split / Broad Lighting</option>
-            <option value="Key lighting with a large softbox placed very close to subject, wrapping the face in ultra-soft, creamy light with imperceptible shadow transitions and catchlights">근접 대형 소프트박스 (초소프트) - Key with a Close Softbox</option>
-            <option value="Key lighting with a softbox positioned far away, increasing contrast with sharper shadow edges and distinct jawline definition">원거리 소프트박스 (하드 콘트라스트) - Key with a Far Away Softbox</option>
-            <option value="Classic loop lighting setup with key light slightly above eye level at 30-40 degrees, casting a small delicate loop shadow from nose toward corner of the lip">루프 라이팅 - Loop Lighting</option>
-            <option value="Paramount butterfly beauty lighting placed high directly in front of face, casting a symmetrical butterfly-shaped shadow beneath nose and sculpting high cheekbones">버터플라이 라이팅 (파라마운트 뷰티) - Butterfly Lighting</option>
-            <option value="Even flat lighting using two symmetrical softboxes flanking the camera at equal power, eliminating facial wrinkles with clean, smooth, flawless skin tones">플랫 라이팅 (균일 뷰티) - Flat Light</option>
-            <option value="Badger lighting setup with two softboxes positioned on opposite sides slightly behind subject, sculpting facial edges with dual rim highlights and center shadow">배저 라이팅 (측면 2등) - Badger Lighting</option>
-            <option value="Clamshell beauty lighting setup with top key softbox overhead and silver reflector below chin, filling neck shadows and creating dual radiant catchlights in irises">클램셸 뷰티 라이팅 - Clamshell Lighting</option>
-            <option value="Loop lighting on face paired with a dedicated background strobe, creating a subtle luminous halo behind subject for clean subject separation">루프 라이팅 + 배경 분리광 - Loop with a Background Light</option>
-            <option value="Loop lighting key light combined with a honeycomb grid kicker placed behind subject, outlining jaw and shoulder with a razor-sharp accent rim highlight">루프 라이팅 + 림 라이트 (헤어/외곽 분리) - Loop with a Rim Light</option>
-            <option value="Pure high key studio lighting setup with blown-out seamless white background, large front fill, and glowing shadowless exposure for clean commercial aesthetic">하이키 라이팅 (순백 배경) - High Key Lighting</option>
-            <option value="Standard two-light studio setup with 45-degree key softbox at f/8 and frontal fill softbox at f/4 (2:1 ratio), providing natural depth and gentle shadow detail">키 라이트 + 필 라이트 (표준 2등) - Key and Fill Light</option>
-            <option value="Complete three-point studio portrait lighting including 45-degree key softbox, fill reflector, and overhead hair boom light separating crown hair from background">3점 조명 (키 + 필 + 헤어 라이트) - Key, Fill and Hair Light</option>
-            <option value="Hard key reflector lighting combined with dual rear kickers flanking both sides, sculpting dramatic muscular contours, razor-sharp jawline, and edgy high fashion contrast">하드 키 + 듀얼 키커 (강렬한 에디토리얼) - Hard Key with Kickers</option>
-            <option value="Creative studio lighting setup using colored gels (cyan/magenta or warm amber/cool blue) on opposing strobes, creating striking complementary color gradients on shadow and highlight">컬러 젤 조명 (듀얼/멀티 톤) - Coloured Gels Lighting</option>
-          </optgroup>
-          <optgroup label=" 자연광 & 앰비언트 라이팅">
-            <option value="Soft, diffused 4700K north window daylight gently wrapping around the subject with muted, delicate shadows">북향 창문 4700K 소프트 산광 (킨포크 감성 자연광)</option>
-            <option value="Crisp afternoon 4900K natural sunlight casting geometric diagonal shadows across the smooth architectural surfaces">오후 4900K 사선 자연광 (기하학적 건축 그림자)</option>
-            <option value="Low-angle 5100K golden sunset backlight carving an exquisite golden rim light along the silhouette">5100K 해안 노을빛 역광 (황금빛 림라이트)</option>
-            <option value="Dramatic morning volumetric sunbeams (God rays) piercing through the misty canopy, casting an ethereal halo rim light">아침 삼나무 숲 틴들 광선 (천상의 빛내림 & 헤일로)</option>
-            <option value="Warm 2800K ambient tungsten lamp light softly illuminating the subject with cozy amber glow">2800K 앤티크 텅스텐 백열등 (포근한 호박빛 온기)</option>
-          </optgroup>
+          <option value="">-- [선택 안 함] --</option>
+          <option value="Soft, diffused 4700K north window daylight gently wrapping around the subject with muted, delicate shadows">북향 창문 4700K 소프트 산광 (킨포크 자연광)</option>
+          <option value="Crisp afternoon 4900K natural sunlight casting geometric diagonal shadows across the smooth architectural surfaces">오후 4900K 사선 자연광 (기하학적 건축 그림자)</option>
+          <option value="Low-angle 5100K golden sunset backlight carving an exquisite golden rim light along the silhouette">5100K 해안 노을빛 역광 (황금빛 림라이트)</option>
+          <option value="Dramatic morning volumetric sunbeams (God rays) piercing through the misty canopy, casting an ethereal halo rim light">아침 삼나무 숲 틴들 광선 (천상의 빛내림 & 헤일로)</option>
+          <option value="Warm 2800K ambient tungsten lamp light softly illuminating the subject with cozy amber glow">2800K 앤티크 텅스텐 백열등 (포근한 호박빛 온기)</option>
         </select>
       </div>
 
@@ -214,7 +170,6 @@
           <option value="Shot on Fujifilm GFX 100 II medium format camera, medium format microcontrast">Fujifilm GFX 100 II (중형 포맷/마이크로 콘트라스트)</option>
           <option value="Shot on Fujifilm X-T5 flagship mirrorless camera">Fujifilm X-T5 (후지필름 플래그십 미러리스)</option>
           <option value="Shot on Hasselblad X2D 100C medium format camera, natural color solution">Hasselblad X2D 100C (중형 명품 발색)</option>
-          <option value="Shot on Canon EOS R6 Mark II camera, natural skin tone rendering">Canon EOS R6 Mark II (캐논 표준 스튜디오)</option>
         </select>
       </div>
 
@@ -226,7 +181,6 @@
           <option value="with a GF 110mm F2 lens at f/2.2, shallow depth of field, creamy background bokeh">GF 110mm f/2.2 (중형 에디토리얼 인물 화각)</option>
           <option value="with an XF 35mm F1.4 lens at f/2.8, intimate environmental perspective">XF 35mm f/2.8 (자연스러운 50mm 일상 스냅)</option>
           <option value="with an XF 56mm F1.2 lens at f/2.0, pin-sharp subject separation">XF 56mm f/2.0 (85mm 상당 표준 포트레이트)</option>
-          <option value="with an 85mm F1.4 studio prime lens at f/2.8, flattering facial compression">85mm f/2.8 (스튜디오 프로 인물 압축감)</option>
         </select>
       </div>
 
@@ -270,14 +224,14 @@
     <main class="library-panel">
       <div class="filter-bar">
         <div class="tab-group" id="filter-tabs">
-          <button class="tab-btn active" data-cat="all" type="button">전체 (78)</button>
+          <button class="tab-btn active" data-cat="all" type="button">전체 (46)</button>
           <button class="tab-btn" data-cat="kinfolk" type="button" style="border-color:#f59e0b; font-weight:800;">🌿 킨포크 에디션 (10)</button>
-          <button class="tab-btn" data-cat="nature" type="button">🌲 대자연</button>
-          <button class="tab-btn" data-cat="atelier" type="button">☕ 아틀리에</button>
-          <button class="tab-btn" data-cat="vintage" type="button">🎻 빈티지 장인</button>
-          <button class="tab-btn" data-cat="season" type="button">🍂 계절 & 빛</button>
+          <button class="tab-btn" data-cat="nature" type="button">🌲 대자연 (10)</button>
+          <button class="tab-btn" data-cat="atelier" type="button">☕ 아틀리에 (10)</button>
+          <button class="tab-btn" data-cat="vintage" type="button">🎻 빈티지 장인 (8)</button>
+          <button class="tab-btn" data-cat="season" type="button">🍂 계절 & 빛 (8)</button>
         </div>
-        <input type="text" class="search-input" id="search-input" placeholder="키워드 검색 (예: 킨포크, 렘브란트, 테라코타)..." />
+        <input type="text" class="search-input" id="search-input" placeholder="키워드 검색 (예: 킨포크, 테라코타, 도자기)..." />
       </div>
 
       <div class="cards-grid" id="cards-container"></div>
@@ -294,7 +248,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 테이블: 린넨 식탁보와 아침 에스프레소, 손끝의 온기",
-    "kr": "아침 햇살이 부드럽게 스며드는 코펜하겐의 조용한 아파트 다이닝 룸. 자연스러운 구김이 잡힌 바랜 아이보리 오가닉 린넨 식탁보 위에 소박한 유약 없는 수제 세라믹 에스프레소 잔과 넓은 소서, 갓 구워낸 스웨디시 시나몬 카다몸 번 하나가 여유롭게 놓여 있다. 린넨 셔츠 소매를 걷은 인물의 손이 찻잔 손잡이를 가볍게 쥐고 있으며, 찻잔 위로 미세한 아침 김이 피어오른다. 화면 상단과 좌측에는 대담한 빈 여백을 남겨둔 미니멀한 3분할 45도 탑뷰 구도. 북향 창가에서 스며드는 4600K 소프트 산광이 매트한 도자기와 빵 표면의 캐러멜 광택을 은은하게 밝힌다.",
+    "desc": "아침 햇살이 부드럽게 스며드는 코펜하겐의 조용한 아파트 다이닝 룸. 자연스러운 구김이 잡힌 바랜 아이보리 오가닉 린넨 식탁보 위에 소박한 유약 없는 수제 세라믹 에스프레소 잔과 넓은 소서, 갓 구워낸 스웨디시 시나몬 카다몸 번 하나가 여유롭게 놓여 있다. 린넨 셔츠 소매를 걷은 인물의 손이 찻잔 손잡이를 가볍게 쥐고 있으며, 찻잔 위로 미세한 아침 김이 피어오른다. 화면 상단과 좌측에는 대담한 빈 여백을 남겨둔 미니멀한 3분할 45도 탑뷰 구도. 북향 창가에서 스며드는 4600K 소프트 산광이 매트한 도자기와 빵 표면의 캐러멜 광택을 은은하게 밝힌다.",
     "prompt": "An authentic Kinfolk magazine editorial photograph of slow morning dining. On a wrinkled, raw ivory linen tablecloth sits a handmade unglazed ceramic espresso cup with saucer and a single golden cardamom bun. A relaxed hand with rolled-up linen cuff gently rests beside the cup with delicate rising steam. Generous minimalist negative space across the frame, unhurried domestic poise. Soft, diffused 4600K north window daylight casting gentle, wrap-around shadows across the matte ceramic and linen textures. Earthy muted color palette of toasted caramel, warm cream, and raw oatmeal. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/3.2, ISO 160, Classic Chrome, 4600K, 3:4 aspect ratio, matte editorial paper texture, understated luxury lifestyle mood.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/3.2, ISO 160, 1/250s | Film Simulation: Classic Chrome | Lighting: Soft diffused 4600K north window light | Color Temp: 4600K | Aspect Ratio: 3:4"
   },
@@ -304,7 +258,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 정물: 붉은 테라코타 테이블 위 반으로 갈라진 무화과와 올리브유",
-    "kr": "따뜻한 테라코타 레드 브라운 톤의 매트한 식탁 위, 정갈하게 절제된 정물 포토그래피. 세월의 손때가 묻은 올리브 원목 도마 위에 갓 딴 신선한 진보랏빛 무화과 두 알이 반으로 갈라진 채 놓여 있어 루비빛 과육과 촘촘한 씨앗이 투명한 이슬과 함께 반짝인다. 곁에는 앤티크 작은 유리병에 담긴 황금빛 올리브유와 거친 린넨 냅킨이 비대칭으로 놓여 있다. 완벽한 중앙 정렬을 피해 화면 아래쪽에 오브제를 모으고 상단에 넉넉한 여백을 둔 킨포크 특유의 레이아웃. 창문을 통과한 오후 4시의 부드러운 사선 자연광이 도마와 과일의 긴 그림자를 드리운다.",
+    "desc": "따뜻한 테라코타 레드 브라운 톤의 매트한 식탁 위, 정갈하게 절제된 정물 포토그래피. 세월의 손때가 묻은 올리브 원목 도마 위에 갓 딴 신선한 진보랏빛 무화과 두 알이 반으로 갈라진 채 놓여 있어 루비빛 과육과 촘촘한 씨앗이 투명한 이슬과 함께 반짝인다. 곁에는 앤티크 작은 유리병에 담긴 황금빛 올리브유와 거친 린넨 냅킨이 비대칭으로 놓여 있다. 완벽한 중앙 정렬을 피해 화면 아래쪽에 오브제를 모으고 상단에 넉넉한 여백을 둔 킨포크 특유의 레이아웃. 창문을 통과한 오후 4시의 부드러운 사선 자연광이 도마와 과일의 긴 그림자를 드리운다.",
     "prompt": "An authentic Kinfolk Table editorial still life photograph. On a matte terracotta red-brown surface rests an aged olive wood board with halved ripe purple figs glistening with ruby seeds and fine nectar drops. A small clear glass cruet of golden extra-virgin olive oil and a folded raw-linen napkin casually arranged beside it. Asymmetrical composition leaving generous negative space in the upper frame. Soft, slanted 4800K afternoon natural daylight entering from the side, casting elongated gentle shadows and subtle glass refractions. Color palette of deep fig purple, terracotta, muted olive green, and warm beige. Shot on Fujifilm X-T5, XF 35mm F1.4 at f/2.8, ISO 200, Classic Chrome, 4800K, 3:4 aspect ratio, tactile organic food textures, serene slow-living aesthetic.",
     "spec": "Camera: Fujifilm X-T5 | Lens: XF 35mm F1.4 R | Settings: f/2.8, ISO 200, 1/320s | Film Simulation: Classic Chrome | Lighting: Slanted 4800K afternoon natural side light | Color Temp: 4800K | Aspect Ratio: 3:4"
   },
@@ -314,7 +268,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 건축: 샌드스톤 회벽과 테라코타 계단 위의 고요한 인물",
-    "kr": "극단적인 미니멀리즘과 기하학적 건축미가 돋보이는 킨포크 볼륨 31 건축 스페셜 표지 헌정 화보. 거칠게 미장된 웜 샌드스톤 회벽과 기하학적인 테라코타 계단이 만나는 공간. 간결한 실루엣의 머스터드 오커 린넨 셔츠와 와이드 팬츠를 입은 인물이 계단참에 편안한 자세로 걸터앉아 고요히 시선을 아래로 떨구고 있다. 인물은 프레임 우측 하단에 조용히 머물며 화면의 60% 이상은 따스한 빈 회벽과 여백으로 비워져 있다. 오후 3시의 부드러운 사선 자연광이 벽면에 계단의 날카롭지만 부드러운 기하학적 그림자를 새긴다.",
+    "desc": "극단적인 미니멀리즘과 기하학적 건축미가 돋보이는 킨포크 볼륨 31 건축 스페셜 표지 헌정 화보. 거칠게 미장된 웜 샌드스톤 회벽과 기하학적인 테라코타 계단이 만나는 공간. 간결한 실루엣의 머스터드 오커 린넨 셔츠와 와이드 팬츠를 입은 인물이 계단참에 편안한 자세로 걸터앉아 고요히 시선을 아래로 떨구고 있다. 인물은 프레임 우측 하단에 조용히 머물며 화면의 60% 이상은 따스한 빈 회벽과 여백으로 비워져 있다. 오후 3시의 부드러운 사선 자연광이 벽면에 계단의 날카롭지만 부드러운 기하학적 그림자를 새긴다.",
     "prompt": "An authentic Kinfolk Architecture editorial photograph inspired by Scandinavian and Mediterranean brutalist minimalism. A lone contemplative figure wearing a structured mustard-ochre linen tunic and neutral trousers sits calmly on a minimalist terracotta staircase set against an expansive, smooth sandstone plaster wall. Breathtaking negative space occupying two-thirds of the composition. Quiet, unhurried meditative poise with downward gaze. Crisp afternoon 4900K natural sunlight casting geometric diagonal shadows across the architecture. Muted earthy palette of faded terracotta, warm plaster beige, and mustard gold. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/4.0, ISO 160, Classic Chrome, 4900K, 3:4 aspect ratio, architectural silence, understated luxury lifestyle mood.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/4.0, ISO 160, 1/400s | Film Simulation: Classic Chrome | Lighting: Crisp 4900K sunlight casting geometric architectural shadows | Color Temp: 4900K | Aspect Ratio: 3:4"
   },
@@ -324,7 +278,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 공간: 아치창 너머로 빛이 흐르는 미니멀 화이트 아파트",
-    "kr": "비어있음의 미학이 흐르는 코펜하겐의 미니멀 화이트 아파트 인테리어. 층고가 높은 하얀 회벽과 낡았지만 윤기 나는 페일 오크 원목 바닥. 높은 격자형 아치창을 통해 쏟아져 들어오는 부드러운 아침 5000K 햇살이 텅 빈 바닥 위에 사각형 빛의 웅덩이를 만든다. 창가 구석에 세워진 바랜 나무 벤치 하나와 흙빛 도자기 화병에 꽂힌 마른 보태니컬 나뭇가지 하나만이 정적을 지킨다. 공간의 공기감과 빛의 흐름만을 온전히 기록한 킨포크 특유의 비움의 미학.",
+    "desc": "비어있음의 미학이 흐르는 코펜하겐의 미니멀 화이트 아파트 인테리어. 층고가 높은 하얀 회벽과 낡았지만 윤기 나는 페일 오크 원목 바닥. 높은 격자형 아치창을 통해 쏟아져 들어오는 부드러운 아침 5000K 햇살이 텅 빈 바닥 위에 사각형 빛의 웅덩이를 만든다. 창가 구석에 세워진 바랜 나무 벤치 하나와 흙빛 도자기 화병에 꽂힌 마른 보태니컬 나뭇가지 하나만이 정적을 지킨다. 공간의 공기감과 빛의 흐름만을 온전히 기록한 킨포크 특유의 비움의 미학.",
     "prompt": "An authentic Kinfolk Interior editorial photograph of a serene, empty minimalist Copenhagen apartment. High ceilings with smooth off-white lime-plastered walls and pale oiled oak floorboards. A tall arched French window allows soft morning 5000K daylight to pour into the room, creating an ethereal rectangular pool of light on the floor. In the quiet corner rests a single rustic weathered wooden bench holding a matte ceramic vase with a single dried botanical branch. Vast contemplative negative space celebrating spatial silence. Muted palette of pale oak, warm ivory, and soft grey. Shot on Fujifilm X-T5, XF 23mm F1.4 at f/4.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, matte architectural paper feel, pure Scandinavian serenity.",
     "spec": "Camera: Fujifilm X-T5 | Lens: XF 23mm F1.4 R LM WR | Settings: f/4.0, ISO 160, 1/320s | Film Simulation: Classic Chrome | Lighting: Ethereal morning sunlight through arched window | Color Temp: 5000K | Aspect Ratio: 3:4"
   },
@@ -334,7 +288,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 포트레이트: 창가 자연광과 도예가의 정적인 옆모습",
-    "kr": "햇살이 맑게 떨어지는 도예 공방의 창가. 킨포크 볼륨 2 표지 헌정 스타일. 단정한 카키 올리브빛 코튼 티셔츠를 입은 인물이 나무 의자에 비스듬히 앉아 흰색 세라믹 잔을 두 손으로 감싸 쥐고 있다. 카메라는 인물의 얼굴을 정면으로 담지 않고 아름다운 목선과 턱선, 귀 뒤로 단정하게 빗어 넘긴 헤어라인의 우아한 옆모습에 집중한다. 인물의 등 뒤로는 부드러운 샌드 베이지 톤의 빈 여백 벽면이 넓게 펼쳐져 있어 숨 쉴 틈을 준다. 창가에서 쏟아지는 부드러운 확산광이 턱선과 어깨선을 따라 섬세하고 부드러운 림라이트를 그린다.",
+    "desc": "햇살이 맑게 떨어지는 도예 공방의 창가. 킨포크 볼륨 2 표지 헌정 스타일. 단정한 카키 올리브빛 코튼 티셔츠를 입은 인물이 나무 의자에 비스듬히 앉아 흰색 세라믹 잔을 두 손으로 감싸 쥐고 있다. 카메라는 인물의 얼굴을 정면으로 담지 않고 아름다운 목선과 턱선, 귀 뒤로 단정하게 빗어 넘긴 헤어라인의 우아한 옆모습에 집중한다. 인물의 등 뒤로는 부드러운 샌드 베이지 톤의 빈 여백 벽면이 넓게 펼쳐져 있어 숨 쉴 틈을 준다. 창가에서 쏟아지는 부드러운 확산광이 턱선과 어깨선을 따라 섬세하고 부드러운 림라이트를 그린다.",
     "prompt": "An authentic Kinfolk magazine cover editorial portrait inspired by Volume 2. A side-profile view of a tranquil person with graceful posture sitting on a simple wooden chair, gently holding a minimalist white ceramic cup with both hands. Wearing a plain muted khaki-olive cotton top. The camera captures the elegant profile of the jawline, neck, and neatly swept-back hair, avoiding direct frontal eye contact. Breathtaking clean sandstone-beige negative space fills the background. Soft, diffused 4700K window daylight gently contouring the shoulders and porcelain skin. Pure understated luxury, domestic calm, unpretentious poetic beauty. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.5, ISO 160, Classic Chrome, 4700K, 3:4 aspect ratio, matte editorial magazine cover texture.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.5, ISO 160, 1/350s | Film Simulation: Classic Chrome | Lighting: Soft diffused 4700K side window daylight | Color Temp: 4700K | Aspect Ratio: 3:4"
   },
@@ -344,8 +298,8 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 친밀감: 따뜻한 머스터드 재킷과 포옹의 실루엣",
-    "kr": "킨포크 볼륨 34 'Intimacy' 표지 헌정 화보. 따뜻한 머스터드 옐로우 오버사이즈 울 블레이저를 입은 인물이 파트너를 부드럽게 감싸 안고 있는 정적인 클로즈업. 두 사람의 얼굴은 과장된 감정을 드러내지 않고 차분하고 깊은 교감을 나누며, 배경은 파스텔 하늘빛과 따뜻한 아이보리 벽면이 부드러운 원형으로 분할되어 여백을 만든다. 오전 10시의 부드러운 북향 자연광이 머스터드 재킷의 직물 결을 도톰하게 살려내며 두 사람의 윤곽선에 따스한 온기를 불어넣는다.",
-    "prompt": "An authentic Kinfolk Volume 34 'Intimacy' cover editorial photograph. An intimate, quiet embrace between two people, one wearing a structured oversized warm mustard-yellow wool blazer. Unrushed, profound emotional connection, tranquil expressions with eyes closed or gazing gently past the lens. The background is a soft graphic bi-color partition of muted pastel sky-blue and warm sandstone ivory, providing clean negative space. Soft wrap-around 4800K natural daylight illuminating the rich wool textile fibers and authentic skin tones. Color palette of mustard yellow, pastel air blue, and warm cream. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.2, ISO 160, Classic Chrome, 4800K, 3:4 aspect ratio, iconic indie magazine cover aesthetic.",
+    "desc": "킨포크 볼륨 34 'Intimacy' 표지 헌정 화보. 따뜻한 머스터드 옐로우 오버사이즈 울 블레이저를 입은 인물이 파트너를 부드럽게 감싸 안고 있는 정적인 클로즈업. 두 사람의 얼굴은 과장된 감정을 드러내지 않고 차분하고 깊은 교감을 나누며, 배경은 파스텔 하늘빛과 따뜻한 아이보리 벽면이 부드러운 원형으로 분할되어 여백을 만든다. 오전 10시의 부드러운 북향 자연광이 머스터드 재킷의 직물 결을 도톰하게 살려내며 두 사람의 윤곽선에 따스한 온기를 불어넣는다.",
+    "prompt": "An authentic Kinfolk Volume 34 Intimacy cover editorial photograph. An intimate, quiet embrace between two people, one wearing a structured oversized warm mustard-yellow wool blazer. Unrushed, profound emotional connection, tranquil expressions with eyes closed or gazing gently past the lens. The background is a soft graphic bi-color partition of muted pastel sky-blue and warm sandstone ivory, providing clean negative space. Soft wrap-around 4800K natural daylight illuminating the rich wool textile fibers and authentic skin tones. Color palette of mustard yellow, pastel air blue, and warm cream. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.2, ISO 160, Classic Chrome, 4800K, 3:4 aspect ratio, iconic indie magazine cover aesthetic.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/2.2, ISO 160, 1/320s | Film Simulation: Classic Chrome | Lighting: Soft wrap-around 4800K daylight | Color Temp: 4800K | Aspect Ratio: 3:4"
   },
   {
@@ -354,7 +308,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 기업가: 화이트 벽면을 따라 걷는 단정한 실루엣",
-    "kr": "킨포크 'The Kinfolk Entrepreneur' 표지 헌정 화보. 끝없이 펼쳐진 거대한 순백의 미니멀 건축 벽면과 완만한 바닥 턱. 단정하게 재단된 차콜 그레이 미니멀 수트를 입은 인물이 벽면을 따라 앞으로 조용히 걸어 나아가는 전신 스냅. 인물은 프레임의 중앙이 아닌 오른쪽 상단 계단턱 위에 작게 배치되어 공간의 거대한 여백과 침묵을 극대화한다. 오후의 은은한 사선 자연광이 인물의 걸음 뒤로 바닥에 길고 옅은 그림자를 드리우며, '행동하기보다 머무는(Being rather than Doing)' 킨포크적 사색을 시각화한다.",
+    "desc": "킨포크 'The Kinfolk Entrepreneur' 표지 헌정 화보. 끝없이 펼쳐진 거대한 순백의 미니멀 건축 벽면과 완만한 바닥 턱. 단정하게 재단된 차콜 그레이 미니멀 수트를 입은 인물이 벽면을 따라 앞으로 조용히 걸어 나아가는 전신 스냅. 인물은 프레임의 중앙이 아닌 오른쪽 상단 계단턱 위에 작게 배치되어 공간의 거대한 여백과 침묵을 극대화한다. 오후의 은은한 사선 자연광이 인물의 걸음 뒤로 바닥에 길고 옅은 그림자를 드리우며, '행동하기보다 머무는(Being rather than Doing)' 킨포크적 사색을 시각화한다.",
     "prompt": "An iconic editorial photograph inspired by The Kinfolk Entrepreneur book cover. A full-body shot of a solitary person in an impeccably tailored, minimalist charcoal suit calmly walking along a low architectural ledge against an immense, pure white and pale grey minimalist wall. Striking asymmetrical composition with the subject occupying only a small portion of the frame, leaving immense negative space that breathes. Soft, directional 5000K afternoon sunlight casting a long, crisp shadow across the white surface. Minimalist monochrome palette of crisp white, soft grey, and charcoal. Shot on Fujifilm X-T5, XF 35mm F1.4 at f/4.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile architectural paper texture, cerebral aesthetic.",
     "spec": "Camera: Fujifilm X-T5 | Lens: XF 35mm F1.4 R | Settings: f/4.0, ISO 160, 1/500s | Film Simulation: Classic Chrome | Lighting: Directional 5000K afternoon sunlight casting long shadow | Color Temp: 5000K | Aspect Ratio: 3:4"
   },
@@ -364,8 +318,8 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 변화: 조각 같은 초록 토피어리 관목원과 옐로우 셔츠",
-    "kr": "킨포크 'Change' 이슈 표지 헌정 화보. 거대한 유기적 곡선으로 정교하게 깎아 다듬은 짙푸른 토피어리(Topiary) 녹색 관목들이 프레임을 압도하듯 채우고 있는 신비로운 정원. 구릉처럼 둥글게 이어진 짙은 초록빛 관목 숲 한가운데, 따뜻한 옐로우 오커 컬러의 단정한 셔츠를 입은 인물이 우뚝 서서 먼 곳을 조용히 응시하고 있다. 짙푸른 잎사귀들의 촘촘한 질감과 인물의 단정한 셔츠 색감이 완벽한 보색의 조화를 이루며, 흐린 날의 부드러운 산광이 관목의 입체적인 곡면을 벨벳처럼 부드럽게 감싼다.",
-    "prompt": "An authentic Kinfolk Magazine cover editorial inspired by the 'Change' issue. A surreal, beautifully sculpted green topiary garden with massive, velvety undulating trimmed hedges filling the frame. Amidst the lush sculptural mounds of green stands a lone person wearing a vibrant, crisp yellow-ochre button-up shirt and rust-red trousers, gazing serenely off-camera. Overcast, soft diffused 5000K daylight evenly wraps around the rounded organic hedge contours with rich, deep shadows in the crevices. Color palette of rich moss green, earthy yellow ochre, and warm terracotta. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/4.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile botanical hedge texture, poetic surreal minimalism.",
+    "desc": "킨포크 'Change' 이슈 표지 헌정 화보. 거대한 유기적 곡선으로 정교하게 깎아 다듬은 짙푸른 토피어리(Topiary) 녹색 관목들이 프레임을 압도하듯 채우고 있는 신비로운 정원. 구릉처럼 둥글게 이어진 짙은 초록빛 관목 숲 한가운데, 따뜻한 옐로우 오커 컬러의 단정한 셔츠를 입은 인물이 우뚝 서서 먼 곳을 조용히 응시하고 있다. 짙푸른 잎사귀들의 촘촘한 질감과 인물의 단정한 셔츠 색감이 완벽한 보색의 조화를 이루며, 흐린 날의 부드러운 산광이 관목의 입체적인 곡면을 벨벳처럼 부드럽게 감싼다.",
+    "prompt": "An authentic Kinfolk Magazine cover editorial inspired by the Change issue. A surreal, beautifully sculpted green topiary garden with massive, velvety undulating trimmed hedges filling the frame. Amidst the lush sculptural mounds of green stands a lone person wearing a vibrant, crisp yellow-ochre button-up shirt and rust-red trousers, gazing serenely off-camera. Overcast, soft diffused 5000K daylight evenly wraps around the rounded organic hedge contours with rich, deep shadows in the crevices. Color palette of rich moss green, earthy yellow ochre, and warm terracotta. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/4.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile botanical hedge texture, poetic surreal minimalism.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/4.0, ISO 160, 1/320s | Film Simulation: Classic Chrome | Lighting: Overcast diffused daylight wrapping around hedge contours | Color Temp: 5000K | Aspect Ratio: 3:4"
   },
   {
@@ -374,7 +328,7 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 해변: 거대한 유목 통나무 위에 걸터앉은 고요한 순간",
-    "kr": "킨포크 초기 오리건주 해변의 자연주의 감성을 담은 화보. 파도와 비바람에 은백색으로 바랜 거대한 유목 통나무(Driftwood log)가 놓인 적막한 모래 해변. 차분한 그레이와 린넨 톤의 편안한 옷을 입은 인물이 통나무 위에 걸터앉아 바다를 바라보고 있다. 발치에는 모래 위에 놓인 바랜 펠트 모자 하나가 여유롭게 놓여 있다. 흐린 날 옅은 해무를 뚫고 들어오는 차분한 5200K 해안 산광이 유목의 거친 나뭇결과 모래의 부드러운 텍스처를 자연스럽게 살려내며, 상단에 끝없이 펼쳐진 흐린 하늘의 광활한 여백이 깊은 쉼을 전한다.",
+    "desc": "킨포크 초기 오리건주 해변의 자연주의 감성을 담은 화보. 파도와 비바람에 은백색으로 바랜 거대한 유목 통나무(Driftwood log)가 놓인 적막한 모래 해변. 차분한 그레이와 린넨 톤의 편안한 옷을 입은 인물이 통나무 위에 걸터앉아 바다를 바라보고 있다. 발치에는 모래 위에 놓인 바랜 펠트 모자 하나가 여유롭게 놓여 있다. 흐린 날 옅은 해무를 뚫고 들어오는 차분한 5200K 해안 산광이 유목의 거친 나뭇결과 모래의 부드러운 텍스처를 자연스럽게 살려내며, 상단에 끝없이 펼쳐진 흐린 하늘의 광활한 여백이 깊은 쉼을 전한다.",
     "prompt": "An authentic Kinfolk coastal gathering editorial photograph. A person dressed in relaxed grey cotton and neutral linen sits unhurriedly on a massive, weathered pale driftwood log on an empty sandy Pacific Northwest beach. A vintage felt hat rests naturally on the sand beside the log. Breathtaking negative space of pale overcast sky and misty sea horizon occupying the top half of the frame. Soft, cool 5200K coastal daylight diffused through morning fog, gently illuminating the cracked wood grain and damp sand. Earthy desaturated palette of driftwood grey, pale sand, and slate ocean blue. Shot on Fujifilm X-T5, XF 35mm F1.4 at f/2.8, ISO 160, Classic Chrome, 5200K, 3:4 aspect ratio, tactile weathered textures, contemplative coastal stillness.",
     "spec": "Camera: Fujifilm X-T5 | Lens: XF 35mm F1.4 R | Settings: f/2.8, ISO 160, 1/400s | Film Simulation: Classic Chrome | Lighting: Soft coastal daylight diffused through morning fog | Color Temp: 5200K | Aspect Ratio: 3:4"
   },
@@ -384,329 +338,9 @@
     "catName": "🌿 킨포크",
     "catClass": "tag-kinfolk",
     "title": "킨포크 식탁의 뒤편: 린넨 식탁보와 나무 의자에 앉은 여인의 뒷모습",
-    "kr": "킨포크 'The Kinfolk Table'의 대표 화보 헌정. 새하얗고 긴 오가닉 린넨 식탁보가 바닥까지 드리워진 식탁 앞, 앤티크 나무 의자에 단정하게 앉아 있는 여인의 조용한 뒷모습. 옅은 블루 샴브레이 셔츠를 입고 붉은빛이 감도는 브라운 헤어를 단정하게 묶어 올린 여인의 목선이 우아하게 드러난다. 식탁 위에는 정원에서 갓 따온 신선한 케일과 허브 잎들이 무심하게 놓여 있다. 화면 좌측에서 부드럽게 흘러들어오는 은은한 아침 자연광이 린넨 식탁보의 미세한 주름과 여인의 어깨선을 조용히 밝히며 한 폭의 정물화 같은 경건한 아름다움을 완성한다.",
+    "desc": "킨포크 'The Kinfolk Table'의 대표 화보 헌정. 새하얗고 긴 오가닉 린넨 식탁보가 바닥까지 드리워진 식탁 앞, 앤티크 나무 의자에 단정하게 앉아 있는 여인의 조용한 뒷모습. 옅은 블루 샴브레이 셔츠를 입고 붉은빛이 감도는 브라운 헤어를 단정하게 묶어 올린 여인의 목선이 우아하게 드러난다. 식탁 위에는 정원에서 갓 따온 신선한 케일과 허브 잎들이 무심하게 놓여 있다. 화면 좌측에서 부드럽게 흘러들어오는 은은한 아침 자연광이 린넨 식탁보의 미세한 주름과 여인의 어깨선을 조용히 밝히며 한 폭의 정물화 같은 경건한 아름다움을 완성한다.",
     "prompt": "An iconic editorial photograph inspired by The Kinfolk Table book. A contemplative view from behind of a woman with auburn hair in a neat updo, wearing a soft chambray work shirt, seated on a classic wooden dining chair at a long table draped in a floor-length white linen cloth. Fresh harvested dark green kale and herb leaves lie casually on the table. Clean white lime-washed wall providing generous negative space. Soft morning 4700K natural side light pouring gently from the left, illuminating the delicate linen folds and the contour of the chair. Muted palette of chambray blue, fresh sage green, warm wood, and pure linen white. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/2.8, ISO 160, Classic Chrome, 4700K, 3:4 aspect ratio, timeless domestic intimacy.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/2.8, ISO 160, 1/250s | Film Simulation: Classic Chrome | Lighting: Soft morning 4700K natural side light | Color Temp: 4700K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-01",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "고산 분지 산정 호수의 고요한 블루아워와 거울 반영",
-    "desc": "해발 2,000m 산정 분지의 잔잔한 칼데라 호숫가. 해 뜨기 직전 혹은 직후의 신비로운 6800K 블루아워 확산광 아래, 맑고 차가운 수면 위로 완벽하게 맺히는 수평 대칭 거울 반영과 서늘한 고산 대기감.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic sublime alpine wilderness editorial beside a crystal-still mountain crater lake at blue hour twilight with no artificial structures. The subject is positioned naturally on a damp pebble shore, casting a clean mirror-like reflection on the undisturbed glassy water surface. Cool 6800K ambient twilight illuminates the scene with soft, shadowless light, creating delicate moisture sheen across the subject's textures. Distant misty pine ridges and alpine peaks softly mirrored in the calm water. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/2.8, ISO 200, Classic Chrome, 6800K, 3:4 aspect ratio, tactile organic textures, breathtaking serene wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/2.8, ISO 200, 1/250s | Film Simulation: Classic Chrome | Lighting: Cool 6800K blue hour twilight | Color Temp: 6800K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-02",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "가을 고원 억새밭의 황혼과 흩날리는 은빛 림라이트",
-    "desc": "끝없이 펼쳐진 산등성이의 억새 군락지. 늦은 오후 5시 30분의 5000K 노을빛 역광을 받아 황금빛으로 출렁이는 풀의 바다, 바람결을 따라 흩날리는 억새 이삭과 눈부신 림라이트.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic wild autumn plateau editorial in a vast sea of windblown silvergrass at sunset with no human structures. The subject is positioned naturally on a soft dirt path amid tall glowing pampas grass. Low-angle 5000K golden sunset backlighting pours through the feathery plumes, carving an intense, radiant golden rim light along the subject's silhouette and hair or fur textures. Gentle breeze motion, creamy circular amber foliage bokeh in the background. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5000K, 3:4 aspect ratio, tactile organic textures, breathtaking seasonal autumn mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Nostalgic Negative | Lighting: Low-angle autumn sunset backlighting 5000K | Color Temp: 5000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-03",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "은하수가 흐르는 원시 바위 고원의 별빛 앰비언트",
-    "desc": "인공 불빛이 완전히 차단된 해발 고도 높은 원시 사막 바위 고원. 맑고 차가운 밤하늘을 가로지르는 웅장한 가을밤 은하수와 수천억 개의 별무리, 침묵 속에서 피사체를 부드럽게 감싸는 신비로운 4000K 자연 별빛 앰비언트.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic wilderness astrophotography editorial under a magnificent, clear Milky Way galaxy on a remote rocky desert plateau with no human light pollution. The subject is naturally positioned on flat ancient sandstone bedrock beneath a vast dark-indigo sky filled with millions of sparkling stars and the luminous dust lanes of the Milky Way. Subtle, natural 4000K ambient starlight gently illuminates the scene, casting a delicate silvery rim light along the subject's silhouette and hair or fur textures. Distant mesa rock formations blurred into the night horizon. Shot on Sony A7S III with a 24mm F1.4 GM lens at f/1.4, ISO 3200, 4000K, 3:4 aspect ratio, clean shadow detail with organic film texture, breathtaking cosmic wilderness mood.",
-    "spec": "Camera: Sony A7S III | Lens: 24mm F1.4 GM | Settings: f/1.4, ISO 3200, 10s | Color Profile: Deep Space Cool Tone | Lighting: Natural ambient starlight 4000K | Color Temp: 4000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-04",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "보름달빛이 부서지는 야간 해안 백사장과 은빛 파도",
-    "desc": "차가운 5600K 은빛 보름달빛이 수면 위로 눈부신 달빛 물길(Moon river)을 만들며 밀려오는 파도를 하얗게 적시고, 젖은 백사장에 맺히는 거울 같은 달빛 반영.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic moonlit ocean beach editorial on a vast wet sandy shoreline at night with no artificial lights. A brilliant full moon high in the clear dark sky casts a glowing silver moon river reflection across the breaking ocean surf. The subject is positioned on the damp, mirror-like sand where gentle waves lap softly. Crisp 5600K cool silvery moonlight backlighting sculpts a clean, radiant silver rim light along the subject's silhouette and windblown hair or fur textures, with an elegant elongated shadow cast on the wet reflective sand. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/1.7, ISO 800, Classic Chrome, 5600K, 3:4 aspect ratio, tactile sand and water textures, serene nocturnal mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/1.7, ISO 800, 1/30s | Film Simulation: Classic Chrome | Lighting: High-altitude full moonlight 5600K | Color Temp: 5600K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-05",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "아침 안개 걷히는 고원 야생 들꽃 군락과 황금빛 여명",
-    "desc": "서늘한 새벽 안개가 부드럽게 걷혀가는 고산 초원의 야생 들꽃 군락. 지평선 위로 막 솟아오른 아침 7시의 따스한 5200K 여명 햇살이 꽃잎에 맺힌 아침 이슬방울을 보석처럼 반짝이게 만드는 싱그러운 대자연.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic morning alpine wildflower meadow editorial on rolling hills with no human structures. The subject is nestled naturally along a soft grassy path surrounded by blooming purple asters, white daisies, and wild alpine flora. A low-angle 5200K golden dawn sunlight pierces through lingering morning mist, carving a radiant golden rim light along the subject's silhouette and hair or fur textures. Glistening morning dew drops on surrounding flower petals create dreamy circular bokeh in the softly blurred background. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.0, ISO 160, Nostalgic Negative, 5200K, 3:4 aspect ratio, tactile organic textures, serene dawn wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.0, ISO 160, 1/400s | Film Simulation: Nostalgic Negative | Lighting: Low-angle morning dawn sunlight 5200K | Color Temp: 5200K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-06",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "붉은 단풍 캐노피 아래 투명한 바위 계곡과 흐르는 여울",
-    "desc": "원시 침엽수와 불타는 듯한 붉은 단풍나무가 하늘을 덮은 깊은 산속 바위 계곡. 계곡물 바닥의 매끄러운 흑요석 조약돌과 물속을 떠다니는 붉은 단풍잎, 수면 위로 맑게 부서지는 오전 햇살의 찬란한 윤슬.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic autumn mountain creek editorial in a remote primeval valley with no human structures. The subject is positioned naturally on a broad, smooth granite river rock beside a rushing, crystal-clear mountain stream where scarlet maple leaves float gently over dark pebbles. Morning 5000K slanted sunlight filters through the fiery crimson maple canopy, casting sparkling water reflections on the rocks and an exquisite silvery-gold rim light along the subject's silhouette and hair or fur contours. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile water, moss, and wet stone textures, breathtaking seasonal autumn mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/350s | Film Simulation: Classic Chrome | Lighting: Slanted morning sunlight 5000K through crimson maple | Color Temp: 5000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-07",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "원시 대나무 숲을 뚫고 내리쬐는 청명한 오전의 빛내림",
-    "desc": "서늘한 안개가 감도는 울창한 원시 대나무 숲길. 높게 솟은 대나무 캐노피 틈새를 뚫고 쏟아지는 오전 11시의 청명한 5300K 볼륨메트릭 광선(God rays)과 젖은 잎사귀 위로 맺히는 투명한 빛의 산란.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic primeval bamboo forest editorial in an untouched misty woodland with no human structures. The subject is nestled naturally along a soft dirt path covered with damp fallen bamboo leaves between towering green bamboo stalks. Slanted late morning 5300K volumetric sunbeams (God rays) pierce through the tall bamboo canopy and lingering mist, carving a radiant silvery-emerald rim light along the subject's silhouette and hair or fur contours. Gentle breeze motion, creamy circular foliage bokeh in the deep green background. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.2, ISO 160, Classic Chrome, 5300K, 3:4 aspect ratio, tactile bamboo and organic textures, tranquil Zen-like wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.2, ISO 160, 1/350s | Film Simulation: Classic Chrome | Lighting: Slanted late morning volumetric sunbeams 5300K | Color Temp: 5300K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-08",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "만년설 피오르드 해안의 에메랄드 수면과 차가운 암벽",
-    "desc": "만년설과 빙하가 녹아 흘러든 북유럽 피오르드 해안의 고요한 바위 물가. 바람이 잦아든 거울 같은 짙푸른 에메랄드빛 수면과 이끼 낀 고대 화강암 단면, 물결에서 반사되어 올라오는 눈부신 수면 반사광.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic Nordic glacial fjord editorial at the edge of a calm, deep emerald-green water basin surrounded by towering granite cliffs and distant snow-dusted peaks with no human structures. The subject is positioned naturally on a smooth, damp granite rock shelf where gentle crystal water laps softly. Crisp 5000K mountain daylight combined with a gentle cool water bounce light illuminates the subject from below, carving a brilliant silvery-gold rim light along the silhouette and hair or fur textures. Gentle mountain breeze, elegant mirror-like reflection on the still fjord surface. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5000K, 3:4 aspect ratio, tactile stone and water textures, awe-inspiring serene wilderness mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Nostalgic Negative | Lighting: Crisp 5000K mountain daylight with water bounce | Color Temp: 5000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-09",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "붉은 사암 협곡의 황금빛 슬롯 광선과 대지의 침묵",
-    "desc": "수억 년의 물과 바람이 깎아낸 원시 붉은 사암 협곡(Slot Canyon). 좁은 바위 틈새를 뚫고 쏟아지는 늦은 오후 5시 30분의 4800K 황금빛 사선광과 불타는 듯한 테라코타 오렌지빛 암벽의 질감.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic desert slot canyon editorial inside narrow, undulating red sandstone walls with no human structures. The subject is positioned naturally on fine red sand at the canyon floor. A dramatic slanted 4800K golden hour sunbeam pours through the narrow canyon opening above, illuminating swirling dust motes in the air and bouncing warm terracotta light off the sculpted rock curves, carving a rich amber-gold rim light along the subject's silhouette and hair or fur textures. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.0, ISO 160, Nostalgic Negative, 4800K, 3:4 aspect ratio, tactile sandstone and fine dust textures, breathtaking ancient wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/2.0, ISO 160, 1/350s | Film Simulation: Nostalgic Negative | Lighting: Slanted golden hour sunlight beam 4800K | Color Temp: 4800K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-10",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "해식 동굴 아치 너머로 지는 석양과 에메랄드 조간대",
-    "desc": "거센 파도가 깎아낸 원시 해식 동굴 내부에서 바라본 해질녘의 대양. 동굴 바깥 수평선으로 떨어지는 오후 5시 45분의 5100K 짙은 황혼 역광과 동굴 바닥 조간대 웅덩이에 맺히는 거울 같은 하늘 반영.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal nature editorial looking outward from inside a majestic, weathered basalt sea cave arch at sunset with no human structures. The cave frame silhouettes the brilliant ocean horizon outside. The subject is positioned on flat wet rocks beside crystal-still emerald tidepools that mirror the glowing twilight sky. A low-angle 5100K fiery golden sunset backlight pierces ocean waves, carving a brilliant golden rim light along the subject's silhouette and hair or fur contours, creating deep chiaroscuro depth against the dark cave interior. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/2.8, ISO 160, Classic Chrome, 5100K, 3:4 aspect ratio, tactile wet stone and wave textures, breathtaking cinematic coastal mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/2.8, ISO 160, 1/400s | Film Simulation: Classic Chrome | Lighting: Intense 5100K golden sunset backlight through sea cave arch | Color Temp: 5100K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-11",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "푸른 형광빛으로 부서지는 밤바다 생체 발광(Bioluminescence)",
-    "desc": "인공 조명이 완전히 배제된 칠흑 같은 야간 해안가. 파도가 칠 때마다 야광 플랑크톤이 푸른빛으로 반응하여 네온 일렉트릭 블루로 타오르는 기적 같은 밤바다와 젖은 모래톱의 신비로운 발광.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic night ocean wilderness editorial along a remote sandy beach with no human artificial light. Crashing ocean waves glow intensely with natural bioluminescent plankton, radiating a vibrant, ethereal electric-blue and cyan light across the breaking surf and damp sand. The subject is positioned naturally at the water's edge where glowing foam gently washes ashore. The vivid bioluminescent glow from below illuminates the subject, carving a striking neon-blue rim light along the silhouette and hair or fur textures against the deep navy night sky. Shot on Sony A7S III with a 35mm F1.4 GM lens at f/1.4, ISO 3200, 4800K, 3:4 aspect ratio, tactile wet sand and glowing water textures, breathtaking mystical nocturnal mood.",
-    "spec": "Camera: Sony A7S III | Lens: FE 35mm F1.4 GM | Settings: f/1.4, ISO 3200, 1/15s | Film Simulation: Deep Night Oceanic | Lighting: Natural bioluminescent plankton emission 4800K | Color Temp: 4800K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-12",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "북극 툰드라 설산 위로 넘실대는 에메랄드빛 오로라의 커튼",
-    "desc": "영하의 침묵이 흐르는 북극권의 광활한 설산 툰드라 호숫가. 밤하늘 전체를 가로지르며 살아 움직이듯 춤추는 거대한 에메랄드빛 오로라와 빙판에 거울처럼 맺히는 초록빛 반영.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic arctic wilderness editorial under a vibrant Aurora Borealis (Northern Lights) dancing across the clear night sky over distant snow-covered peaks with no human structures. The subject is positioned naturally on a frost-dusted, frozen lake shoreline. Soft, ambient 5000K emerald-green and violet auroral light illuminates the scene from above, carving an ethereal silvery-green rim light along the subject's silhouette and hair or fur contours. The smooth ice surface reflects the dancing northern lights and the subject's reflection. Shot on Fujifilm GFX 100 II, GF 45mm F2.8 at f/2.8, ISO 1600, Classic Chrome, 5000K, 3:4 aspect ratio, tactile frost and rock textures, awe-inspiring arctic silence.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 45mm F2.8 R WR | Settings: f/2.8, ISO 1600, 4s | Film Simulation: Classic Chrome | Lighting: Soft ambient emerald aurora borealis 5000K | Color Temp: 5000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-13",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "원시 삼나무 숲속 비밀 폭포와 비취빛 웅덩이",
-    "desc": "서늘한 아침 물안개가 피어오르는 원시 삼나무 숲의 은밀한 계곡. 검은 현무암 단애를 타고 비단결처럼 떨어지는 하얀 폭포수와 그 아래 맑게 고인 비취빛 소(沼), 나뭇가지 사이를 뚫고 쏟아지는 찬란한 아침 햇살.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic pristine wilderness editorial beside a secluded cascading waterfall in an ancient cedar rainforest with no human structures. The subject is positioned naturally on a large flat moss-covered river stone beside a crystal-clear jade-green plunge pool. Cool morning water mist floats gently in the air. Slanted 4900K morning sunlight beams pierce through the tall forest canopy, catching the cascading white water spray to create a faint luminous rainbow prism, carving an exquisite silvery-gold rim light along the subject's silhouette and hair or fur textures. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.0, ISO 160, Classic Chrome, 4900K, 3:4 aspect ratio, tactile moss, wet basalt, and flowing water textures, breathtaking serene wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/2.0, ISO 160, 1/400s | Film Simulation: Classic Chrome | Lighting: Slanted 4900K morning sunbeams catching waterfall spray | Color Temp: 4900K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-14",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "바닷가 모래언덕(Dunes)의 은빛 해무와 야생 풀잎 이슬",
-    "desc": "바람이 결을 따라 조각한 유려한 해안 모래언덕과 은빛 해무. 수평선 위로 막 떠오른 오전 7시의 5200K 황금빛 햇살이 바람에 흩날리는 야생 풀잎과 고운 모래의 물결무늬를 붉게 물들이는 서정적인 일출.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal wilderness editorial on sweeping windswept sand dunes at sunrise with no human structures. The subject is naturally positioned along the crest of a soft sand ridge surrounded by swaying wild sea oats. Lingering morning sea mist diffuses the horizon. Low-angle 5200K golden sunrise sunlight sweeps across the sculpted sand ripples, carving a radiant golden rim light along the subject's silhouette and windblown hair or fur textures, casting long delicate shadows across the pale sand. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5200K, 3:4 aspect ratio, tactile sand ripple and organic textures, tranquil coastal awakening mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Nostalgic Negative | Lighting: Low-angle 5200K golden sunrise light | Color Temp: 5200K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-15",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "에메랄드빛 해안 암초와 흰 파도의 비말 포말",
-    "desc": "인공물이 전혀 닿지 않은 태고의 화강암 해안 암초 지대. 늦은 오전 11시의 투명하고 청명한 5400K 자연광 아래, 바위에 부딪혀 하얗게 부서지는 에메랄드빛 파도 포말과 공기 중에 흩날리는 시원한 바다 안개.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal nature editorial on a rugged granite rocky shoreline facing a wild, turquoise-emerald ocean with no human structures. The subject is positioned naturally on a large, damp sea rock where crashing waves burst into fine white spray and sea mist. Crisp late morning 5400K sunlight illuminates the splashing water droplets, freezing the ocean spray in mid-air and carving a radiant silvery rim light along the subject's silhouette and hair or fur contours. Long clean reflections and damp stone textures below. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.2, ISO 160, 1/800s, Classic Chrome, 5400K, 3:4 aspect ratio, tactile wet stone and dynamic sea spray textures, exhilarating wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.2, ISO 160, 1/800s | Film Simulation: Classic Chrome | Lighting: High-angle late morning 5400K sunlight | Color Temp: 5400K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-16",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "원시 자작나무 숲길의 은빛 수피와 황금빛 나뭇잎",
-    "desc": "새하얀 은빛 수피를 지닌 키 큰 자작나무들이 끝없이 펼쳐진 북유럽 원시 숲. 늦은 오전의 5100K 자연광이 수관 사이를 뚫고 쏟아지며 바람에 살랑이는 황금빛 잎사귀들을 눈부시게 비추는 서정적인 가을 숲의 정취.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic autumn woodland editorial inside a primeval silver birch forest with no human structures. The subject is nestled naturally along a soft mossy forest path surrounded by slender white birch trunks and fluttering golden leaves. Dappled late morning 5100K sunlight filters through the high golden canopy, creating an exquisite, warm golden rim light along the subject's silhouette and hair or fur textures. Drifting yellow leaves catch the light in the crisp autumn air, with a creamy circular foliage bokeh softly blurring the deep forest background. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5100K, 3:4 aspect ratio, tactile paper-bark and damp moss textures, serene woodland mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/450s | Film Simulation: Nostalgic Negative | Lighting: Dappled late morning 5100K sunlight through golden canopy | Color Temp: 5100K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-17",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "화산섬 검은 모래 해변과 붉은 노을의 파도 포말",
-    "desc": "문명의 흔적이 닿지 않은 태고의 화산섬 검은 모래사장. 늦은 오후 5시 45분의 짙은 진홍빛-황금빛 노을 역광 아래, 칠흑 같은 흑요석 모래톱에 밀려오는 새하얀 파도 포말과 거울처럼 맺히는 석양의 반영.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic oceanic wilderness editorial along a vast volcanic black sand beach at sunset with no human structures. The subject is positioned naturally on the wet, mirror-like obsidian sand where gentle white foaming ocean waves lap softly. A dramatic low-angle 4900K crimson-golden sunset backlight pierces through the salty sea mist, carving an intense, blazing golden rim light along the subject's silhouette and hair or fur textures. High contrast between the pure white sea foam and jet-black sand, with a long clean reflection shimmering on the damp shore. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.0, ISO 160, Classic Chrome, 4900K, 3:4 aspect ratio, tactile sand and water textures, awe-inspiring primeval coastal mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Classic Chrome | Lighting: Low-angle 4900K crimson-gold sunset backlight | Color Temp: 4900K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-18",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "가을 갈대 습지대의 은빛 물결과 황혼의 잔물결",
-    "desc": "인간의 발길이 닿지 않은 광활한 늦가을 갈대 습지대. 늦은 오후 5시 30분의 5100K 앰버빛 사선 햇살이 수평선 너머로 완만하게 스며들며, 바람에 출렁이는 깃털 같은 갈대밭과 얕은 수면의 잔물결 위로 부서지는 눈부신 금빛 윤슬.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic autumn wetland marsh editorial in a vast untouched wilderness with no human structures. The subject is positioned naturally on a soft grassy bank beside calm, shallow marsh water flanked by tall, swaying golden reeds. Slanted late afternoon 5100K amber sunlight pours through the feathery reed plumes, creating shimmering golden water reflections and carving an exquisite, warm golden rim light along the subject's silhouette and hair or fur contours. Gentle autumn breeze motion, creamy circular amber bokeh in the background. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5100K, 3:4 aspect ratio, tactile organic reed and water textures, serene golden hour warmth.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/400s | Film Simulation: Nostalgic Negative | Lighting: Slanted late afternoon 5100K amber sunlight | Color Temp: 5100K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-19",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "밤안개 자욱한 원시 숲과 춤추는 반딧불이의 에메랄드 은하",
-    "desc": "문명의 불빛이 닿지 않는 깊은 원시 숲의 고요한 밤. 짙푸른 밤안개가 이끼 낀 고목과 양치식물 위로 부유하는 가운데, 공기 중을 유영하는 수천 마리의 초록빛 반딧불이가 지상에 빚어내는 황홀한 에메랄드빛 은하수.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic enchanted primeval forest editorial at night with no human artificial light. The subject is nestled naturally on a soft, damp mossy path surrounded by ancient moss-covered tree trunks and drifting ground mist. Thousands of wild fireflies float gently in the cool night air, radiating soft, warm emerald and chartreuse points of light. The glowing fireflies create an ethereal greenish-gold rim light along the subject's silhouette and hair or fur textures, with large creamy circular firefly bokeh floating softly in the blurred foreground and deep background. Shot on Sony A7S III with a 50mm F1.2 GM lens at f/1.2, ISO 3200, 4500K, 3:4 aspect ratio, tactile moss and damp bark textures, breathtaking magical nocturnal mood.",
-    "spec": "Camera: Sony A7S III | Lens: FE 50mm F1.2 GM | Settings: f/1.2, ISO 3200, 1/15s | Film Simulation: Deep Night Forest Tone | Lighting: Natural glowing fireflies 4500K | Color Temp: 4500K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-20",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "칠흑 같은 산정 호수 위로 쏟아지는 유성우와 거울 반영",
-    "desc": "해발 2,000m 고산 분지의 맑고 차가운 거울 호숫가. 구름 한 점 없는 짙은 남색 밤하늘을 가르며 떨어지는 페르세우스 유성우의 은빛 궤적과 바람 없는 잔잔한 호수 수면에 데칼코마니처럼 맺히는 별빛 반영.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic alpine lake astrophotography editorial under a spectacular meteor shower streaking across a crystal-clear, dark-indigo night sky with no human light pollution. The subject is positioned naturally on flat stones at the edge of a completely still, mirror-like alpine crater lake. Luminous silver meteor trails streak overhead and reflect flawlessly on the glassy water surface. Soft 3800K ambient starlight gently illuminates the scene, carving a delicate silvery-white rim light along the subject's silhouette and hair or fur contours. Distant mountain peaks softly silhouetted on the horizon. Shot on Fujifilm GFX 100 II, GF 45mm F2.8 at f/2.8, ISO 3200, Classic Chrome, 3800K, 3:4 aspect ratio, tactile stone and glassy water textures, awe-inspiring celestial serenity.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 45mm F2.8 R WR | Settings: f/2.8, ISO 3200, 8s | Film Simulation: Classic Chrome | Lighting: Ambient cool starlight and meteor trails 3800K | Color Temp: 3800K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-21",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "안개 자욱한 소나무 숲 능선의 아침 빛내림과 솔잎 이슬",
-    "desc": "해발 높은 산등성이의 짙은 아침 안개를 뚫고 쏟아지는 원시 소나무 숲의 황금빛 여명. 수직으로 길게 뻗은 소나무 기둥들 사이로 쏟아지는 5100K 볼륨메트릭 광선과 발치에 푹신하게 깔린 젖은 갈색 솔잎 융단의 서사.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic mountain ridge editorial inside an ancient pine forest with dense morning fog and no human structures. The subject is positioned naturally on a soft, needle-strewn earthen trail flanked by towering pine trunks. Dramatic 5100K golden sunrise sunbeams (God rays) pierce through the misty canopy, carving an exquisite golden rim light along the subject's silhouette and hair or fur textures. Gentle mountain breeze, glistening dew on pine needles, with creamy circular bokeh softly blurring the deep misty forest background. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.2, ISO 160, Classic Chrome, 5100K, 3:4 aspect ratio, tactile pine bark and damp needle textures, tranquil wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.2, ISO 160, 1/350s | Film Simulation: Classic Chrome | Lighting: Dramatic morning volumetric God rays 5100K | Color Temp: 5100K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-22",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "둥근 조약돌 해변과 일출의 오렌지빛 파도 윤슬",
-    "desc": "파도에 오랜 세월 깎인 둥글고 매끄러운 흑갈색 조약돌이 펼쳐진 고요한 해변. 수평선 위로 솟아오른 4900K 황금빛 일출 햇살이 밀려오는 잔잔한 파도와 젖은 자갈 표면 위로 눈부신 오렌지빛 윤슬을 수놓는 아침 해변의 서사.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal wilderness editorial on a peaceful shoreline covered with smooth, rounded dark river pebbles with no human structures. The subject is positioned naturally on the damp pebble beach where gentle emerald ocean waves lap softly. A low-angle 4900K warm golden sunrise backlight glints across the wet glistening stones and wave foam, carving an intense, radiant amber rim light along the subject's silhouette and hair or fur textures. Clean reflections and glistening pebble textures under a warm morning sky. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 4900K, 3:4 aspect ratio, tactile stone and clear water textures, poetic dawn tranquility.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Nostalgic Negative | Lighting: Low-angle 4900K warm sunrise backlight | Color Temp: 4900K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-23",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "고산 분지 안개 낀 이끼 습원의 침묵과 부드러운 산광",
-    "desc": "해발 1,800m 고산 분지에 펼쳐진 광활한 야생 이끼 습원. 인공 구조물이 전무한 대지 위로 옅은 안개구름이 부드럽게 감돌며, 붉고 갈색으로 물든 물이끼와 야생 목화풀 군락 위로 떨어지는 그림자 없는 5000K 소프트 산광.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic alpine peat bog wilderness editorial on a vast, untouched high-altitude plateau with no human structures. The subject is positioned naturally on a dry mossy grassy mound surrounded by rusty-red sphagnum moss, small crystal tarn pools, and delicate white cotton grass swaying in the breeze. Soft diffused 5000K overcast mountain daylight illuminates the scene with gentle, wrap-around light and muted shadows, carving an exquisite soft silvery rim light along the subject's silhouette and hair or fur textures. Distant rolling misty ridges softly blurred in the background. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.2, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile moss and wet earth textures, serene Scandinavian wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.2, ISO 160, 1/350s | Film Simulation: Classic Chrome | Lighting: Soft diffused overcast daylight 5000K | Color Temp: 5000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-24",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "파도 잔잔한 모래톱 갯골의 은빛 유목과 한낮의 윤슬",
-    "desc": "오랜 세월 소금기에 씻겨 은백색으로 바랜 거대한 유목이 놓인 고요한 야생 해안가. 오전 11시 40분의 투명하고 서늘한 5300K 자연광 아래, 잔잔하게 밀려드는 얕은 갯골 바닷물과 젖은 모래톱에 맺히는 다이아몬드 같은 은빛 윤슬.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal nature editorial on a vast pristine sandy shoreline flanked by a large, weathered pale grey driftwood log with no human structures. The subject is resting or standing naturally beside the textured driftwood on firm wet sand beside a clear, shallow tidal rivulet. Crisp late morning 5300K slanted sunlight bounces off the calm water surface, creating shimmering diamond-like water ripples and carving an exquisite, radiant silvery rim light along the subject's silhouette and hair or fur textures. Gentle coastal breeze, long elegant reflections on the wet pale sand. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5300K, 3:4 aspect ratio, tactile bleached wood and damp sand textures, tranquil seaside mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/640s | Film Simulation: Nostalgic Negative | Lighting: Slanted late morning 5300K coastal daylight | Color Temp: 5300K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-25",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "자줏빛 야생 헤더 꽃 언덕과 해안 무어랜드의 황혼",
-    "desc": "바다를 내려다보는 광활한 해안 무어랜드 언덕. 늦은 오후 5시 45분의 4900K 앰버-로즈빛 노을 역광 아래, 대지를 가득 채운 보랏빛 야생 헤더 꽃 군락과 거친 암반 사이로 스며드는 서늘한 저녁 해풍의 서사.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal moorland wilderness editorial on rolling hills covered in blooming purple wild heather flowers at sunset with no human structures. The subject is positioned naturally on a soft dirt pathway amid the blooming heather, with a distant wild ocean horizon in the background. A dramatic low-angle 4900K rose-gold sunset backlight pours across the flower-covered slopes, carving an intense golden-ruby rim light along the subject's silhouette and hair or fur textures. Gentle evening breeze motion, long delicate shadows cast across the heather bushes. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.0, ISO 160, Classic Chrome, 4900K, 3:4 aspect ratio, tactile floral and weathered rock textures, breathtaking poetic twilight mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/2.0, ISO 160, 1/400s | Film Simulation: Classic Chrome | Lighting: Low-angle 4900K rose-gold sunset backlight | Color Temp: 4900K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-26",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "첩첩산중 운해를 굽어보는 산정 바위 능선과 불타는 일몰",
-    "desc": "해발 2,000m 고산 암릉 능선에서 내려다보는 끝없는 운해. 오후 5시 50분의 5100K 짙은 황금빛 석양빛이 발아래로 바다처럼 넘실대는 구름 바다를 오렌지빛으로 물들이며 빚어내는 숭고한 대자연의 스케일.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic high-alpine ridge editorial atop a rugged granite mountain peak looking down over a vast, billowing sea of clouds (cloud inversion) at sunset with no human structures. The subject is positioned naturally on a flat weathered rock edge overlooking the glowing clouds. A blazing, low-angle 5100K golden sunset backlight pours across the mountain horizon, carving a razor-sharp, brilliant golden rim light along the subject's silhouette and hair or fur contours. Brisk mountain wind motion, dramatic chiaroscuro contrast between the rocky ridge and the golden clouds below. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5100K, 3:4 aspect ratio, tactile granite and ethereal cloud textures, awe-inspiring majestic summit mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Nostalgic Negative | Lighting: Slanted 5100K blazing golden sunset light | Color Temp: 5100K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-27",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "달빛 아래 은빛으로 일렁이는 가을 억새 평원과 서늘한 밤안개",
-    "desc": "인공 조명이 닿지 않는 광활한 가을 산등성이 억새 평원. 맑은 밤하늘에 높게 뜬 5600K 창백한 은빛 달빛 아래, 바람결을 따라 은빛 파도처럼 출렁이는 억새 군락과 발치에 낮게 깔려 흐르는 서늘한 밤안개의 서사.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic autumn plateau wilderness editorial under a brilliant cool-white moon at night with no human artificial light. The subject is positioned naturally on a soft dirt trail winding through a vast sea of tall, windblown silvergrass and drifting ground mist. A crisp, cool 5600K moonlight backlighting pours through the feathery plumes, carving an exquisite, radiant silvery rim light along the subject's silhouette and hair or fur textures against the deep navy night sky. Gentle nocturnal breeze motion, soft elegant shadows on the path. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/1.7, ISO 1600, Classic Chrome, 5600K, 3:4 aspect ratio, tactile organic grass and mist textures, serene nocturnal wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/1.7, ISO 1600, 1/30s | Film Simulation: Classic Chrome | Lighting: Cool 5600K moonlight backlighting | Color Temp: 5600K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-28",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "칠흑 같은 원시 숲속 청록빛 발광 버섯과 별빛",
-    "desc": "인간의 손길이 닿지 않은 태고의 원시 침엽수림 깊은 밤. 축축한 이끼와 쓰러진 고목 둥치 주변에 자생하는 야생 발광 버섯들이 뿜어내는 신비로운 4800K 에메랄드빛 형광과 수관 틈새로 은은하게 쏟아지는 차가운 별빛 앰비언트.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic enchanted primeval forest editorial at night with no human artificial light. The subject is positioned naturally on a damp, moss-covered ground beside ancient rotting logs where clusters of wild bioluminescent mushrooms emit a vivid, magical emerald-green and cyan glow. The organic light from the glowing mushrooms gently illuminates the subject from below, carving an ethereal greenish-blue rim light along the silhouette and hair or fur textures against the deep shadowed forest. Dreamy circular green bokeh floating softly in the blurred foreground. Shot on Sony A7S III with a 35mm F1.4 GM lens at f/1.4, ISO 3200, 4800K, 3:4 aspect ratio, tactile damp moss and bark textures, breathtaking mystical nocturnal mood.",
-    "spec": "Camera: Sony A7S III | Lens: FE 35mm F1.4 GM | Settings: f/1.4, ISO 3200, 1/15s | Film Simulation: Deep Night Forest | Lighting: Natural bioluminescent mushroom emission 4800K | Color Temp: 4800K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-29",
-    "category": "season",
-    "catName": "🍂 계절 & 빛",
-    "catClass": "tag-season",
-    "title": "첫 서리 내린 자작나무 숲과 크리스털 서릿발의 여명",
-    "desc": "늦가을에서 초겨울로 넘어가는 문턱, 첫 서리가 하얗게 내려앉은 북유럽 원시 자작나무 숲. 오전 7시 15분의 투명하고 차가운 5000K 아침 햇살이 얼어붙은 서릿발을 투과하며 눈부신 크리스털 반짝임을 뿜어내는 서정적인 숲의 침묵.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic autumn-to-winter transitional woodland editorial in a pristine silver birch forest dusted with the season's first frost with no human structures. The subject is positioned naturally on a soft dirt trail covered with frost-rimmed leaves and frozen green moss. Slanted 5000K crisp morning dawn sunlight pierces through slender white birch trunks, sparkling off tiny ice crystals on the foliage and carving an exquisite, razor-sharp silvery rim light along the subject's silhouette and hair or fur textures. Gentle chilly breeze motion, creamy circular morning bokeh softly blurring the deep forest background. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.2, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile frost, frozen earth, and paper-bark textures, serene Nordic wilderness mood.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.2, ISO 160, 1/400s | Film Simulation: Classic Chrome | Lighting: Crisp 5000K morning sunlight on frost | Color Temp: 5000K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-30",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "바다 물안개(Sea Smoke) 피어오르는 해안과 오렌지빛 여명",
-    "desc": "차가운 새벽 대기와 바닷물의 온도 차로 수면 위에서 몽환적인 아지랑이처럼 피어오르는 바다 물안개(Sea Smoke). 수평선 위로 솟아오른 4800K 황금빛 일출 햇살이 부유하는 물안개 입자를 통과하며 타오르는 듯한 황금빛 산란광을 일으키는 아침 해변.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic coastal nature editorial on a vast, untouched sandy beach at sunrise with ethereal sea smoke (steam fog) rising from the calm cold ocean with no human structures. The subject is positioned naturally on the wet, mirror-like tidal sand where gentle waves lap softly. A low-angle 4800K blazing golden-orange sunrise backlight pierces through the swirling sea smoke, creating a radiant golden haze and carving an intense amber rim light along the subject's silhouette and hair or fur textures. Long elegant reflections cast on the damp sand. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 4800K, 3:4 aspect ratio, tactile sand and misty water textures, breathtaking cinematic dawn mood.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/500s | Film Simulation: Nostalgic Negative | Lighting: Low-angle 4800K golden sunrise backlight through sea smoke | Color Temp: 4800K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-31",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "지중해 야생 올리브 언덕과 은빛 잎사귀의 한낮 산광",
-    "desc": "세월의 뒤틀림을 간직한 고대 올리브 나무들이 끝없이 펼쳐진 지중해 야생 구릉 언덕. 한낮의 5200K 투명한 햇살 아래, 바람결을 따라 뒤집히며 은백색으로 반짝이는 올리브 잎사귀들과 테라코타 흙길 위로 부서지는 섬세한 나뭇잎 그림자.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic Mediterranean wilderness editorial on a scenic rolling hillside filled with ancient, gnarled olive trees with no human structures. The subject is positioned naturally along a dry, pale terracotta earthen path beneath the canopy of an ancient olive tree. Crisp midday 5200K sunlight filters through the fluttering silver-green olive foliage, creating delicate dappled leaf shadows across the ground and carving an exquisite, soft silvery-gold rim light along the subject's silhouette and hair or fur textures. Gentle warm Mediterranean breeze motion, creamy circular foliage bokeh in the soft background. Shot on Fujifilm GFX 100 II, GF 110mm F2 at f/2.2, ISO 160, Classic Chrome, 5200K, 3:4 aspect ratio, tactile olive wood and dry earth textures, tranquil rustic elegance.",
-    "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 110mm F2 R LM WR | Settings: f/2.2, ISO 160, 1/500s | Film Simulation: Classic Chrome | Lighting: High-angle crisp midday 5200K sunlight | Color Temp: 5200K | Aspect Ratio: 3:4"
-  },
-  {
-    "id": "briefing-32",
-    "category": "nature",
-    "catName": "🌲 대자연",
-    "catClass": "tag-nature",
-    "title": "고산 협곡의 청록빛 빙하 여울과 눈부신 수면 윤슬",
-    "desc": "만년설이 녹아 흘러내리는 고산 협곡의 투명한 청록빛 급류. 오전 11시 45분의 서늘한 5400K 고산 자연광 아래, 둥근 화강암 조약돌 둔덕과 맑은 여울물 표면에서 튕겨 오르는 다이아몬드 같은 은빛 반사광.",
-    "prompt": "Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo. Transform the entire environment, lighting, and mood into an ultra-photorealistic alpine wilderness editorial beside a rushing, crystal-clear turquoise glacial river in a remote mountain canyon with no human structures. The subject is positioned naturally on smooth, damp granite river stones at the water's edge where cold meltwater gently ripples over dark riverbed pebbles. Crisp late morning 5400K alpine sunlight combined with an upward-bouncing crystalline water reflection illuminates the subject, carving a brilliant, razor-sharp silvery rim light along the silhouette and hair or fur textures. Distant pine-covered canyon ridges softly blurred in the background. Shot on Fujifilm X-T5, XF 56mm F1.2 at f/2.0, ISO 160, Nostalgic Negative, 5400K, 3:4 aspect ratio, tactile wet stone and rushing glacial water textures, exhilarating alpine purity.",
-    "spec": "Camera: Fujifilm X-T5 | Lens: XF 56mm F1.2 R WR | Settings: f/2.0, ISO 160, 1/640s | Film Simulation: Nostalgic Negative | Lighting: Crisp late morning 5400K daylight with water bounce | Color Temp: 5400K | Aspect Ratio: 3:4"
   },
   {
     "id": "story-01",
@@ -1072,7 +706,6 @@
 
     let currentCat = "all";
     let searchQuery = "";
-    let deferredPrompt = null;
 
     const grid = document.getElementById("cards-container");
     const tabs = document.getElementById("filter-tabs");
@@ -1090,70 +723,30 @@
     const liveOutput = document.getElementById("live-output");
     const btnCopy = document.getElementById("btn-copy-builder");
     const btnReset = document.getElementById("btn-reset");
-    const btnInstall = document.getElementById("btn-install");
-
-    // PWA BeforeInstallPrompt Event Listener
-    window.addEventListener("beforeinstallprompt", (e) => {{
-      e.preventDefault();
-      deferredPrompt = e;
-      if (btnInstall) {{
-        btnInstall.style.display = "flex";
-      }}
-    }});
-
-    window.addEventListener("appinstalled", () => {{
-      deferredPrompt = null;
-      showToast("앱이 바탕화면에 성공적으로 추가되었습니다! 🎉");
-    }});
-
-    // Install Button Handler
-    if (btnInstall) {{
-      btnInstall.addEventListener("click", async () => {{
-        if (deferredPrompt) {{
-          deferredPrompt.prompt();
-          const choiceResult = await deferredPrompt.userChoice;
-          if (choiceResult.outcome === "accepted") {{
-            showToast("홈 화면/바탕화면에 추가되었습니다!");
-          }} else {{
-            showToast("추가가 취소되었습니다.");
-          }}
-          deferredPrompt = null;
-        }} else {{
-          // Check iOS vs Android / Desktop
-          const userAgent = window.navigator.userAgent.toLowerCase();
-          const isIOS = /iphone|ipad|ipod/.test(userAgent);
-          if (isIOS) {{
-            showToast("사파리 하단 [공유] 버튼(네모+화살표)을 누르고 '홈 화면에 추가'를 선택하세요! 📲");
-          }} else {{
-            showToast("브라우저 메뉴(⋮)에서 '홈 화면에 추가' 또는 '앱 설치'를 누르면 바탕화면에 생성됩니다! 📲");
-          }}
-        }}
-      }});
-    }}
 
     let toastTimer = null;
-    function showToast(msg = "클립보드에 복사되었습니다!") {{
+    function showToast(msg = "클립보드에 복사되었습니다!") {
       if (toastTimer) clearTimeout(toastTimer);
       toast.textContent = msg;
       toast.classList.add("show");
-      toastTimer = setTimeout(() => {{
+      toastTimer = setTimeout(() => {
         toast.classList.remove("show");
-      }}, 3200);
-    }}
+      }, 2200);
+    }
 
-    function copyText(text) {{
-      if (!text || text.trim() === "") {{
+    function copyText(text) {
+      if (!text || text.trim() === "") {
         showToast("복사할 내용이 없습니다.");
         return;
-      }}
-      if (navigator.clipboard && window.isSecureContext) {{
+      }
+      if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => showToast()).catch(() => fallbackCopy(text));
-      }} else {{
+      } else {
         fallbackCopy(text);
-      }}
-    }}
+      }
+    }
 
-    function fallbackCopy(text) {{
+    function fallbackCopy(text) {
       const ta = document.createElement("textarea");
       ta.value = text;
       ta.style.position = "fixed";
@@ -1161,30 +754,30 @@
       document.body.appendChild(ta);
       ta.focus();
       ta.select();
-      try {{
+      try {
         document.execCommand("copy");
         showToast();
-      }} catch (err) {{
+      } catch (err) {
         showToast("복사에 실패했습니다.");
-      }}
+      }
       document.body.removeChild(ta);
-    }}
+    }
 
-    function updateLivePreview() {{
+    function updateLivePreview() {
       const parts = [];
       const mode = selMode.value;
       const env = selEnv.value;
       const desc = inpDesc.value.trim();
 
-      if (mode) {{
-        if (env) {{
+      if (mode) {
+        if (env) {
           parts.push(mode + " " + env);
-        }} else {{
+        } else {
           parts.push(mode);
-        }}
-      }} else if (env) {{
+        }
+      } else if (env) {
         parts.push(env);
-      }}
+      }
 
       if (desc) parts.push(desc);
       if (selLighting.value) parts.push(selLighting.value);
@@ -1193,17 +786,17 @@
       if (selFilm.value) parts.push(selFilm.value);
       if (selRatio.value) parts.push(selRatio.value);
 
-      if (parts.length === 0) {{
+      if (parts.length === 0) {
         liveOutput.textContent = "선택된 옵션이 없습니다.";
-      }} else {{
+      } else {
         const assembled = parts.map(p => p.endsWith(".") ? p : p + ".").join(" ");
         liveOutput.textContent = assembled;
-      }}
-    }}
+      }
+    }
 
-    function renderCards() {{
+    function renderCards() {
       grid.innerHTML = "";
-      const filtered = masterCollection.filter(item => {{
+      const filtered = masterCollection.filter(item => {
         const matchesCat = (currentCat === "all" || item.category === currentCat);
         const q = searchQuery.toLowerCase();
         const matchesSearch = !q ||
@@ -1212,16 +805,16 @@
                               item.spec.toLowerCase().includes(q) ||
                               item.prompt.toLowerCase().includes(q);
         return matchesCat && matchesSearch;
-      }});
+      });
 
-      if (filtered.length === 0) {{
+      if (filtered.length === 0) {
         grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);">일치하는 프롬프트가 없습니다.</div>`;
         return;
-      }}
+      }
 
       const fragment = document.createDocumentFragment();
 
-      filtered.forEach(item => {{
+      filtered.forEach(item => {
         const card = document.createElement("div");
         card.className = "card" + (item.category === "kinfolk" ? " kinfolk-card" : "");
 
@@ -1266,12 +859,12 @@
 
         card.appendChild(btnsDiv);
         fragment.appendChild(card);
-      }});
+      });
 
       grid.appendChild(fragment);
-    }}
+    }
 
-    grid.addEventListener("click", (e) => {{
+    grid.addEventListener("click", (e) => {
       const btn = e.target.closest("button");
       if (!btn) return;
       const action = btn.dataset.action;
@@ -1281,34 +874,34 @@
       const item = masterCollection.find(x => x.id === id);
       if (!item) return;
 
-      if (action === "copy") {{
+      if (action === "copy") {
         copyText(item.prompt);
-      }} else if (action === "load") {{
-        if (inpDesc.value.trim()) {{
+      } else if (action === "load") {
+        if (inpDesc.value.trim()) {
           inpDesc.value += ` ${item.prompt}`;
-        }} else {{
+        } else {
           inpDesc.value = item.prompt;
-        }}
+        }
         updateLivePreview();
         showToast("빌더에 추가되었습니다!");
-      }}
-    }});
+      }
+    });
 
-    [selMode, selEnv, selLighting, selCamera, selLens, selFilm, selRatio, inpDesc].forEach(el => {{
+    [selMode, selEnv, selLighting, selCamera, selLens, selFilm, selRatio, inpDesc].forEach(el => {
       el.addEventListener("input", updateLivePreview);
       el.addEventListener("change", updateLivePreview);
-    }});
+    });
 
-    btnCopy.addEventListener("click", () => {{
+    btnCopy.addEventListener("click", () => {
       const txt = liveOutput.textContent;
-      if (!txt || txt === "선택된 옵션이 없습니다.") {{
+      if (!txt || txt === "선택된 옵션이 없습니다.") {
         showToast("복사할 프롬프트 내용이 없습니다.");
         return;
-      }}
+      }
       copyText(txt);
-    }});
+    });
 
-    btnReset.addEventListener("click", () => {{
+    btnReset.addEventListener("click", () => {
       selMode.selectedIndex = 0;
       selMode.value = selMode.options[0].value;
       selEnv.selectedIndex = 0;
@@ -1326,26 +919,24 @@
       inpDesc.value = "";
       updateLivePreview();
       showToast("모든 항목이 제로(0)로 초기화되었습니다.");
-    }});
+    });
 
-    tabs.addEventListener("click", (e) => {{
+    tabs.addEventListener("click", (e) => {
       const btn = e.target.closest(".tab-btn");
       if (!btn) return;
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCat = btn.dataset.cat;
       renderCards();
-    }});
+    });
 
-    search.addEventListener("input", (e) => {{
+    search.addEventListener("input", (e) => {
       searchQuery = e.target.value.trim();
       renderCards();
-    }});
+    });
 
-    // Initialize
     updateLivePreview();
     renderCards();
   </script>
 </body>
 </html>
-
