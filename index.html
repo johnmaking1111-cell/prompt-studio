@@ -3,59 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 감성 사진 변형 & 킨포크 스튜디오 (Prompt Studio v4.0)</title>
-  <meta name="description" content="촬영 사진 보존 변형 36선 + 킨포크(Kinfolk) 매거진 에디션 10선 마스터 프롬프트 빌더" />
+  <title>AI 감성 사진 스튜디오 (Prompt Studio v4.2)</title>
+  <meta name="description" content="킨포크(Kinfolk) 매거진 에디션 10선 + 촬영 사진 보존 변형 36선 통합 마스터 프롬프트 빌더" />
   <style>
     :root {
-      --bg-dark: #080c14;
+      --bg-dark: #090d16;
       --bg-panel: #0f172a;
       --bg-card: #1e293b;
       --bg-input: #131d31;
       --border: #334155;
       --accent: #38bdf8;
       --accent-hover: #0ea5e9;
-      --purple: #c084fc;
+      --kinfolk: #f59e0b;
+      --kinfolk-hover: #d97706;
       --emerald: #34d399;
       --amber: #fbbf24;
+      --purple: #c084fc;
       --rose: #fb7185;
       --text: #f8fafc;
       --text-muted: #94a3b8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; padding: 20px; gap: 16px; }
+    body { background-color: var(--bg-dark); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; padding: 18px; gap: 16px; }
     
-    header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
-    .logo-box h1 { font-size: 1.45rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
-    .logo-box p { font-size: 0.84rem; color: var(--text-muted); margin-top: 3px; }
-    .header-actions { display: flex; align-items: center; gap: 10px; }
-    .badge-pro { background: linear-gradient(135deg, #f59e0b, #38bdf8); color: #080c14; font-size: 0.72rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px; }
-    .btn-guide { background-color: rgba(56, 189, 248, 0.12); color: var(--accent); border: 1px solid rgba(56, 189, 248, 0.3); padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
-    .btn-guide:hover { background-color: var(--accent); color: #080c14; }
+    header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
+    .logo-box h1 { font-size: 1.4rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .logo-box p { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
+    .badge-bar { display: flex; gap: 8px; align-items: center; }
+    .badge { font-size: 0.72rem; font-weight: 800; padding: 4px 9px; border-radius: 6px; letter-spacing: 0.3px; }
+    .badge-kinfolk { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-universal { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
 
     .main-grid { display: grid; grid-template-columns: 460px 1fr; gap: 20px; flex: 1; align-items: start; }
 
     /* Left Builder */
-    .builder-panel { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
+    .builder-panel { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 12px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .panel-header { display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--accent); padding-left: 10px; }
-    .panel-header h2 { font-size: 1.1rem; color: var(--text); font-weight: 700; }
-    .btn-reset { background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 0.75rem; cursor: pointer; }
-    .btn-reset:hover { color: var(--text); border-color: var(--text); }
+    .panel-header h2 { font-size: 1.05rem; color: var(--text); font-weight: 700; }
+    .btn-reset { background: #1e293b; color: #cbd5e1; border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .btn-reset:hover { background: #334155; color: #fff; border-color: #94a3b8; }
 
     .form-row { display: flex; flex-direction: column; gap: 5px; }
-    .form-row label { font-size: 0.78rem; font-weight: 700; color: #cbd5e1; display: flex; justify-content: space-between; }
-    .form-row select, .form-row textarea, .form-row input { background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 7px 10px; font-size: 0.83rem; outline: none; transition: border-color 0.2s; }
+    .form-row label { font-size: 0.78rem; font-weight: 700; color: #cbd5e1; }
+    .form-row select, .form-row textarea, .form-row input { background-color: var(--bg-input); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 8px 10px; font-size: 0.83rem; outline: none; transition: border-color 0.2s; }
     .form-row select:focus, .form-row textarea:focus, .form-row input:focus { border-color: var(--accent); }
-    .form-row textarea { resize: vertical; min-height: 54px; line-height: 1.4; }
+    .form-row textarea { resize: vertical; min-height: 60px; line-height: 1.4; }
 
-    .live-box { background-color: #050811; border: 1px dashed var(--accent); border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.8rem; line-height: 1.45; color: #64748b; max-height: 140px; overflow-y: auto; word-break: break-all; min-height: 60px; }
-    .btn-copy-main { background-color: var(--accent); color: #080c14; font-weight: 800; font-size: 0.9rem; border: none; border-radius: 6px; padding: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; width: 100%; }
+    .live-box-wrap { display: flex; flex-direction: column; gap: 6px; }
+    .live-box-header { display: flex; justify-content: space-between; align-items: center; }
+    .live-box-header span { font-size: 0.78rem; font-weight: 700; color: #38bdf8; }
+    .live-box { background-color: #050811; border: 1px solid #38bdf8; border-radius: 8px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.82rem; line-height: 1.48; color: #f1f5f9; min-height: 90px; max-height: 180px; overflow-y: auto; word-break: break-all; white-space: pre-wrap; }
+    .btn-copy-main { background-color: var(--accent); color: #080c14; font-weight: 800; font-size: 0.92rem; border: none; border-radius: 8px; padding: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; width: 100%; }
     .btn-copy-main:hover { background-color: var(--accent-hover); }
 
     /* Right Library */
     .library-panel { display: flex; flex-direction: column; gap: 14px; }
     .filter-bar { display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; flex-wrap: wrap; gap: 10px; }
-    .tab-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-group { display: flex; gap: 7px; flex-wrap: wrap; }
     .tab-btn { background-color: var(--bg-input); border: 1px solid var(--border); color: var(--text-muted); padding: 6px 13px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
     .tab-btn.active, .tab-btn:hover { background-color: var(--accent); color: #080c14; border-color: var(--accent); }
     .tab-btn[data-cat="kinfolk"].active { background-color: #f59e0b; color: #080c14; border-color: #f59e0b; }
@@ -64,7 +69,7 @@
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 14px; }
     .card { background-color: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 15px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; transition: border-color 0.2s, transform 0.2s; }
     .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card.kinfolk-card { border-color: rgba(245, 158, 11, 0.35); background: linear-gradient(180deg, #111a2e 0%, #0f172a 100%); }
+    .card.kinfolk-card { border-color: rgba(245, 158, 11, 0.35); background: linear-gradient(180deg, #131d33 0%, #0f172a 100%); }
     .card.kinfolk-card:hover { border-color: #f59e0b; }
 
     .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
@@ -76,31 +81,21 @@
     .tag-vintage { background-color: rgba(192, 132, 252, 0.18); color: var(--purple); }
     .tag-season { background-color: rgba(251, 113, 133, 0.18); color: var(--rose); }
     
-    .card-meta { font-size: 0.78rem; color: #38bdf8; font-family: ui-monospace, monospace; line-height: 1.4; background: rgba(56, 189, 248, 0.08); padding: 4px 8px; border-radius: 4px; }
+    .card-meta { font-size: 0.78rem; color: #38bdf8; font-family: ui-monospace, monospace; line-height: 1.4; background: rgba(56, 189, 248, 0.08); padding: 5px 8px; border-radius: 4px; }
     .card.kinfolk-card .card-meta { color: #fbbf24; background: rgba(245, 158, 11, 0.1); }
     .card-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
-    .card-code { background-color: #050811; border: 1px solid #1e293b; border-radius: 6px; padding: 10px; font-family: ui-monospace, monospace; font-size: 0.77rem; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto; }
+    .card-code { background-color: #050811; border: 1px solid #1e293b; border-radius: 6px; padding: 10px; font-family: ui-monospace, monospace; font-size: 0.77rem; color: #cbd5e1; line-height: 1.42; max-height: 95px; overflow-y: auto; white-space: pre-wrap; }
     .card-btns { display: flex; justify-content: flex-end; gap: 6px; }
-    .btn-sm { padding: 5px 10px; font-size: 0.75rem; border-radius: 5px; font-weight: 700; cursor: pointer; border: none; }
-    .btn-load { background-color: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
-    .btn-load:hover { background-color: var(--border); }
+    .btn-sm { padding: 6px 11px; font-size: 0.76rem; border-radius: 5px; font-weight: 700; cursor: pointer; border: none; transition: background 0.2s; }
+    .btn-load { background-color: #1e293b; color: #e2e8f0; border: 1px solid #475569; }
+    .btn-load:hover { background-color: #334155; color: #fff; }
     .btn-copy { background-color: var(--accent); color: #080c14; }
     .btn-copy:hover { background-color: var(--accent-hover); }
     .card.kinfolk-card .btn-copy { background-color: #f59e0b; color: #080c14; }
     .card.kinfolk-card .btn-copy:hover { background-color: #d97706; }
 
-    /* Modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-    .modal-overlay.open { display: flex; }
-    .modal-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; width: 100%; max-width: 580px; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-    .modal-title { font-size: 1.2rem; font-weight: 800; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
-    .modal-body { font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; display: flex; flex-direction: column; gap: 12px; }
-    .modal-body ol { padding-left: 20px; }
-    .modal-body li { margin-bottom: 6px; }
-    .btn-close { background: var(--border); color: var(--text); border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-weight: 700; align-self: flex-end; }
-
     /* Toast */
-    #toast { position: fixed; bottom: 20px; right: 20px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 10px 18px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; }
+    #toast { position: fixed; bottom: 24px; right: 24px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 11px 18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; }
     #toast.show { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 1024px) {
@@ -114,49 +109,53 @@
 
   <header>
     <div class="logo-box">
-      <h1>📸 AI 감성 사진 스튜디오 <span class="badge-pro">Kinfolk & Universal v4.0</span></h1>
-      <p>킨포크(Kinfolk) 에디션 10선 + 촬영 사진 피사체 보존 변형 36선 통합 마스터 라이브러리</p>
+      <h1>📸 AI 감성 사진 스튜디오 <span style="font-size:0.78rem; background:#1e293b; color:#94a3b8; padding:3px 8px; border-radius:5px; border:1px solid #334155;">v4.2</span></h1>
+      <p>킨포크(Kinfolk) 에디션 10선 + 촬영 사진 보존 변형 36선 통합 마스터 라이브러리</p>
     </div>
-    <div class="header-actions">
-      <button class="btn-guide" id="open-guide">🚀 사용 가이드</button>
+    <div class="badge-bar">
+      <span class="badge badge-kinfolk">🌿 킨포크 에디션 10선</span>
+      <span class="badge badge-universal">📸 사진 변형 36선</span>
     </div>
   </header>
 
   <div class="main-grid">
-    <!-- Left: 10-axis Interactive Builder -->
+    <!-- Left: Interactive Builder -->
     <aside class="builder-panel">
       <div class="panel-header">
-        <h2>🛠️ 감성 콤보 빌더</h2>
-        <button class="btn-reset" id="btn-reset">초기화</button>
+        <h2>🛠️ 프롬프트 콤보 빌더</h2>
+        <button class="btn-reset" id="btn-reset" type="button">🔄 초기화</button>
       </div>
 
       <div class="form-row">
-        <label>1. 프롬프트 모드 (Mode)</label>
+        <label for="sel-mode">1. 프롬프트 모드</label>
         <select id="sel-mode">
           <option value="Kinfolk magazine editorial photograph characterized by Scandinavian minimalism, muted earthy palette, unhurried domestic stillness.">🌿 킨포크 신규 생성 모드 (Kinfolk Text-to-Image)</option>
           <option value="Preserve the exact identity, facial features, pose, and core structure of the subject in the uploaded reference photo.">📸 내 촬영 사진 보존 변형 모드 (Img2Img)</option>
+          <option value="">-- [모드 선택 안 함] --</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label>2. 킨포크 & 자연 공간 (Space & Atmosphere)</label>
+        <label for="sel-env">2. 공간 및 배경</label>
         <select id="sel-env">
           <option value="">-- [선택 안 함] --</option>
-          <option value="in a minimalist architectural space with smooth sandstone plaster walls and geometric terracotta steps, generous negative space">킨포크 건축: 샌드스톤 회벽과 테라코타 계단 (대담한 여백)</option>
+          <option value="in a minimalist architectural space with smooth sandstone plaster walls and geometric terracotta steps, generous negative space">킨포크 건축: 샌드스톤 회벽과 테라코타 계단</option>
           <option value="at a rustic dining table draped in a wrinkled, raw ivory linen tablecloth with handmade ceramic cup and rising steam">킨포크 테이블: 린넨 식탁보와 유약 없는 수제 세라믹</option>
           <option value="in a quiet minimalist Copenhagen apartment with pale oiled oak floors and arched French window pouring soft daylight">킨포크 인테리어: 코펜하겐 아파트와 높은 아치창</option>
           <option value="amidst lush, sculpted mounds of green velvety topiary hedges under soft overcast diffused daylight">킨포크 정원: 조각 같은 초록 토피어리 관목원</option>
           <option value="on an empty Pacific Northwest beach sitting calmly beside a massive pale driftwood log with misty horizon">킨포크 해변: 광활한 해무와 거대한 유목 통나무</option>
-          <option value="on a vast, mirror-like wet tidal sand flat at sunset reflecting the glowing twilight sky">황혼의 해안 모래톱: 수평선과 젖은 모래 반영</option>
-          <option value="in an untouched primeval moss forest surrounded by damp emerald-green mossy rocks and ancient tree roots">원시 이끼 숲: 고대 거목 뿌리와 틴들 빛내림</option>
+          <option value="on a vast, mirror-like wet tidal sand flat at sunset reflecting the glowing twilight sky">대자연 해변: 황혼의 해안 모래톱과 젖은 모래 반영</option>
+          <option value="in an untouched primeval moss forest surrounded by damp emerald-green mossy rocks and ancient tree roots">대자연 숲: 원시 이끼 숲과 천상의 틴들 빛내림</option>
+          <option value="on a rugged basalt sea cliff edge facing violent ocean waves and sea mist with no human structures">대자연 절벽: 대양의 현무암 바위 절벽과 파도 비말</option>
+          <option value="at the edge of a crystal-clear mountain glacial brook with smooth river pebbles and alpine air">대자연 계곡: 고산 빙하 개울과 서늘한 산악 대기</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label>3. 조명 및 빛의 궤적 (Lighting)</label>
+        <label for="sel-lighting">3. 조명 및 빛의 궤적</label>
         <select id="sel-lighting">
           <option value="">-- [선택 안 함] --</option>
-          <option value="Soft, diffused 4700K north window daylight gently wrapping around the subject with muted, delicate shadows">북향 창문 4700K 소프트 산광 (은은한 저대비 킨포크 자연광)</option>
+          <option value="Soft, diffused 4700K north window daylight gently wrapping around the subject with muted, delicate shadows">북향 창문 4700K 소프트 산광 (킨포크 자연광)</option>
           <option value="Crisp afternoon 4900K natural sunlight casting geometric diagonal shadows across the smooth architectural surfaces">오후 4900K 사선 자연광 (기하학적 건축 그림자)</option>
           <option value="Low-angle 5100K golden sunset backlight carving an exquisite golden rim light along the silhouette">5100K 해안 노을빛 역광 (황금빛 림라이트)</option>
           <option value="Dramatic morning volumetric sunbeams (God rays) piercing through the misty canopy, casting an ethereal halo rim light">아침 삼나무 숲 틴들 광선 (천상의 빛내림 & 헤일로)</option>
@@ -165,94 +164,78 @@
       </div>
 
       <div class="form-row">
-        <label>4. 카메라 바디 & 센서 (Camera Body)</label>
+        <label for="sel-camera">4. 카메라 바디</label>
         <select id="sel-camera">
           <option value="">-- [선택 안 함] --</option>
-          <option value="Shot on Fujifilm GFX 100 II medium format camera, medium format microcontrast">Fujifilm GFX 100 II (중형 포맷/극강 마이크로 콘트라스트)</option>
-          <option value="Shot on Fujifilm X-T5 flagship mirrorless camera">Fujifilm X-T5 (후지필름 최신 플래그십 미러리스)</option>
+          <option value="Shot on Fujifilm GFX 100 II medium format camera, medium format microcontrast">Fujifilm GFX 100 II (중형 포맷/마이크로 콘트라스트)</option>
+          <option value="Shot on Fujifilm X-T5 flagship mirrorless camera">Fujifilm X-T5 (후지필름 플래그십 미러리스)</option>
           <option value="Shot on Hasselblad X2D 100C medium format camera, natural color solution">Hasselblad X2D 100C (중형 명품 발색)</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label>5. 렌즈 화각 & 조리개 심도 (Lens & Aperture)</label>
+        <label for="sel-lens">5. 렌즈 및 조리개</label>
         <select id="sel-lens">
           <option value="">-- [선택 안 함] --</option>
           <option value="with a GF 63mm F2.8 lens at f/3.2, uncompressed authentic perspective">GF 63mm f/3.2 (킨포크 시그니처 50mm 표준 화각)</option>
           <option value="with a GF 110mm F2 lens at f/2.2, shallow depth of field, creamy background bokeh">GF 110mm f/2.2 (중형 에디토리얼 인물 화각)</option>
-          <option value="with an XF 35mm F1.4 lens at f/2.8, intimate environmental perspective">XF 35mm f/2.8 (자연스러운 50mm 상당 일상 스냅)</option>
+          <option value="with an XF 35mm F1.4 lens at f/2.8, intimate environmental perspective">XF 35mm f/2.8 (자연스러운 50mm 일상 스냅)</option>
           <option value="with an XF 56mm F1.2 lens at f/2.0, pin-sharp subject separation">XF 56mm f/2.0 (85mm 상당 표준 포트레이트)</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label>6. 필름 시뮬레이션 & 색감 (Film Simulation)</label>
+        <label for="sel-film">6. 필름 시뮬레이션</label>
         <select id="sel-film">
           <option value="">-- [선택 안 함] --</option>
-          <option value="Classic Chrome film simulation, muted earthy tones, low saturation, deep rich shadows">Classic Chrome (킨포크 특유의 차분한 저채도와 묵직한 암부)</option>
-          <option value="Nostalgic Negative film simulation, rich amber highlights, soft warm shadows">Nostalgic Negative (호박빛 하이라이트와 부드러운 온기)</option>
+          <option value="Classic Chrome film simulation, muted earthy tones, low saturation, deep rich shadows">Classic Chrome (킨포크 차분한 저채도 & 묵직한 암부)</option>
+          <option value="Nostalgic Negative film simulation, rich amber highlights, soft warm shadows">Nostalgic Negative (호박빛 하이라이트 & 부드러운 온기)</option>
           <option value="Provia Standard natural film profile, true-to-life organic colors">Provia (자연스럽고 투명한 원색 발색)</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label>7. 화면 비율 (Aspect Ratio)</label>
+        <label for="sel-ratio">7. 화면 비율</label>
         <select id="sel-ratio">
           <option value="">-- [선택 안 함] --</option>
-          <option value="3:4 aspect ratio, matte editorial paper texture">킨포크 매거진 표준 세로 (3:4)</option>
-          <option value="4:5 aspect ratio">인스타그램 표준 (4:5)</option>
-          <option value="16:9 aspect ratio">시네마틱 와이드 (16:9)</option>
-          <option value="1:1 aspect ratio">정사각형 (1:1)</option>
+          <option value="3:4 aspect ratio, matte editorial paper texture">3:4 세로 (킨포크 매거진 표준)</option>
+          <option value="4:5 aspect ratio">4:5 세로 (인스타그램 표준)</option>
+          <option value="16:9 aspect ratio">16:9 가로 (시네마틱 와이드)</option>
+          <option value="1:1 aspect ratio">1:1 정사각형</option>
         </select>
       </div>
 
       <div class="form-row">
-        <label>8. 추가 세부 서술 (Custom Details)</label>
-        <textarea id="inp-desc" placeholder="예: unglazed pottery, delicate fig seeds, gentle breeze, quiet thoughtful poise..."></textarea>
+        <label for="inp-desc">8. 추가 세부 묘사 (직접 입력 또는 카드에서 추가)</label>
+        <textarea id="inp-desc" placeholder="카드의 '빌더에 추가' 버튼을 누르거나 직접 영문/한글 디테일을 입력하세요."></textarea>
       </div>
 
-      <div class="form-row">
-        <label>조립된 최종 프롬프트 (Live Preview)</label>
-        <div class="live-box" id="live-output">선택된 프롬프트가 없습니다. (초기화 상태)</div>
+      <div class="live-box-wrap">
+        <div class="live-box-header">
+          <span>⚡ 조립된 최종 프롬프트 (실시간 갱신)</span>
+        </div>
+        <div class="live-box" id="live-output"></div>
       </div>
 
-      <button class="btn-copy-main" id="btn-copy-builder">📋 완성된 프롬프트 복사</button>
+      <button class="btn-copy-main" id="btn-copy-builder" type="button">📋 완성된 프롬프트 복사</button>
     </aside>
 
-    <!-- Right: Master Library Cards -->
+    <!-- Right: Library Cards -->
     <main class="library-panel">
       <div class="filter-bar">
         <div class="tab-group" id="filter-tabs">
-          <button class="tab-btn active" data-cat="all">전체 컬렉션 (46)</button>
-          <button class="tab-btn" data-cat="kinfolk" style="border-color:#f59e0b; font-weight:800;">🌿 킨포크 에디션 (10)</button>
-          <button class="tab-btn" data-cat="nature">🌲 대자연 & 야생 (10)</button>
-          <button class="tab-btn" data-cat="atelier">☕ 감성 아틀리에 (10)</button>
-          <button class="tab-btn" data-cat="vintage">🎻 빈티지 장인 (8)</button>
-          <button class="tab-btn" data-cat="season">🍂 계절 & 빛 (8)</button>
+          <button class="tab-btn active" data-cat="all" type="button">전체 (46)</button>
+          <button class="tab-btn" data-cat="kinfolk" type="button" style="border-color:#f59e0b; font-weight:800;">🌿 킨포크 에디션 (10)</button>
+          <button class="tab-btn" data-cat="nature" type="button">🌲 대자연 (10)</button>
+          <button class="tab-btn" data-cat="atelier" type="button">☕ 아틀리에 (10)</button>
+          <button class="tab-btn" data-cat="vintage" type="button">🎻 빈티지 장인 (8)</button>
+          <button class="tab-btn" data-cat="season" type="button">🍂 계절 & 빛 (8)</button>
         </div>
-        <input type="text" class="search-input" id="search-input" placeholder="키워드 검색 (예: 킨포크, 테라코타, 도자기, 무화과)..." />
+        <input type="text" class="search-input" id="search-input" placeholder="키워드 검색 (예: 킨포크, 테라코타, 도자기)..." />
       </div>
 
       <div class="cards-grid" id="cards-container"></div>
     </main>
-  </div>
-
-  <!-- Guide Modal -->
-  <div class="modal-overlay" id="guide-modal">
-    <div class="modal-box">
-      <div class="modal-title">
-        <span>🚀 킨포크 & 사진 변형 스튜디오 가이드</span>
-        <span style="cursor:pointer;" id="close-modal">✕</span>
-      </div>
-      <div class="modal-body">
-        <p><strong>1. 킨포크 신규 생성 프롬프트 (Text-to-Image)</strong></p>
-        <p>우측 상단의 <strong>[🌿 킨포크 에디션]</strong> 탭을 누르고 원하는 프롬프트를 복사하여 Gemini나 Midjourney에 그대로 입력하시면, 킨포크 잡지 특유의 미니멀 건축, 테이블 정물, 차분한 색감과 대담한 여백의 화보가 새로 생성됩니다.</p>
-        <hr style="border:0; border-top:1px solid var(--border);" />
-        <p><strong>2. 내 촬영 사진 보존 변형 (Image-to-Image)</strong></p>
-        <p>대자연, 아틀리에, 계절 탭의 프롬프트는 직접 촬영하신 인물/반려견 사진을 대화창에 올린 후 적용하여, 피사체의 생김새는 100% 보존하고 배경과 빛만 영화처럼 합성하는 용도입니다.</p>
-      </div>
-      <button class="btn-close" id="btn-close-guide">확인</button>
-    </div>
   </div>
 
   <div id="toast">클립보드에 복사되었습니다!</div>
@@ -316,7 +299,7 @@
     "catClass": "tag-kinfolk",
     "title": "킨포크 친밀감: 따뜻한 머스터드 재킷과 포옹의 실루엣",
     "desc": "킨포크 볼륨 34 'Intimacy' 표지 헌정 화보. 따뜻한 머스터드 옐로우 오버사이즈 울 블레이저를 입은 인물이 파트너를 부드럽게 감싸 안고 있는 정적인 클로즈업. 두 사람의 얼굴은 과장된 감정을 드러내지 않고 차분하고 깊은 교감을 나누며, 배경은 파스텔 하늘빛과 따뜻한 아이보리 벽면이 부드러운 원형으로 분할되어 여백을 만든다. 오전 10시의 부드러운 북향 자연광이 머스터드 재킷의 직물 결을 도톰하게 살려내며 두 사람의 윤곽선에 따스한 온기를 불어넣는다.",
-    "prompt": "An authentic Kinfolk Volume 34 'Intimacy' cover editorial photograph. An intimate, quiet embrace between two people, one wearing a structured oversized warm mustard-yellow wool blazer. Unrushed, profound emotional connection, tranquil expressions with eyes closed or gazing gently past the lens. The background is a soft graphic bi-color partition of muted pastel sky-blue and warm sandstone ivory, providing clean negative space. Soft wrap-around 4800K natural daylight illuminating the rich wool textile fibers and authentic skin tones. Color palette of mustard yellow, pastel air blue, and warm cream. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.2, ISO 160, Classic Chrome, 4800K, 3:4 aspect ratio, iconic indie magazine cover aesthetic.",
+    "prompt": "An authentic Kinfolk Volume 34 Intimacy cover editorial photograph. An intimate, quiet embrace between two people, one wearing a structured oversized warm mustard-yellow wool blazer. Unrushed, profound emotional connection, tranquil expressions with eyes closed or gazing gently past the lens. The background is a soft graphic bi-color partition of muted pastel sky-blue and warm sandstone ivory, providing clean negative space. Soft wrap-around 4800K natural daylight illuminating the rich wool textile fibers and authentic skin tones. Color palette of mustard yellow, pastel air blue, and warm cream. Shot on Fujifilm GFX 100 II, GF 80mm F1.7 at f/2.2, ISO 160, Classic Chrome, 4800K, 3:4 aspect ratio, iconic indie magazine cover aesthetic.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 80mm F1.7 R WR | Settings: f/2.2, ISO 160, 1/320s | Film Simulation: Classic Chrome | Lighting: Soft wrap-around 4800K daylight | Color Temp: 4800K | Aspect Ratio: 3:4"
   },
   {
@@ -336,7 +319,7 @@
     "catClass": "tag-kinfolk",
     "title": "킨포크 변화: 조각 같은 초록 토피어리 관목원과 옐로우 셔츠",
     "desc": "킨포크 'Change' 이슈 표지 헌정 화보. 거대한 유기적 곡선으로 정교하게 깎아 다듬은 짙푸른 토피어리(Topiary) 녹색 관목들이 프레임을 압도하듯 채우고 있는 신비로운 정원. 구릉처럼 둥글게 이어진 짙은 초록빛 관목 숲 한가운데, 따뜻한 옐로우 오커 컬러의 단정한 셔츠를 입은 인물이 우뚝 서서 먼 곳을 조용히 응시하고 있다. 짙푸른 잎사귀들의 촘촘한 질감과 인물의 단정한 셔츠 색감이 완벽한 보색의 조화를 이루며, 흐린 날의 부드러운 산광이 관목의 입체적인 곡면을 벨벳처럼 부드럽게 감싼다.",
-    "prompt": "An authentic Kinfolk Magazine cover editorial inspired by the 'Change' issue. A surreal, beautifully sculpted green topiary garden with massive, velvety undulating trimmed hedges filling the frame. Amidst the lush sculptural mounds of green stands a lone person wearing a vibrant, crisp yellow-ochre button-up shirt and rust-red trousers, gazing serenely off-camera. Overcast, soft diffused 5000K daylight evenly wraps around the rounded organic hedge contours with rich, deep shadows in the crevices. Color palette of rich moss green, earthy yellow ochre, and warm terracotta. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/4.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile botanical hedge texture, poetic surreal minimalism.",
+    "prompt": "An authentic Kinfolk Magazine cover editorial inspired by the Change issue. A surreal, beautifully sculpted green topiary garden with massive, velvety undulating trimmed hedges filling the frame. Amidst the lush sculptural mounds of green stands a lone person wearing a vibrant, crisp yellow-ochre button-up shirt and rust-red trousers, gazing serenely off-camera. Overcast, soft diffused 5000K daylight evenly wraps around the rounded organic hedge contours with rich, deep shadows in the crevices. Color palette of rich moss green, earthy yellow ochre, and warm terracotta. Shot on Fujifilm GFX 100 II, GF 63mm F2.8 at f/4.0, ISO 160, Classic Chrome, 5000K, 3:4 aspect ratio, tactile botanical hedge texture, poetic surreal minimalism.",
     "spec": "Camera: Fujifilm GFX 100 II | Lens: GF 63mm F2.8 R WR | Settings: f/4.0, ISO 160, 1/320s | Film Simulation: Classic Chrome | Lighting: Overcast diffused daylight wrapping around hedge contours | Color Temp: 5000K | Aspect Ratio: 3:4"
   },
   {
@@ -741,23 +724,43 @@
     const btnCopy = document.getElementById("btn-copy-builder");
     const btnReset = document.getElementById("btn-reset");
 
-    const guideModal = document.getElementById("guide-modal");
-    const openGuide = document.getElementById("open-guide");
-    const closeModal = document.getElementById("close-modal");
-    const btnCloseGuide = document.getElementById("btn-close-guide");
-
-    openGuide.addEventListener("click", () => guideModal.classList.add("open"));
-    closeModal.addEventListener("click", () => guideModal.classList.remove("open"));
-    btnCloseGuide.addEventListener("click", () => guideModal.classList.remove("open"));
-
+    let toastTimer = null;
     function showToast(msg = "클립보드에 복사되었습니다!") {
+      if (toastTimer) clearTimeout(toastTimer);
       toast.textContent = msg;
       toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 2000);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
     }
 
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => showToast());
+    function copyText(text) {
+      if (!text || text.trim() === "") {
+        showToast("복사할 내용이 없습니다.");
+        return;
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => showToast()).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showToast();
+      } catch (err) {
+        showToast("복사에 실패했습니다.");
+      }
+      document.body.removeChild(ta);
     }
 
     function updateLivePreview() {
@@ -766,9 +769,17 @@
       const env = selEnv.value;
       const desc = inpDesc.value.trim();
 
-      if (env) parts.push(mode + " " + env);
-      else if (desc) parts.push(mode + " " + desc);
+      if (mode) {
+        if (env) {
+          parts.push(mode + " " + env);
+        } else {
+          parts.push(mode);
+        }
+      } else if (env) {
+        parts.push(env);
+      }
 
+      if (desc) parts.push(desc);
       if (selLighting.value) parts.push(selLighting.value);
       if (selCamera.value) parts.push(selCamera.value);
       if (selLens.value) parts.push(selLens.value);
@@ -776,11 +787,10 @@
       if (selRatio.value) parts.push(selRatio.value);
 
       if (parts.length === 0) {
-        liveOutput.textContent = "선택된 프롬프트가 없습니다. (초기화 상태)";
-        liveOutput.style.color = "#64748b";
+        liveOutput.textContent = "선택된 옵션이 없습니다.";
       } else {
-        liveOutput.textContent = parts.join(". ") + ".";
-        liveOutput.style.color = "#e2e8f0";
+        const assembled = parts.map(p => p.endsWith(".") ? p : p + ".").join(" ");
+        liveOutput.textContent = assembled;
       }
     }
 
@@ -789,7 +799,8 @@
       const filtered = masterCollection.filter(item => {
         const matchesCat = (currentCat === "all" || item.category === currentCat);
         const q = searchQuery.toLowerCase();
-        const matchesSearch = item.title.toLowerCase().includes(q) ||
+        const matchesSearch = !q ||
+                              item.title.toLowerCase().includes(q) ||
                               item.desc.toLowerCase().includes(q) ||
                               item.spec.toLowerCase().includes(q) ||
                               item.prompt.toLowerCase().includes(q);
@@ -801,43 +812,80 @@
         return;
       }
 
+      const fragment = document.createDocumentFragment();
+
       filtered.forEach(item => {
         const card = document.createElement("div");
         card.className = "card" + (item.category === "kinfolk" ? " kinfolk-card" : "");
 
-        card.innerHTML = `
-          <div>
-            <div class="card-head">
-              <span class="card-title">${item.title}</span>
-              <span class="tag ${item.catClass}">${item.catName}</span>
-            </div>
-            <p class="card-desc" style="margin-top:6px;">${item.desc}</p>
+        const headDiv = document.createElement("div");
+        headDiv.innerHTML = `
+          <div class="card-head">
+            <span class="card-title">${item.title}</span>
+            <span class="tag ${item.catClass}">${item.catName}</span>
           </div>
-          <div class="card-meta">${item.spec}</div>
-          <div class="card-code">${item.prompt}</div>
-          <div class="card-btns">
-            <button class="btn-sm btn-load" onclick="loadToInput('${item.prompt.replace(/'/g, "\\'")}')">➕ 빌더에 추가</button>
-            <button class="btn-sm btn-copy" onclick="copyToClipboard('${item.prompt.replace(/'/g, "\\'")}')">📋 프롬프트 복사</button>
-          </div>
+          <p class="card-desc" style="margin-top:6px;">${item.desc}</p>
         `;
-        grid.appendChild(card);
+        card.appendChild(headDiv);
+
+        const metaDiv = document.createElement("div");
+        metaDiv.className = "card-meta";
+        metaDiv.textContent = item.spec;
+        card.appendChild(metaDiv);
+
+        const codeDiv = document.createElement("div");
+        codeDiv.className = "card-code";
+        codeDiv.textContent = item.prompt;
+        card.appendChild(codeDiv);
+
+        const btnsDiv = document.createElement("div");
+        btnsDiv.className = "card-btns";
+
+        const btnLoad = document.createElement("button");
+        btnLoad.className = "btn-sm btn-load";
+        btnLoad.type = "button";
+        btnLoad.textContent = "➕ 빌더에 추가";
+        btnLoad.dataset.action = "load";
+        btnLoad.dataset.id = item.id;
+        btnsDiv.appendChild(btnLoad);
+
+        const btnCardCopy = document.createElement("button");
+        btnCardCopy.className = "btn-sm btn-copy";
+        btnCardCopy.type = "button";
+        btnCardCopy.textContent = "📋 프롬프트 복사";
+        btnCardCopy.dataset.action = "copy";
+        btnCardCopy.dataset.id = item.id;
+        btnsDiv.appendChild(btnCardCopy);
+
+        card.appendChild(btnsDiv);
+        fragment.appendChild(card);
       });
+
+      grid.appendChild(fragment);
     }
 
-    window.copyToClipboard = copyToClipboard;
-    window.loadToInput = function(text) {
-      if (inpDesc.value.trim()) {
-        inpDesc.value += ` ${text}`;
-      } else {
-        inpDesc.value = text;
-      }
-      updateLivePreview();
-      showToast("빌더에 프롬프트가 추가되었습니다!");
-    };
+    grid.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const action = btn.dataset.action;
+      const id = btn.dataset.id;
+      if (!id) return;
 
-      updateLivePreview();
-      showToast("빌더에 프롬프트가 추가되었습니다!");
-    };
+      const item = masterCollection.find(x => x.id === id);
+      if (!item) return;
+
+      if (action === "copy") {
+        copyText(item.prompt);
+      } else if (action === "load") {
+        if (inpDesc.value.trim()) {
+          inpDesc.value += ` ${item.prompt}`;
+        } else {
+          inpDesc.value = item.prompt;
+        }
+        updateLivePreview();
+        showToast("빌더에 추가되었습니다!");
+      }
+    });
 
     [selMode, selEnv, selLighting, selCamera, selLens, selFilm, selRatio, inpDesc].forEach(el => {
       el.addEventListener("input", updateLivePreview);
@@ -846,35 +894,49 @@
 
     btnCopy.addEventListener("click", () => {
       const txt = liveOutput.textContent;
-      if (!txt || txt === "선택된 프롬프트가 없습니다. (초기화 상태)") {
+      if (!txt || txt === "선택된 옵션이 없습니다.") {
         showToast("복사할 프롬프트 내용이 없습니다.");
         return;
       }
-      copyToClipboard(txt);
+      copyText(txt);
     });
 
     btnReset.addEventListener("click", () => {
+      selMode.selectedIndex = 0;
+      selMode.value = selMode.options[0].value;
       selEnv.selectedIndex = 0;
+      selEnv.value = "";
       selLighting.selectedIndex = 0;
+      selLighting.value = "";
       selCamera.selectedIndex = 0;
+      selCamera.value = "";
       selLens.selectedIndex = 0;
+      selLens.value = "";
       selFilm.selectedIndex = 0;
+      selFilm.value = "";
       selRatio.selectedIndex = 0;
+      selRatio.value = "";
       inpDesc.value = "";
       updateLivePreview();
       showToast("모든 항목이 제로(0)로 초기화되었습니다.");
     });
 
     tabs.addEventListener("click", (e) => {
-      if (e.target.classList.contains("tab-btn")) {
-        document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-        e.target.classList.add("active");
-        currentCat = e.target.dataset.cat;
-        renderCards();
-      }
+      const btn = e.target.closest(".tab-btn");
+      if (!btn) return;
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentCat = btn.dataset.cat;
+      renderCards();
     });
 
     search.addEventListener("input", (e) => {
       searchQuery = e.target.value.trim();
       renderCards();
     });
+
+    updateLivePreview();
+    renderCards();
+  </script>
+</body>
+</html>
