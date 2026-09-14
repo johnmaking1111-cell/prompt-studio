@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 감성 사진 스튜디오 (Prompt Studio v5.0)</title>
-  <meta name="description" content="스튜디오 24대 조명 + 킨포크 에디션 10선 + 최신 자연 화보 총 78선 통합 마스터 프롬프트 빌더" />
+  <title>AI 감성 사진 스튜디오 (Prompt Studio v5.1)</title>
+  <meta name="description" content="스튜디오 24대 조명 + 킨포크 에디션 10선 + 감성 마스터 화보 78선 통합 프롬프트 빌더" />
+  <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2248%22%20fill%3D%22%230f172a%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2255%22%20r%3D%2218%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%226%22/%3E%3Crect%20x%3D%2225%22%20y%3D%2235%22%20width%3D%2250%22%20height%3D%2238%22%20rx%3D%226%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%225%22/%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2242%22%20r%3D%223%22%20fill%3D%22%23f59e0b%22/%3E%3Cpath%20d%3D%22M40%2028%20L60%2028%20L65%2035%20L35%2035%20Z%22%20fill%3D%22%2338bdf8%22/%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2248%22%20fill%3D%22%230f172a%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%224%22/%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2255%22%20r%3D%2218%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%226%22/%3E%3Crect%20x%3D%2225%22%20y%3D%2235%22%20width%3D%2250%22%20height%3D%2238%22%20rx%3D%226%22%20fill%3D%22none%22%20stroke%3D%22%2338bdf8%22%20stroke-width%3D%225%22/%3E%3Ccircle%20cx%3D%2268%22%20cy%3D%2242%22%20r%3D%223%22%20fill%3D%22%23f59e0b%22/%3E%3Cpath%20d%3D%22M40%2028%20L60%2028%20L65%2035%20L35%2035%20Z%22%20fill%3D%22%2338bdf8%22/%3E%3C/svg%3E" />
+  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%20%22Prompt%20Studio%20-%20AI%20%EA%B0%90%EC%84%B1%20%EC%82%AC%EC%A7%84%20%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4%22%2C%20%22short_name%22%3A%20%22PromptStudio%22%2C%20%22description%22%3A%20%22%ED%82%A8%ED%8F%AC%ED%81%AC%20%26%20%EB%8C%80%EC%9E%90%EC%97%B0%20%EA%B7%B9%EC%8B%A4%EC%82%AC%20%EC%82%AC%EC%A7%84%20%ED%94%84%EB%A1%AC%ED%94%84%ED%8A%B8%20%EB%B9%8C%EB%8D%94%22%2C%20%22start_url%22%3A%20%22./%22%2C%20%22display%22%3A%20%22standalone%22%2C%20%22background_color%22%3A%20%22%23090d16%22%2C%20%22theme_color%22%3A%20%22%230f172a%22%2C%20%22icons%22%3A%20%5B%7B%22src%22%3A%20%22data%3Aimage/svg%2Bxml%3Butf8%2C%253Csvg%2520xmlns%253D%2522http%253A//www.w3.org/2000/svg%2522%2520viewBox%253D%25220%25200%2520100%2520100%2522%253E%253Ccircle%2520cx%253D%252250%2522%2520cy%253D%252250%2522%2520r%253D%252248%2522%2520fill%253D%2522%25230f172a%2522%2520stroke%253D%2522%252338bdf8%2522%2520stroke-width%253D%25224%2522/%253E%253Ccircle%2520cx%253D%252250%2522%2520cy%253D%252255%2522%2520r%253D%252218%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%252338bdf8%2522%2520stroke-width%253D%25226%2522/%253E%253Crect%2520x%253D%252225%2522%2520y%253D%252235%2522%2520width%253D%252250%2522%2520height%253D%252238%2522%2520rx%253D%25226%2522%2520fill%253D%2522none%2522%2520stroke%253D%2522%252338bdf8%2522%2520stroke-width%253D%25225%2522/%253E%253Ccircle%2520cx%253D%252268%2522%2520cy%253D%252242%2522%2520r%253D%25223%2522%2520fill%253D%2522%2523f59e0b%2522/%253E%253Cpath%2520d%253D%2522M40%252028%2520L60%252028%2520L65%252035%2520L35%252035%2520Z%2522%2520fill%253D%2522%252338bdf8%2522/%253E%253C/svg%253E%22%2C%20%22sizes%22%3A%20%22192x192%20512x512%22%2C%20%22type%22%3A%20%22image/svg%2Bxml%22%2C%20%22purpose%22%3A%20%22any%20maskable%22%7D%5D%7D" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PromptStudio" />
   <style>
     :root {
       --bg-dark: #090d16;
@@ -27,13 +34,16 @@
     body { background-color: var(--bg-dark); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; padding: 18px; gap: 16px; }
     
     header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 10px; }
-    .logo-box h1 { font-size: 1.4rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .logo-box h1 { font-size: 1.35rem; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight: 800; }
     .logo-box p { font-size: 0.82rem; color: var(--text-muted); margin-top: 2px; }
-    .badge-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    
+    .btn-install { background: linear-gradient(135deg, #0ea5e9, #38bdf8); color: #080c14; border: none; border-radius: 8px; padding: 7px 13px; font-size: 0.8rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35); transition: all 0.2s; }
+    .btn-install:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(56, 189, 248, 0.5); }
+    
     .badge { font-size: 0.72rem; font-weight: 800; padding: 4px 9px; border-radius: 6px; letter-spacing: 0.3px; }
-    .badge-lighting { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
-    .badge-kinfolk { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
-    .badge-universal { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-lighting { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-kinfolk { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
 
     .main-grid { display: grid; grid-template-columns: 460px 1fr; gap: 20px; flex: 1; align-items: start; }
 
@@ -97,13 +107,14 @@
     .card.kinfolk-card .btn-copy:hover { background-color: #d97706; }
 
     /* Toast */
-    #toast { position: fixed; bottom: 24px; right: 24px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 11px 18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; }
+    #toast { position: fixed; bottom: 24px; right: 24px; background-color: #22c55e; color: #080c14; font-weight: 800; padding: 11px 18px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); opacity: 0; transform: translateY(10px); transition: all 0.3s; z-index: 3000; pointer-events: none; max-width: 90vw; }
     #toast.show { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 1024px) {
       .main-grid { grid-template-columns: 1fr; }
       .builder-panel { position: static; max-height: none; }
       .search-input { width: 100%; }
+      .btn-install { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -111,13 +122,13 @@
 
   <header>
     <div class="logo-box">
-      <h1>📸 AI 감성 사진 스튜디오 <span style="font-size:0.78rem; background:#1e293b; color:#94a3b8; padding:3px 8px; border-radius:5px; border:1px solid #334155;">v5.0</span></h1>
+      <h1>📸 AI 감성 사진 스튜디오 <span style="font-size:0.78rem; background:#1e293b; color:#94a3b8; padding:3px 8px; border-radius:5px; border:1px solid #334155;">v5.1</span></h1>
       <p>스튜디오 24대 조명 가이드 + 킨포크 에디션 10선 + 감성 마스터 화보 78선 라이브러리</p>
     </div>
-    <div class="badge-bar">
-      <span class="badge badge-lighting">💡 스튜디오 조명 24선 탑재</span>
+    <div class="header-actions">
+      <button class="btn-install" id="btn-install" type="button">📲 홈 화면/바탕화면에 추가</button>
+      <span class="badge badge-lighting">💡 스튜디오 24대 조명</span>
       <span class="badge badge-kinfolk">🌿 킨포크 10선</span>
-      <span class="badge badge-universal">📚 마스터 화보 총 78선</span>
     </div>
   </header>
 
@@ -1061,6 +1072,7 @@
 
     let currentCat = "all";
     let searchQuery = "";
+    let deferredPrompt = null;
 
     const grid = document.getElementById("cards-container");
     const tabs = document.getElementById("filter-tabs");
@@ -1078,6 +1090,46 @@
     const liveOutput = document.getElementById("live-output");
     const btnCopy = document.getElementById("btn-copy-builder");
     const btnReset = document.getElementById("btn-reset");
+    const btnInstall = document.getElementById("btn-install");
+
+    // PWA BeforeInstallPrompt Event Listener
+    window.addEventListener("beforeinstallprompt", (e) => {{
+      e.preventDefault();
+      deferredPrompt = e;
+      if (btnInstall) {{
+        btnInstall.style.display = "flex";
+      }}
+    }});
+
+    window.addEventListener("appinstalled", () => {{
+      deferredPrompt = null;
+      showToast("앱이 바탕화면에 성공적으로 추가되었습니다! 🎉");
+    }});
+
+    // Install Button Handler
+    if (btnInstall) {{
+      btnInstall.addEventListener("click", async () => {{
+        if (deferredPrompt) {{
+          deferredPrompt.prompt();
+          const choiceResult = await deferredPrompt.userChoice;
+          if (choiceResult.outcome === "accepted") {{
+            showToast("홈 화면/바탕화면에 추가되었습니다!");
+          }} else {{
+            showToast("추가가 취소되었습니다.");
+          }}
+          deferredPrompt = null;
+        }} else {{
+          // Check iOS vs Android / Desktop
+          const userAgent = window.navigator.userAgent.toLowerCase();
+          const isIOS = /iphone|ipad|ipod/.test(userAgent);
+          if (isIOS) {{
+            showToast("사파리 하단 [공유] 버튼(네모+화살표)을 누르고 '홈 화면에 추가'를 선택하세요! 📲");
+          }} else {{
+            showToast("브라우저 메뉴(⋮)에서 '홈 화면에 추가' 또는 '앱 설치'를 누르면 바탕화면에 생성됩니다! 📲");
+          }}
+        }}
+      }});
+    }}
 
     let toastTimer = null;
     function showToast(msg = "클립보드에 복사되었습니다!") {{
@@ -1086,7 +1138,7 @@
       toast.classList.add("show");
       toastTimer = setTimeout(() => {{
         toast.classList.remove("show");
-      }}, 2200);
+      }}, 3200);
     }}
 
     function copyText(text) {{
